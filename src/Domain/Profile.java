@@ -1,12 +1,23 @@
 package Domain;
 
 public class Profile {
+    private int profileId;
     private String name;
     private int age;
 
     public Profile(String name, int age) {
         this.name = name;
         this.age = age;
+    }
+
+    public Profile(int profileId, String name, int age) {
+        this.profileId = profileId;
+        this.name = name;
+        this.age = age;
+    }
+
+    public int getProfileId() {
+        return profileId;
     }
 
     public String getName() {

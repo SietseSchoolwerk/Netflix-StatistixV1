@@ -1,5 +1,6 @@
 package GUI;
 
+import Controllers.ProfileController;
 import Database.ProfileDAO;
 import Domain.Account;
 import Domain.Profile;
@@ -151,10 +152,16 @@ public class Profiles {
         txtAge.setLayoutX(666);
         txtAge.setLayoutY(93);
 
+        ProfileController controller = new ProfileController(stage, profile);
+        controller.setTxtAgeProfile(txtAge);
+        controller.setTxtNameProfile(txtName);
+
         Button btnSubmit = new Button("Submit changes");
+        btnSubmit.setId("btnSubmit");
         btnSubmit.setLayoutX(465);
         btnSubmit.setLayoutY(138);
         btnSubmit.getStyleClass().add("accountButtons");
+        btnSubmit.setOnAction(controller);
 
         Menu menu = new Menu();
 
