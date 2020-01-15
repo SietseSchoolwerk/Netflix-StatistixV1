@@ -3,16 +3,36 @@ package Database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+
 import Domain.Account;
 
 
 public class AccountDAO {
+    private Connection connection;
 
-    private static Connection connection = DatabaseConnection.getConn();
+    public AccountDAO(Connection connection) {
+        this.connection = DatabaseConnection.getConn();
+    }
 
-    public void AccountDAO(Connection connection) { this.connection = connection; }
+    public ArrayList<Account> getAllAccounts() {
+        String sql = "SELECT * FROM Account;";
 
-    public static Account getAccount(String email){
+        try {
+            ArrayList<Account> result = new ArrayList<>();
+            PreparedStatement statement = this.connection.prepareStatement(sql);
+            ResultSet r = statement.executeQuery();
+            while(r.next()) {
+                result.add(new Account(r.getString("Email"),r.getString("Password"),r.getString("Subscriber"),r.getString("Address"), r.getString("City")));
+            }
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Account getAccount(String email){
 
         try{
             PreparedStatement pdo = connection.prepareStatement(
@@ -42,7 +62,7 @@ public class AccountDAO {
         }
     }
 
-    public static boolean addAccount(Account account){
+    public boolean addAccount(Account account){
 
         String Email = account.getEmail();
         String Password = account.getPassword();
@@ -70,7 +90,7 @@ public class AccountDAO {
 
     }
 
-    public static boolean deleteAccount(String email){
+    public boolean deleteAccount(String email){
 
 
         try{
@@ -87,7 +107,7 @@ public class AccountDAO {
 
     }
 
-    public static boolean editAccount(Account newAccount,String accountEmailToEdit) {
+    public boolean editAccount(Account newAccount,String accountEmailToEdit) {
 
         /*
             This class is vulnerable to SQLi.
