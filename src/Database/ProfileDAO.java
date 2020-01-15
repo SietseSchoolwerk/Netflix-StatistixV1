@@ -64,7 +64,6 @@ public class ProfileDAO {
             String sql = "SELECT * FROM Profile WHERE ProfileId=?;";
 
             try {
-                ArrayList<Profile> result = new ArrayList<>();
                 PreparedStatement statement = this.connection.prepareStatement(sql);
                 statement.setInt(1, profileId);
 
@@ -76,6 +75,25 @@ public class ProfileDAO {
                 e.printStackTrace();
             }
             return null;
+    }
+
+
+    public int profileCounter(String Email) {
+        String sql = "SELECT count(*) as result FROM Profile WHERE Email=?;";
+
+        try {
+            ArrayList<Profile> result = new ArrayList<>();
+            PreparedStatement statement = this.connection.prepareStatement(sql);
+            statement.setString(1, Email);
+
+            ResultSet r = statement.executeQuery();
+            while(r.next()) {
+                return r.getInt("result");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
 
@@ -147,12 +165,12 @@ public class ProfileDAO {
     }
 
 
-    public boolean deleteProfile(int ProfileId){
+    public boolean deleteProfile(Profile profile){
         try{
             PreparedStatement pdo = connection.prepareStatement(
                     "DELETE FROM Profile WHERE ProfileId=?"
             );
-            pdo.setInt(1, ProfileId);
+            pdo.setInt(1, profile.getProfileId());
             pdo.execute();
             return true;
         } catch(Exception e){
