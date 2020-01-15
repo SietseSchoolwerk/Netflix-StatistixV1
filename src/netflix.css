@@ -1,0 +1,8 @@
+.menuBtn{
+    -fx-background-color: #383838;
+    -fx-alignment: CENTER;
+    -fx-font-size: 30pt Ariel;
+    -fx-text-fill: WHITE;
+    -fx-min-width: 375.0;
+    -fx-min-height: 97.0;
+}
