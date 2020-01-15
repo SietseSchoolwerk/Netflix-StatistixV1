@@ -1,18 +1,36 @@
 package Database;
 
+import Domain.Account;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import Domain.Account;
-
+import java.util.ArrayList;
 
 public class AccountDAO {
+    private Connection connection;
 
-    private static Connection connection = DatabaseConnection.getConn();
+    public AccountDAO(Connection connection) {
+        this.connection = DatabaseConnection.getConn();
+    }
 
-    public void AccountDAO(Connection connection) { this.connection = connection; }
+    public ArrayList<Account> getAllAccounts() {
+        String sql = "SELECT * FROM Account;";
 
-    public static Account getAccount(String email){
+        try {
+            ArrayList<Account> result = new ArrayList<>();
+            PreparedStatement statement = this.connection.prepareStatement(sql);
+            ResultSet r = statement.executeQuery();
+            while(r.next()) {
+                result.add(new Account(r.getString("Email"),r.getString("Password"),r.getString("Subscriber"),r.getString("Address"), r.getString("City")));
+            }
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Account getAccount(String email){
 
         try{
             PreparedStatement pdo = connection.prepareStatement(
@@ -42,7 +60,7 @@ public class AccountDAO {
         }
     }
 
-    public static boolean addAccount(Account account){
+    public boolean addAccount(Account account){
 
         String Email = account.getEmail();
         String Password = account.getPassword();
@@ -70,7 +88,7 @@ public class AccountDAO {
 
     }
 
-    public static boolean deleteAccount(String email){
+    public boolean deleteAccount(String email){
 
 
         try{
@@ -87,67 +105,18 @@ public class AccountDAO {
 
     }
 
-    public static boolean editAccount(Account newAccount,String accountEmailToEdit) {
-
-        /*
-            This class is vulnerable to SQLi.
-            Should either come up with a way to still generate the query dynamically
-            or sanitize the arguments.
-         */
-
-        StringBuilder setStatementStringBuilder = new StringBuilder();
-
-        setStatementStringBuilder.append("UPDATE Account SET ");
-        Account existingAccount = getAccount(accountEmailToEdit);
-        //String ExistingEmail = existingAccount.getEmail();
-        String ExistingPassword = existingAccount.getPassword();
-        String ExistingSubscriber = existingAccount.getSubscriber();
-        String ExistingAddress = existingAccount.getAddress();
-        String ExistingCity = existingAccount.getCity();
-
-        String NewEmail = newAccount.getEmail();
-        String NewPassword = newAccount.getPassword();
-        String NewSubscriber = newAccount.getSubscriber();
-        String NewAddress = newAccount.getAddress();
-        String NewCity = newAccount.getCity();
+    public boolean editAccount(Account newAccount,String accountEmailToEdit) {
 
 
-
-//         if (!ExistingEmail.equals(NewEmail)) {
-//             setStatementStringBuilder.append(
-//                    String.format("Email='%s',", NewEmail)
-//            );
-//        }
-        if (!ExistingPassword.equals(NewPassword)) {
-            setStatementStringBuilder.append(
-                    String.format("Password='%s',", NewPassword)
-            );
-        }
-        if (!ExistingSubscriber.equals(NewSubscriber)) {
-            setStatementStringBuilder.append(
-                    String.format("Subscriber='%s',", NewSubscriber)
-            );
-        }
-        if (!ExistingAddress.equals(NewAddress)) {
-            setStatementStringBuilder.append(
-                    String.format("Address='%s',", NewAddress)
-            );
-        }
-        if (!ExistingCity.equals(NewCity)) {
-            setStatementStringBuilder.append(
-                    String.format("City='%s',", NewCity)
-            );
-        }
-        String setStatementString = setStatementStringBuilder.toString();
-        String setStatementStringSliced =
-                setStatementString.substring(0, setStatementString.length() - 1);
-
-        //setStatementStringStrSliced += " WHERE uniqueId=<uniqueId>";
-        setStatementStringSliced += String.format(" WHERE Email='%s'",accountEmailToEdit);
+        String sqlStr = "UPDATE Account SET Password=?,Subscriber=?,Address=?,City=? WHERE Email=?";
 
         try{
-            System.out.println(setStatementStringSliced);
-            PreparedStatement pdo = connection.prepareStatement(setStatementStringSliced);
+            PreparedStatement pdo = connection.prepareStatement(sqlStr);
+            pdo.setString(1,newAccount.getPassword());
+            pdo.setString(2,newAccount.getSubscriber());
+            pdo.setString(3,newAccount.getAddress());
+            pdo.setString(4,newAccount.getCity());
+            pdo.setString(5,newAccount.getEmail());
             pdo.execute();
             return true;
         } catch(Exception e){
