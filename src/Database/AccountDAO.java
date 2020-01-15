@@ -1,17 +1,10 @@
 package Database;
 
 import Domain.Account;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-<<<<<<< HEAD
 import java.util.ArrayList;
-
-import Domain.Account;
-=======
->>>>>>> 5c9b96a1e0305f722ef43a46bdbe08c742d3eb0d
-
 
 public class AccountDAO {
     private Connection connection;
