@@ -7,13 +7,12 @@ import java.sql.ResultSet;
 
 public class ProgramDAO {
 
-    private static Connection connection = DatabaseConnection.getConn();
+    private Connection connection;
+    private DatabaseConnection databaseConnection = new DatabaseConnection();
 
-    public ProgramDAO(Connection connection) { this.connection = connection; }
+    public ProgramDAO() { this.connection = databaseConnection.getConn(); }
 
-
-
-    public static Program getProgram(int ProgramId){
+    public Program getProgram(int ProgramId){
         try{
             PreparedStatement pdo = connection.prepareStatement(
                     "SELECT Title,Genre,Language,Age,Playtime " +

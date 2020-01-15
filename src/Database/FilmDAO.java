@@ -5,10 +5,11 @@ import Domain.Film;
 
 public class FilmDAO extends ProgramDAO{
 
-    private static Connection connection = DatabaseConnection.getConn();
+    private Connection connection;
+    private DatabaseConnection databaseConnection = new DatabaseConnection();
 
-    public FilmDAO(Connection connection) {
-        super(connection);
+    public FilmDAO() {
+        this.connection = databaseConnection.getConn();
     }
 
     public Film getFilm(int ProgramId){
