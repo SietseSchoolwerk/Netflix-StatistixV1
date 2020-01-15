@@ -1,5 +1,6 @@
 package GUI;
 
+import Controllers.AccountController;
 import Database.AccountDAO;
 import Database.DatabaseConnection;
 import Domain.Account;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -78,6 +80,7 @@ public class Accounts {
             btnEdit.setLayoutY(55);
             btnEdit.setMinWidth(80);
             btnEdit.getStyleClass().add("accountButtons");
+            btnEdit.setOnAction(e -> stage.setScene(new Accounts().editAccount(stage, accounts)));
 
             Button btnDelete = new Button("Delete");
             btnDelete.setLayoutX(1089);
@@ -134,13 +137,79 @@ public class Accounts {
         return scene;
     }
 
-    public ArrayList<Account> getAccounts() {
-        ArrayList<Account> accountList = new ArrayList<>();
+    public Scene editAccount(Stage stage, Account account) {
+        AnchorPane mainPane = new AnchorPane();
+        mainPane.prefHeight(800.0);
+        mainPane.setMinWidth(900.0);
+        mainPane.setStyle("-fx-background-color: #545454;");
 
-        accountList.add(new Account("Daan@icloud.com", "da", "daan hayman", "Minckelersweg 43", "Hoogerheide"));
-        accountList.add(new Account("Daan@icloud.com", "da", "daan hayman", "Minckelersweg 43", "Hoogerheide"));
-        accountList.add(new Account("Daan@icloud.com", "da", "daan hayman", "Minckelersweg 43", "Hoogerheide"));
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setLayoutX(407);
+        scrollPane.setLayoutY(50);
+        scrollPane.setMinWidth(1140);
+        scrollPane.setMinHeight(700);
+        scrollPane.setMaxHeight(700);
 
-        return accountList;
+        VBox verticalBox = new VBox();
+        verticalBox.setMinWidth(1160);
+        verticalBox.setMinHeight(Region.USE_COMPUTED_SIZE);
+
+        Label lblPassword = new Label("Password account");
+        lblPassword.setLayoutX(465);
+        lblPassword.setLayoutY(53);
+        lblPassword.getStyleClass().add("whiteLabels");
+
+        Label lblSubscriber = new Label("Subscriber");
+        lblSubscriber.setLayoutX(465);
+        lblSubscriber.setLayoutY(93);
+        lblSubscriber.getStyleClass().add("whiteLabels");
+
+        Label lblAddress = new Label("Address");
+        lblAddress.setLayoutX(465);
+        lblAddress.setLayoutY(133);
+        lblAddress.getStyleClass().add("whiteLabels");
+
+        Label lblCity = new Label("City");
+        lblCity.setLayoutX(465);
+        lblCity.setLayoutY(173);
+        lblCity.getStyleClass().add("whiteLabels");
+
+        TextField txtPassword = new TextField(account.getPassword());
+        txtPassword.setLayoutX(666);
+        txtPassword.setLayoutY(53);
+
+        TextField txtSubscriber = new TextField(account.getSubscriber());
+        txtSubscriber.setLayoutX(666);
+        txtSubscriber.setLayoutY(93);
+
+        TextField txtAddress = new TextField(account.getAddress());
+        txtAddress.setLayoutX(666);
+        txtAddress.setLayoutY(133);
+
+        TextField txtCity = new TextField(account.getCity());
+        txtCity.setLayoutX(666);
+        txtCity.setLayoutY(173);
+
+        AccountController controller = new AccountController(stage, account);
+        controller.setTxtPasswordAccount(txtPassword);
+        controller.setTxtSubscriberAccount(txtSubscriber);
+        controller.setTxtAddressAccount(txtAddress);
+        controller.setTxtCityAccount(txtCity);
+
+        Button btnSubmit = new Button("Submit changes");
+        btnSubmit.setId("btnSubmit");
+        btnSubmit.setLayoutX(465);
+        btnSubmit.setLayoutY(218);
+        btnSubmit.getStyleClass().add("accountButtons");
+        btnSubmit.setOnAction(controller);
+
+        Menu menu = new Menu();
+
+        mainPane.getChildren().addAll(menu.getMenu(stage), lblPassword, lblSubscriber, lblAddress, lblCity, txtPassword, txtSubscriber, txtAddress, txtCity, btnSubmit);
+
+        Scene scene = new Scene(mainPane);
+        scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
+
+        return scene;
     }
 }

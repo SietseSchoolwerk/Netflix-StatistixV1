@@ -62,23 +62,16 @@ public class AccountDAO {
     }
 
     public boolean addAccount(Account account){
-
-        String Email = account.getEmail();
-        String Password = account.getPassword();
-        String Subscriber = account.getSubscriber();
-        String Address = account.getAddress();
-        String City = account.getCity();
-
         try{
             PreparedStatement pdo = this.connection.prepareStatement(
                     "INSERT INTO Account (Email,Password,Subscriber,Address,City) " +
                             " values(?,?,?,?,?)"
             );
-            pdo.setString(1,Email);
-            pdo.setString(2,Password);
-            pdo.setString(3,Subscriber);
-            pdo.setString(4,Address);
-            pdo.setString(5,City);
+            pdo.setString(1,account.getEmail());
+            pdo.setString(2,account.getPassword());
+            pdo.setString(3,account.getSubscriber());
+            pdo.setString(4,account.getAddress());
+            pdo.setString(5,account.getCity());
             pdo.execute();
             return true;
         } catch(Exception e){
@@ -90,14 +83,12 @@ public class AccountDAO {
     }
 
     public boolean deleteAccount(String email){
-
+        String sql = "DELETE Account WHERE Email = ?;";
 
         try{
-            PreparedStatement pdo = connection.prepareStatement(
-                    "DELETE FROM Account WHERE Email=?"
-            );
-            pdo.setString(1,email);
-            pdo.execute();
+            PreparedStatement statement = this.connection.prepareStatement(sql);
+            statement.setString(1,email);
+            statement.execute();
             return true;
         } catch(Exception e){
             e.printStackTrace();
@@ -106,19 +97,17 @@ public class AccountDAO {
 
     }
 
-    public boolean editAccount(Account newAccount,String accountEmailToEdit) {
-
-
-        String sqlStr = "UPDATE Account SET Password=?,Subscriber=?,Address=?,City=? WHERE Email=?";
+    public boolean editAccount(Account newAccount) {
+        String sql = "UPDATE Account SET Password=?,Subscriber=?,Address=?,City=? WHERE Email=?";
 
         try{
-            PreparedStatement pdo = connection.prepareStatement(sqlStr);
-            pdo.setString(1,newAccount.getPassword());
-            pdo.setString(2,newAccount.getSubscriber());
-            pdo.setString(3,newAccount.getAddress());
-            pdo.setString(4,newAccount.getCity());
-            pdo.setString(5,newAccount.getEmail());
-            pdo.execute();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,newAccount.getPassword());
+            statement.setString(2,newAccount.getSubscriber());
+            statement.setString(3,newAccount.getAddress());
+            statement.setString(4,newAccount.getCity());
+            statement.setString(5,newAccount.getEmail());
+            statement.execute();
             return true;
         } catch(Exception e){
             e.printStackTrace();
