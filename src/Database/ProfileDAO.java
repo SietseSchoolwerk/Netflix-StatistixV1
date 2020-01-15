@@ -25,7 +25,7 @@ public class ProfileDAO {
 
             ResultSet r = statement.executeQuery();
             while(r.next()) {
-                result.add(new Profile(r.getString("Name"),r.getInt("Age")));
+                result.add(new Profile(r.getInt("ProfileId"), r.getString("Name"),r.getInt("Age")));
             }
             return result;
         } catch (Exception e) {
@@ -33,10 +33,11 @@ public class ProfileDAO {
         }
         return null;
     }
+
     public Profile getProfile(String name){
         try{
             PreparedStatement pdo = connection.prepareStatement(
-                    "SELECT name,age FROM Profile WHERE Name=?"
+                    "SELECT ProfileId,name,age FROM Profile WHERE Name=?"
             );
             pdo.setString(1, name);
             ResultSet rs = pdo.executeQuery();
@@ -45,16 +46,36 @@ public class ProfileDAO {
             Object[] arr = new Object[2];
 
             while (rs.next()) {
-                arr[0] = rs.getString(1); //name
-                arr[1] = rs.getInt(2); // age
+                arr[0] = rs.getInt(0); //Id
+                arr[1] = rs.getString(1); //name
+                arr[2] = rs.getInt(2); // age
             }
 
-            return new Profile((String)arr[0],(int)arr[1]);
+            return new Profile(Integer.parseInt((String)arr[0]),(String)arr[1],(int)arr[2]);
 
         } catch(Exception e){
             e.printStackTrace();
             return null;
         }
+    }
+
+
+    public String getEmailWithProfileId(int profileId){
+            String sql = "SELECT * FROM Profile WHERE ProfileId=?;";
+
+            try {
+                ArrayList<Profile> result = new ArrayList<>();
+                PreparedStatement statement = this.connection.prepareStatement(sql);
+                statement.setInt(1, profileId);
+
+                ResultSet r = statement.executeQuery();
+                while(r.next()) {
+                    return r.getString("Email");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
     }
 
 
@@ -88,25 +109,20 @@ public class ProfileDAO {
         String NewName = profile.getName();
         int NewAge = profile.getAge();
 
-        Profile oldProfile =  getProfile(profile.getName());
-        String OldName = oldProfile.getName();
-        int OldAge = oldProfile.getAge();
-
 
         StringBuilder setStatementStringBuilder = new StringBuilder();
 
         // Beware. This code has the same lame SQLi as in the AccountDAO.
+        setStatementStringBuilder.append(String.format("UPDATE Profile SET "));
 
-        if(!OldName.equals(NewName)){
             setStatementStringBuilder.append(
                     String.format("Name='%s',",NewName)
             );
-        }
-        if(!(OldAge == NewAge)){
+
+
             setStatementStringBuilder.append(
                     String.format("Age='%s',",NewAge )
             );
-        }
 
         String setStatementString = setStatementStringBuilder.toString();
         String setStatementStringSliced =
@@ -114,14 +130,14 @@ public class ProfileDAO {
 
         //setStatementStringStrSliced += " WHERE uniqueId=<uniqueId>";
         setStatementStringSliced += String.format(
-                " WHERE Name='%s'",profile.getName());
+                " WHERE ProfileId='%s'",profile.getProfileId());
 
 
         try{
             PreparedStatement pdo = connection.prepareStatement(
                     setStatementStringSliced
             );
-
+            System.out.println(setStatementStringBuilder.toString());
             pdo.execute();
             return true;
         } catch(Exception e){
@@ -132,11 +148,9 @@ public class ProfileDAO {
 
 
     public boolean deleteProfile(int ProfileId){
-
-
         try{
             PreparedStatement pdo = connection.prepareStatement(
-                    "DELETE FROM table_name WHERE ProfileId=?"
+                    "DELETE FROM Profile WHERE ProfileId=?"
             );
             pdo.setInt(1, ProfileId);
             pdo.execute();
@@ -145,9 +159,6 @@ public class ProfileDAO {
             e.printStackTrace();
             return false;
         }
-
-
-
     }
 
 
