@@ -17,7 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class Accounts {
-    public Scene scene(Stage stage){
+    public Scene AccountList(Stage stage){
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
         mainPane.prefWidth(1600.0);
@@ -87,7 +87,7 @@ public class Accounts {
             btnProfiles.setLayoutY(13);
             btnProfiles.setMinWidth(142);
             btnProfiles.getStyleClass().add("accountButtons");
-            btnProfiles.setOnAction(e -> stage.setScene(new Profiles().scene(stage, accounts.getEmail())));
+            btnProfiles.setOnAction(e -> stage.setScene(new Profiles().profileList(stage, accounts.getEmail())));
 
             Button btnWatchedSeries = new Button("Watched series");
             btnWatchedSeries.setLayoutX(910);
@@ -115,7 +115,14 @@ public class Accounts {
         }
         Menu menu = new Menu();
         scrollPane.setContent(verticalBox);
-        mainPane.getChildren().addAll(menu.getMenu(stage),scrollPane);
+
+        Button btnAddNewAccount = new Button("New Account");
+        btnAddNewAccount.getStyleClass().add("accountButtons");
+        btnAddNewAccount.getStyleClass().add("newButton");
+        btnAddNewAccount.setLayoutY(2);
+        btnAddNewAccount.setLayoutX(407);
+
+        mainPane.getChildren().addAll(menu.getMenu(stage),scrollPane, btnAddNewAccount);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());

@@ -18,7 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class Profiles {
-    public Scene scene(Stage stage, String Email){
+    public Scene profileList(Stage stage, String Email){
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
         mainPane.prefWidth(1600.0);
@@ -99,7 +99,14 @@ public class Profiles {
 
         Menu menu = new Menu();
         scrollPane.setContent(verticalBox);
-        mainPane.getChildren().addAll(menu.getMenu(stage),scrollPane);
+
+        Button btnAddNewProfile = new Button("New Profile");
+        btnAddNewProfile.getStyleClass().add("accountButtons");
+        btnAddNewProfile.getStyleClass().add("newButton");
+        btnAddNewProfile.setLayoutY(2);
+        btnAddNewProfile.setLayoutX(407);
+
+        mainPane.getChildren().addAll(menu.getMenu(stage),scrollPane, btnAddNewProfile);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
