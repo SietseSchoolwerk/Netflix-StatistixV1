@@ -90,7 +90,6 @@ public class AccountDAO {
 
     public static boolean editAccount(Account newAccount,String accountEmailToEdit) {
 
-        StringBuilder setStatementStringBuilder = new StringBuilder();
 
         String sqlStr = "UPDATE Account SET Password=?,Subscriber=?,Address=?,City=? WHERE Email=?";
 
