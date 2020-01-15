@@ -87,6 +87,9 @@ public class Accounts {
             btnDelete.setLayoutY(13);
             btnDelete.setMinWidth(80);
             btnDelete.getStyleClass().add("accountButtons");
+            btnDelete.setId("btnDelete");
+            AccountController controller = new AccountController(stage, accounts);
+            btnDelete.setOnAction(controller);
 
             Button btnProfiles = new Button("Profiles");
             btnProfiles.setLayoutX(910);
@@ -128,7 +131,7 @@ public class Accounts {
         btnAddNewAccount.getStyleClass().add("newButton");
         btnAddNewAccount.setLayoutY(2);
         btnAddNewAccount.setLayoutX(407);
-
+        btnAddNewAccount.setOnAction(e -> stage.setScene(addAccount(stage)));
         mainPane.getChildren().addAll(menu.getMenu(stage),scrollPane, btnAddNewAccount);
 
         Scene scene = new Scene(mainPane);
@@ -206,6 +209,95 @@ public class Accounts {
         Menu menu = new Menu();
 
         mainPane.getChildren().addAll(menu.getMenu(stage), lblPassword, lblSubscriber, lblAddress, lblCity, txtPassword, txtSubscriber, txtAddress, txtCity, btnSubmit);
+
+        Scene scene = new Scene(mainPane);
+        scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
+
+        return scene;
+    }
+
+    public Scene addAccount(Stage stage) {
+        AnchorPane mainPane = new AnchorPane();
+        mainPane.prefHeight(800.0);
+        mainPane.setMinWidth(900.0);
+        mainPane.setStyle("-fx-background-color: #545454;");
+
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setLayoutX(407);
+        scrollPane.setLayoutY(50);
+        scrollPane.setMinWidth(1140);
+        scrollPane.setMinHeight(700);
+        scrollPane.setMaxHeight(700);
+
+        VBox verticalBox = new VBox();
+        verticalBox.setMinWidth(1160);
+        verticalBox.setMinHeight(Region.USE_COMPUTED_SIZE);
+
+        Label lblEmail = new Label("Email");
+        lblEmail.setLayoutX(465);
+        lblEmail.setLayoutY(53);
+        lblEmail.getStyleClass().add("whiteLabels");
+
+        Label lblPassword = new Label("Password");
+        lblPassword.setLayoutX(465);
+        lblPassword.setLayoutY(93);
+        lblPassword.getStyleClass().add("whiteLabels");
+
+        Label lblSubscriber = new Label("Subscriber");
+        lblSubscriber.setLayoutX(465);
+        lblSubscriber.setLayoutY(133);
+        lblSubscriber.getStyleClass().add("whiteLabels");
+
+        Label lblAddress = new Label("Address");
+        lblAddress.setLayoutX(465);
+        lblAddress.setLayoutY(173);
+        lblAddress.getStyleClass().add("whiteLabels");
+
+        Label lblCity = new Label("City");
+        lblCity.setLayoutX(465);
+        lblCity.setLayoutY(213);
+        lblCity.getStyleClass().add("whiteLabels");
+
+        TextField txtEmail = new TextField();
+        txtEmail.setLayoutX(666);
+        txtEmail.setLayoutY(53);
+
+        TextField txtPassword = new TextField();
+        txtPassword.setLayoutX(666);
+        txtPassword.setLayoutY(93);
+
+        TextField txtSubscriber = new TextField();
+        txtSubscriber.setLayoutX(666);
+        txtSubscriber.setLayoutY(133);
+
+        TextField txtAddress = new TextField();
+        txtAddress.setLayoutX(666);
+        txtAddress.setLayoutY(173);
+
+        TextField txtCity = new TextField();
+        txtCity.setLayoutX(666);
+        txtCity.setLayoutY(213);
+
+        Account account = new Account(txtEmail.getText(), txtPassword.getText(), txtSubscriber.getText(), txtAddress.getText(), txtCity.getText());
+
+        AccountController controller = new AccountController(stage, account);
+        controller.setTxtEmailAccount(txtEmail);
+        controller.setTxtPasswordAccount(txtPassword);
+        controller.setTxtPasswordAccount(txtPassword);
+        controller.setTxtSubscriberAccount(txtSubscriber);
+        controller.setTxtAddressAccount(txtAddress);
+        controller.setTxtCityAccount(txtCity);
+
+        Button btnSubmit = new Button("Add Account");
+        btnSubmit.setId("btnAddAccount");
+        btnSubmit.setLayoutX(465);
+        btnSubmit.setLayoutY(258);
+        btnSubmit.getStyleClass().add("accountButtons");
+        btnSubmit.setOnAction(controller);
+
+        Menu menu = new Menu();
+
+        mainPane.getChildren().addAll(menu.getMenu(stage), lblEmail, lblPassword, lblSubscriber, lblAddress, lblCity, txtPassword, txtSubscriber, txtAddress, txtCity, txtEmail, btnSubmit);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
