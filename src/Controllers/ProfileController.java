@@ -28,6 +28,8 @@ public class ProfileController implements EventHandler<ActionEvent> {
             btn = (Button) event.getTarget();
             if (btn.getId().equals("btnSubmit")) {
                 this.handleEdit();
+            } else if (btn.getId().equals("btnDelete")) {
+                this.handleDelete();
             }
         }
     }
@@ -38,6 +40,19 @@ public class ProfileController implements EventHandler<ActionEvent> {
 
         Boolean result = new ProfileDAO().editProfile(this.profile);
         String attachedEmail = new ProfileDAO().getEmailWithProfileId(this.profile.getProfileId());
+        this.stage.setScene(new Profiles().profileList(this.stage, attachedEmail));
+    }
+
+    public void handleDelete() {
+        ProfileDAO dao = new ProfileDAO();
+        String attachedEmail = dao.getEmailWithProfileId(this.profile.getProfileId());
+
+        int count = dao.profileCounter(attachedEmail);
+        if (count == 1) {
+
+        } else {
+            dao.deleteProfile(this.profile);
+        }
         this.stage.setScene(new Profiles().profileList(this.stage, attachedEmail));
     }
 

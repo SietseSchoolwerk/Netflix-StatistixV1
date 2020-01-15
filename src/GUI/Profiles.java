@@ -77,6 +77,10 @@ public class Profiles {
             btnDelete.setLayoutY(13);
             btnDelete.setMinWidth(80);
             btnDelete.getStyleClass().add("accountButtons");
+            btnDelete.setId("btnDelete");
+            ProfileController controller = new ProfileController(stage, profile);
+            btnDelete.setOnAction(controller);
+
 
             Button btnWatch = new Button("Bekijk programma");
             btnWatch.setLayoutX(910);
