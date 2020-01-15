@@ -35,8 +35,7 @@ public class Accounts {
 
         ArrayList<Account> accountList = getAccounts();
 
-        scrollPane.setStyle("-fx-background-color: #383838;");
-        verticalBox.setStyle("-fx-background-color: #383838;");
+        scrollPane.setStyle("-fx-background: #383838;");
 
         int count = 0;
         for (Account accounts: accountList) {

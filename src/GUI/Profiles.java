@@ -27,8 +27,9 @@ public class Profiles {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setLayoutX(407);
         scrollPane.setLayoutY(50);
-        scrollPane.setMinWidth(1160);
+        scrollPane.setMinWidth(1140);
         scrollPane.setMinHeight(700);
+        scrollPane.setMaxHeight(700);
 
         VBox verticalBox = new VBox();
         verticalBox.setMinWidth(1160);
@@ -36,8 +37,7 @@ public class Profiles {
 
        ArrayList<Profile> profielList = getProfiles();
 
-        scrollPane.setStyle("-fx-background-color: #383838;");
-        verticalBox.setStyle("-fx-background-color: #383838;");
+        scrollPane.setStyle("-fx-background: #383838;");
 
         int count = 0;
         for (Profile profile: profielList) {
@@ -112,7 +112,7 @@ public class Profiles {
 
         accountList.add(new Profile("Daan@icloud.com", 11));
         accountList.add(new Profile("Daan@icloud.com", 11));
-        accountList.add(new Profile("Daan@icloud.com", 11));
+
         return accountList;
     }
 }
