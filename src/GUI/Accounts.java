@@ -113,6 +113,7 @@ public class Accounts {
 
             verticalBox.getChildren().add(accountPane);
         }
+
         Menu menu = new Menu();
         scrollPane.setContent(verticalBox);
 

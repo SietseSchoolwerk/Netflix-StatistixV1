@@ -36,3 +36,8 @@
 .newButton{
     -fx-font-size: 15pt Ariel;
 }
+
+.whiteLabels {
+    -fx-alignment: CENTER;
+    -fx-text-fill: WHITE;
+}
