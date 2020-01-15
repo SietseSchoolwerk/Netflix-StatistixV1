@@ -1,5 +1,6 @@
 package GUI;
 
+import Domain.Account;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -31,7 +32,7 @@ public class Menu {
         Button accountBtn = new Button("Account");
         accountBtn.setId("accountBtn");
         accountBtn.getStyleClass().add("menuBtn");
-        accountBtn.setOnAction(e -> stage.setScene(account.scene(stage)));
+        accountBtn.setOnAction(e -> stage.setScene(new Accounts().scene(stage)));
 
         Button movieBtn = new Button("Movie");
         movieBtn.setMnemonicParsing(false);

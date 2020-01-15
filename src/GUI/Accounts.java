@@ -83,11 +83,12 @@ public class Accounts {
             btnDelete.setMinWidth(80);
             btnDelete.getStyleClass().add("accountButtons");
 
-            Button btnWatch = new Button("Profiles");
-            btnWatch.setLayoutX(910);
-            btnWatch.setLayoutY(13);
-            btnWatch.setMinWidth(142);
-            btnWatch.getStyleClass().add("accountButtons");
+            Button btnProfiles = new Button("Profiles");
+            btnProfiles.setLayoutX(910);
+            btnProfiles.setLayoutY(13);
+            btnProfiles.setMinWidth(142);
+            btnProfiles.getStyleClass().add("accountButtons");
+            btnProfiles.setOnAction(e -> stage.setScene(new Profiles().scene(stage, accounts.getEmail())));
 
             Button btnWatchedSeries = new Button("Watched series");
             btnWatchedSeries.setLayoutX(910);
@@ -108,7 +109,7 @@ public class Accounts {
             line.setStroke(javafx.scene.paint.Color.rgb(255,255,255));
 
             accountPane.getChildren().addAll(lblEmail, lblSubscriber, lblAdress, lblCity);
-            accountPane.getChildren().addAll(btnEdit, btnDelete, btnWatch, btnWatchedSeries, btnWatchedMovies);
+            accountPane.getChildren().addAll(btnEdit, btnDelete, btnProfiles, btnWatchedSeries, btnWatchedMovies);
             accountPane.getChildren().add(line);
 
             verticalBox.getChildren().add(accountPane);

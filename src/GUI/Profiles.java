@@ -1,6 +1,7 @@
 package GUI;
 
 import Domain.Account;
+import Domain.Profile;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 
@@ -16,8 +17,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-public class Accounts {
-    public Scene scene(Stage stage){
+public class Profiles {
+    public Scene scene(Stage stage, String Email){
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
         mainPane.prefWidth(1600.0);
@@ -96,10 +97,13 @@ public class Accounts {
             verticalBox.getChildren().add(accountPane);
         }
 
+        Menu menu = new Menu();
         scrollPane.setContent(verticalBox);
-        mainpane.getChildren().addAll(scrollPane);
+        mainPane.getChildren().addAll(menu.getMenu(stage),scrollPane);
 
-        Scene scene = new Scene(mainpane);
+        Scene scene = new Scene(mainPane);
+        scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
+
         return scene;
     }
 
