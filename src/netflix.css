@@ -6,3 +6,29 @@
     -fx-min-width: 375.0;
     -fx-min-height: 97.0;
 }
+
+.accountLabels {
+    -fx-text-fill: WHITE;
+    -fx-font-size: 10pt Ariel;
+}
+
+.accountEmail {
+    -fx-text-fill: WHITE;
+    -fx-font-size: 15pt Ariel;
+}
+
+.accountButtons{
+    -fx-background-color: #383838;
+    -fx-alignment: CENTER;
+    -fx-text-fill: WHITE;
+    -fx-border-width: 1 1 1 1;
+        -fx-border-color:WHITE;
+}
+
+.accountButtons:hover{
+    -fx-background-color: #4d4d4d;
+    -fx-alignment: CENTER;
+    -fx-text-fill: WHITE;
+    -fx-border-width: 1 1 1 1;
+        -fx-border-color:WHITE;
+}
