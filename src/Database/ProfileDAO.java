@@ -131,11 +131,13 @@ public class ProfileDAO {
     }
 
 
-    /*
-    Todo
-    public static boolean setBekeken(){}
 
-    public static boolean getBekeken(){}
+    /*
+    public static boolean setWatched(int watchedId, int profileId,int programId,int watchedPercentage){
+
+    }
+
+    public static boolean getWatched(){}
     */
 
 }
