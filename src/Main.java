@@ -1,11 +1,9 @@
+import GUI.Menu;
 import javafx.application.Application;
-import javafx.geometry.Insets;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -14,56 +12,16 @@ public class Main extends Application {
         AnchorPane mainPane = new AnchorPane();
         mainPane.setStyle("-fx-background-color: #545454;");
 
-        VBox menu = new VBox();
-        menu.setLayoutX(3.0);
-        menu.setLayoutY(6.0);
-        menu.setMinHeight(800.0);
-        menu.setMinWidth(395.0);
-        menu.setStyle("-fx-background-color: #383838;");
-        AnchorPane.setBottomAnchor(menu,0.0);
-        AnchorPane.setLeftAnchor(menu,0.0);
-        AnchorPane.setTopAnchor(menu,0.0);
-
-        Image imageLogo = new Image("file:NetflixLogo.png");
-        ImageView logo = new ImageView();
-        logo.setFitHeight(151.0);
-        logo.setFitWidth(375.0);
-        logo.setPickOnBounds(true);
-        logo.setPreserveRatio(true);
-        logo.setImage(imageLogo);
-
-        Button accountBtn = new Button("Account");
-        accountBtn.setId("accountBtn");
-        accountBtn.getStyleClass().add("menuBtn");
-
-        Button movieBtn = new Button("Movie");
-        movieBtn.setMnemonicParsing(false);
-        accountBtn.setId("movieBtn");
-        movieBtn.getStyleClass().add("menuBtn");
-
-        Button serieBtn = new Button("Serie");
-        serieBtn.setMnemonicParsing(false);
-        accountBtn.setId("serieBtn");
-        serieBtn.getStyleClass().add("menuBtn");
-
-        //Add margin to the nodes in the VBox
-        VBox.setMargin(logo, new Insets(15.0, 0.0, 0.0, 37.0));
-        VBox.setMargin(accountBtn, new Insets(10.0, 10.0, 10.0, 10.0));
-        VBox.setMargin(movieBtn, new Insets(10.0, 10.0, 10.0, 10.0));
-        VBox.setMargin(serieBtn, new Insets(10.0, 10.0, 10.0, 10.0));
-
-        //Can't use addAll to add nodes to menu, needs to be fixed
-        menu.getChildren().add(logo);
-        menu.getChildren().add(accountBtn);
-        menu.getChildren().add(movieBtn);
-        menu.getChildren().add(serieBtn);
-
-        mainPane.getChildren().addAll(menu);
+        Menu menu = new Menu();
+        mainPane.getChildren().addAll(menu.getMenu(stage));
 
         Scene scene = new Scene(mainPane);
         stage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
         stage.setResizable(false);
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((screenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((screenBounds.getHeight() - stage.getHeight()) / 2);
         stage.show();
     }
 }
