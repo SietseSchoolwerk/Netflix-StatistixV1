@@ -74,8 +74,8 @@ public class ProfileDAO {
 
 
         StringBuilder setStatementStringBuilder = new StringBuilder();
-        // The same lame SQLi as in the AccountDAO
 
+        // Beware. This code has the same lame SQLi as in the AccountDAO.
 
         if(!OldName.equals(NewName)){
             setStatementStringBuilder.append(
