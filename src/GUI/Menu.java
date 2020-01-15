@@ -31,6 +31,7 @@ public class Menu {
         Button accountBtn = new Button("Account");
         accountBtn.setId("accountBtn");
         accountBtn.getStyleClass().add("menuBtn");
+        accountBtn.setOnAction(e -> stage.setScene(account.scene(stage)));
 
         Button movieBtn = new Button("Movie");
         movieBtn.setMnemonicParsing(false);
