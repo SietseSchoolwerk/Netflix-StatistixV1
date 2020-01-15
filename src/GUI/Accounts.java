@@ -1,5 +1,7 @@
 package GUI;
 
+import Database.AccountDAO;
+import Database.DatabaseConnection;
 import Domain.Account;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -33,7 +35,8 @@ public class Accounts {
         verticalBox.setMinWidth(1160);
         verticalBox.setMinHeight(Region.USE_COMPUTED_SIZE);
 
-        ArrayList<Account> accountList = getAccounts();
+        AccountDAO accountDAO = new AccountDAO();
+        ArrayList<Account> accountList = accountDAO.getAllAccounts();
 
         scrollPane.setStyle("-fx-background: #383838;");
 

@@ -8,9 +8,10 @@ import java.util.ArrayList;
 
 public class AccountDAO {
     private Connection connection;
+    private DatabaseConnection databaseConnection = new DatabaseConnection();
 
-    public AccountDAO(Connection connection) {
-        this.connection = DatabaseConnection.getConn();
+    public AccountDAO() {
+        this.connection = databaseConnection.getConn();
     }
 
     public ArrayList<Account> getAllAccounts() {
@@ -33,7 +34,7 @@ public class AccountDAO {
     public Account getAccount(String email){
 
         try{
-            PreparedStatement pdo = connection.prepareStatement(
+            PreparedStatement pdo = this.connection.prepareStatement(
                     "SELECT Email,Password,Subscriber,Address,City " +
                             "FROM Account " +
                             "WHERE Email=?"
@@ -69,7 +70,7 @@ public class AccountDAO {
         String City = account.getCity();
 
         try{
-            PreparedStatement pdo = connection.prepareStatement(
+            PreparedStatement pdo = this.connection.prepareStatement(
                     "INSERT INTO Account (Email,Password,Subscriber,Address,City) " +
                             " values(?,?,?,?,?)"
             );

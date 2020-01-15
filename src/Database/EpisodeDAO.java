@@ -7,10 +7,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class EpisodeDAO {
+    private Connection connection;
+    private DatabaseConnection databaseConnection = new DatabaseConnection();
 
-
-    private static Connection connection = DatabaseConnection.getConn();
-    public void ProfileDAO(Connection connection) { this.connection = connection; }
+    public EpisodeDAO() {
+        this.connection = databaseConnection.getConn();
+    }
 
 
     public Episode getEpisode(int ProgramId) {
@@ -25,7 +27,8 @@ public class EpisodeDAO {
 
             while (rs.next()) {
 
-                Program program = ProgramDAO.getProgram(ProgramId);
+                ProgramDAO programDAO = new ProgramDAO();
+                Program program = programDAO.getProgram(ProgramId);
                 return new Episode(
                         ProgramId,
                         rs.getString(3),

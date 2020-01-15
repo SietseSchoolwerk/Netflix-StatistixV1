@@ -7,11 +7,11 @@ import java.sql.DriverManager;
 
 public class DatabaseConnection {
 
-    private static Connection connection;
-    private static String databseName = "Netflix";
-    private static String connectionUrl = String.format("jdbc:sqlserver://localhost\\MSSQLSERVER;databaseName=%s;integratedSecurity=true;", databseName);
+    private Connection connection;
+    private String databaseName = "Netflix";
+    private final String connectionUrl = "jdbc:sqlserver://localhost\\SQLEXPRESS;databaseName=Netflix;integratedSecurity=true;port=1433";
 
-    public static Connection getConn() {
+    public Connection getConn() {
         try {
             return DriverManager.getConnection(connectionUrl);
         } catch (Exception e) {

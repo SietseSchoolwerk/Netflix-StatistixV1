@@ -1,8 +1,7 @@
 package GUI;
 
-import Domain.Account;
+import Database.ProfileDAO;
 import Domain.Profile;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 
 import java.util.ArrayList;
@@ -13,12 +12,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class Profiles {
-    public Scene profileList(Stage stage, String Email){
+    public Scene profileList(Stage stage, String email){
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
         mainPane.prefWidth(1600.0);
@@ -35,12 +32,14 @@ public class Profiles {
         verticalBox.setMinWidth(1160);
         verticalBox.setMinHeight(Region.USE_COMPUTED_SIZE);
 
-       ArrayList<Profile> profielList = getProfiles();
-
         scrollPane.setStyle("-fx-background: #383838;");
 
+        ProfileDAO profileDAO = new ProfileDAO();
+        ArrayList<Profile> profileList = profileDAO.getAllProfiles(email);
+
+
         int count = 0;
-        for (Profile profile: profielList) {
+        for (Profile profile: profileList) {
             count++;
             AnchorPane accountPane = new AnchorPane();
             accountPane.setMinHeight(110);
@@ -112,14 +111,5 @@ public class Profiles {
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
 
         return scene;
-    }
-
-    public ArrayList<Profile> getProfiles() {
-        ArrayList<Profile> accountList = new ArrayList<>();
-
-        accountList.add(new Profile("Daan@icloud.com", 11));
-        accountList.add(new Profile("Daan@icloud.com", 11));
-
-        return accountList;
     }
 }

@@ -4,16 +4,36 @@ import Domain.Profile;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class ProfileDAO {
 
-    private static Connection connection = DatabaseConnection.getConn();
+    private Connection connection;
+    private DatabaseConnection databaseConnection = new DatabaseConnection();
 
+    public ProfileDAO() {
+        this.connection = databaseConnection.getConn();
+    }
 
-    public void ProfileDAO(Connection connection) { this.connection = connection; }
-    public void ProfileDAO(){}
+    public ArrayList<Profile> getAllProfiles(String email) {
+        String sql = "SELECT * FROM Profile WHERE Email=?;";
 
-    public static Profile getProfile(String name){
+        try {
+            ArrayList<Profile> result = new ArrayList<>();
+            PreparedStatement statement = this.connection.prepareStatement(sql);
+            statement.setString(1, email);
+
+            ResultSet r = statement.executeQuery();
+            while(r.next()) {
+                result.add(new Profile(r.getString("Name"),r.getInt("Age")));
+            }
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public Profile getProfile(String name){
         try{
             PreparedStatement pdo = connection.prepareStatement(
                     "SELECT name,age FROM Profile WHERE Name=?"
@@ -38,7 +58,7 @@ public class ProfileDAO {
     }
 
 
-    public static boolean addProfile( Profile profile){
+    public boolean addProfile( Profile profile){
 
         String ProfileId = profile.getName();
         //String email = profile.getEmail();
@@ -52,8 +72,8 @@ public class ProfileDAO {
             );
 
             //pdo.setString(1,email);
-            pdo.setString(2,name);
-            pdo.setInt(3,age);
+            pdo.setString(1,name);
+            pdo.setInt(2,age);
             pdo.execute();
             return true;
         } catch(Exception e){
@@ -63,7 +83,7 @@ public class ProfileDAO {
     }
 
 
-    public static boolean editProfile(Profile profile){
+    public boolean editProfile(Profile profile){
 
         String NewName = profile.getName();
         int NewAge = profile.getAge();
@@ -111,7 +131,7 @@ public class ProfileDAO {
     }
 
 
-    public static boolean deleteProfile(int ProfileId){
+    public boolean deleteProfile(int ProfileId){
 
 
         try{
