@@ -12,7 +12,7 @@ class AccountTest {
     }
 
     @Test
-    void testSetInvalidEmailShouldReturnTrue() {
+    void testSetInvalidEmailShouldReturnFalse() {
 
     }
 
@@ -22,7 +22,7 @@ class AccountTest {
     }
 
     @Test
-    void testSetInvalidPasswordShouldReturnTrue() {
+    void testSetInvalidPasswordShouldReturnFalse() {
 
     }
 
@@ -32,17 +32,17 @@ class AccountTest {
     }
 
     @Test
-    void testSetInvalidSubscriberShouldReturnTrue() {
+    void testSetInvalidSubscriberShouldReturnFalse() {
 
     }
 
     @Test
     void testSetValidAdressShouldReturnTrue() {
-        
+
     }
 
     @Test
-    void testSetInvalidAdressShouldReturnTrue() {
+    void testSetInvalidAdressShouldReturnFalse() {
 
     }
 
@@ -52,7 +52,7 @@ class AccountTest {
     }
 
     @Test
-    void testSetInvalidCityShouldReturnTrue() {
+    void testSetInvalidCityShouldReturnFalse() {
 
     }
 
