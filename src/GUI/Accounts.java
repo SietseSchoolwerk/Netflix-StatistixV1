@@ -4,6 +4,9 @@ import Controllers.AccountController;
 import Database.AccountDAO;
 import Database.DatabaseConnection;
 import Domain.Account;
+import Domain.Film;
+import Domain.Profile;
+import Domain.Program;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 
@@ -108,6 +111,7 @@ public class Accounts {
             btnWatchedMovies.setLayoutX(732);
             btnWatchedMovies.setLayoutY(13);
             btnWatchedMovies.getStyleClass().add("accountButtons");
+            btnWatchedMovies.setOnAction(e -> stage.setScene(watchedMovies(stage, accounts.getEmail())));
 
             Line line = new Line();
             line.setStartX(-100);
@@ -385,6 +389,109 @@ public class Accounts {
         Menu menu = new Menu();
         scrollPane.setContent(verticalBox);
         mainPane.getChildren().addAll(menu.getMenu(stage), scrollPane);
+
+        Scene scene = new Scene(mainPane);
+        scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
+
+        return scene;
+    }
+
+    public Scene watchedMovies(Stage stage, String email) {
+        AnchorPane mainPane = new AnchorPane();
+        mainPane.prefHeight(800.0);
+        mainPane.prefWidth(1600.0);
+        mainPane.setStyle("-fx-background-color: #545454;");
+
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setLayoutX(407);
+        scrollPane.setLayoutY(50);
+        scrollPane.setMinWidth(1160);
+        scrollPane.setMinHeight(700);
+
+        VBox verticalBox = new VBox();
+        verticalBox.setMinWidth(1160);
+        verticalBox.setMinHeight(Region.USE_COMPUTED_SIZE);
+
+        AccountDAO accountDAO = new AccountDAO();
+        ArrayList<Program> movieList = accountDAO.getAllWatchedMovies(email);
+
+        scrollPane.setStyle("-fx-background: #383838;");
+
+        int count = 0;
+        for (Program movie : movieList) {
+            count++;
+            AnchorPane accountPane = new AnchorPane();
+            accountPane.setMinHeight(110);
+            accountPane.setMinWidth(1160);
+
+            if ((count % 2) == 0) {
+                accountPane.setStyle("-fx-background-color: #4d4d4d;");
+            } else {
+                accountPane.setStyle("-fx-background-color: #383838;");
+            }
+
+            Label lblTitle = new Label(movie.getTitle());
+            lblTitle.getStyleClass().add("accountEmail");
+            lblTitle.setLayoutX(65);
+            lblTitle.setLayoutY(14);
+
+            Label lblGenre = new Label((movie.getGenre()));
+            lblGenre.getStyleClass().add("accountLabels");
+            lblGenre.setLayoutY(37);
+            lblGenre.setLayoutX(65);
+
+            Label lblLan = new Label(movie.getLanguage());
+            lblLan.getStyleClass().add("accountLabels");
+            lblLan.setLayoutY(54);
+            lblLan.setLayoutX(65);
+
+            Label lblAge = new Label(Integer.toString(movie.getAge()));
+            lblAge.getStyleClass().add("accountLabels");
+            lblAge.setLayoutY(73);
+            lblAge.setLayoutX(65);
+
+            Label lblPlaytimeInfo = new Label("Playtime in minutes: ");
+            lblPlaytimeInfo.getStyleClass().add("accountLabels");
+            lblPlaytimeInfo.setLayoutY(54);
+            lblPlaytimeInfo.setLayoutX(253);
+
+            Label lblPlaytime = new Label(movie.getLengthOfTime());
+            lblPlaytime.getStyleClass().add("accountLabels");
+            lblPlaytime.setLayoutY(54);
+            lblPlaytime.setLayoutX(390);
+
+            Line line = new Line();
+            line.setStartX(-100);
+            line.setEndX(1081);
+            line.setLayoutX(101);
+            line.setLayoutY(109);
+            line.setStroke(javafx.scene.paint.Color.rgb(255, 255, 255));
+
+            accountPane.getChildren().addAll(lblTitle, lblGenre, lblLan, lblAge, lblPlaytimeInfo, lblPlaytime);
+            accountPane.getChildren().add(line);
+
+            verticalBox.getChildren().add(accountPane);
+        }
+
+        Menu menu = new Menu();
+        scrollPane.setContent(verticalBox);
+
+        Button btnAddNewAccount = new Button("New Account");
+        btnAddNewAccount.getStyleClass().add("accountButtons");
+        btnAddNewAccount.getStyleClass().add("newButton");
+        btnAddNewAccount.setLayoutY(2);
+        btnAddNewAccount.setLayoutX(407);
+        btnAddNewAccount.setOnAction(e -> stage.setScene(addAccount(stage)));
+
+
+        Button btnAccountsWithOneProfile = new Button("Accounts with 1 profile");
+        btnAccountsWithOneProfile.getStyleClass().add("accountButtons");
+        btnAccountsWithOneProfile.getStyleClass().add("newButton");
+        btnAccountsWithOneProfile.setLayoutY(2);
+        btnAccountsWithOneProfile.setLayoutX(577);
+        btnAccountsWithOneProfile.setOnAction(e -> stage.setScene(accountsWithOneProfile(stage)));
+
+        mainPane.getChildren().addAll(menu.getMenu(stage), scrollPane, btnAddNewAccount, btnAccountsWithOneProfile);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
