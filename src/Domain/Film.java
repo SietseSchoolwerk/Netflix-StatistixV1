@@ -7,8 +7,4 @@ public class Film extends Program {
         super(programId, title, genre, language,age, lengthOfTime);
         this.programId = programId;
     }
-
-    public boolean getFilm() {
-        return true;
-    }
 }
