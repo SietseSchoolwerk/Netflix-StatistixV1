@@ -22,9 +22,9 @@ public class SerieDAO {
         try {
 
             PreparedStatement pdo = connection.prepareStatement(
-                    "SELECT * FROM Serie" +
-                            "INNER JOIN Episode on Episode.Title = Serie.Title" +
-                            "WHERE Episode.ProgamId = ?;"
+                    "SELECT * FROM Serie " +
+                            "INNER JOIN Episode on Episode.Title = Serie.Title " +
+                            "WHERE Episode.ProgramId = ?;"
             );
             pdo.setInt(1,programId);
             ResultSet rs = pdo.executeQuery();
