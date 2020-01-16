@@ -47,4 +47,40 @@ public class FilmDAO extends ProgramDAO {
         return null;
     }
 
+    public Film getFilmWithAgeUnderSixteen(){
+
+        try{
+            PreparedStatement pdo = this.connection.prepareStatement(
+                    "SELECT TOP 1 * FROM Programma WHERE NOT Programma.ProgramId " +
+                            " IN (SELECT Episode.ProgramId FROM Episode) AND AGE < 16 " +
+                            " ORDER BY Playtime DESC"
+
+            );
+            ResultSet rs = pdo.executeQuery();
+            Object[] arr = new Object[6];
+            while (rs.next()) {
+                arr[0] = rs.getInt(1);      // programId: int
+                arr[1] = rs.getString(2);   // title: str
+                arr[2] = rs.getString(3);   // Genre: str
+                arr[3] = rs.getString(4);   // Language: str
+                arr[4] = rs.getInt(5);      // Age: int
+                arr[5] = rs.getInt(6);      // PlayTime: int
+            }
+            return new Film(
+                    (int)arr[0],
+                    (String)arr[1],
+                    (String)arr[2],
+                    (String)arr[3],
+                    Integer.toString((int)arr[5]),
+                    (int)arr[4]);
+        } catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
+
+    }
+
+
+
 }
