@@ -26,17 +26,9 @@ public class EpisodeDAO {
             ResultSet rs = pdo.executeQuery();
 
             while (rs.next()) {
-
                 ProgramDAO programDAO = new ProgramDAO();
                 Program program = programDAO.getProgram(ProgramId);
-                return new Episode(
-                        ProgramId,
-                        rs.getString(3),
-                        program.getGenre(),
-                        program.getLanguage(),
-                        program.getLengthOfTime(),
-                        "followNumber" // Change this, after asking what this is for
-                );
+                return new Episode(ProgramId, rs.getString(3), program.getGenre(), program.getLanguage(), program.getLengthOfTime(), rs.getString(2));
             }
         } catch (Exception e) {
             e.printStackTrace();
