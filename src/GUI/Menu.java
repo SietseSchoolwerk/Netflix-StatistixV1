@@ -38,6 +38,7 @@ public class Menu {
         movieBtn.setMnemonicParsing(false);
         accountBtn.setId("movieBtn");
         movieBtn.getStyleClass().add("menuBtn");
+        movieBtn.setOnAction(e -> stage.setScene(new Movies().movieList(stage)));
 
         Button serieBtn = new Button("Serie");
         serieBtn.setMnemonicParsing(false);
