@@ -1,4 +1,5 @@
-
+import java.sql.Connection;
+import Domain.Serie;
 
 public class SerieDAO {
 
