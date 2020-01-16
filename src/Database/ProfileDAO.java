@@ -206,6 +206,28 @@ public class ProfileDAO {
             return false;
         }
     }
+
+
+    public boolean editWatched(int watchedId,int watchedPercentage){
+        try{
+        PreparedStatement pdo = this.connection.prepareStatement(
+                "  UPDATE Watched" +
+                        "  SET WatchedPercentage=?" +
+                        "  WatchedId WatchedId=?"
+        );
+        pdo.setInt(1,watchedId);
+        pdo.setInt(2,watchedPercentage);
+        pdo.execute();
+        return true;
+    } catch(Exception e){
+        e.printStackTrace();
+        return false;
+    }
+
+
+}
+
+
 /*
     public static boolean getWatched(){}
     */
