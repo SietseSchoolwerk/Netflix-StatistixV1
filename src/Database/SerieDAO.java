@@ -59,7 +59,7 @@ public class SerieDAO {
         return null;
     }
 
-    public ArrayList<Integer> getAvgWatchedPercentageFromSeriePerEpisode(int programId) {
+    public int getAvgWatchedPercentageFromSeriePerEpisode(int programId) {
 
         try {
 
@@ -72,20 +72,18 @@ public class SerieDAO {
             );
             pdo.setInt(1, programId);
             ResultSet rs = pdo.executeQuery();
-            ArrayList<Integer> AvgWatchedPercentageFromSeriePerEpisode =
-                    new ArrayList<Integer>();
-            while (rs.next()) {
-                AvgWatchedPercentageFromSeriePerEpisode.add(
-                        rs.getInt(1)
-                );
+
+            if(rs.next()) {
+                return rs.getInt(1);
+
+            }else if (!rs.next()){
+                return 0;
             }
-            return AvgWatchedPercentageFromSeriePerEpisode;
+
+
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
-
-
         }
-
+        return 0;
     }
 }

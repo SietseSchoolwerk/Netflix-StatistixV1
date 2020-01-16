@@ -35,7 +35,7 @@ public class FilmDAO extends ProgramDAO {
     }
 
     public ArrayList<Program> getAllMovies() {
-        String sql = "SELECT * FROM Programma WHERE NOT Programma.ProgramId \n" +
+        String sql = "SELECT * FROM Programma WHERE NOT Programma.ProgramId " +
                                 " IN (SELECT Episode.ProgramId FROM Episode);";
 
         try {
