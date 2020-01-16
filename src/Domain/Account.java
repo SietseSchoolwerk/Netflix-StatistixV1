@@ -2,13 +2,6 @@ package Domain;
 
 import java.util.ArrayList;
 
-
-/*
-
-
-
- */
-
 public class Account {
     private String email;
     private String password;
@@ -30,6 +23,9 @@ public class Account {
     }
 
     public void setEmail(String email) {
+        if (email.equals(null)) {
+            return;
+        }
         this.email = email;
     }
 
@@ -38,6 +34,9 @@ public class Account {
     }
 
     public void setPassword(String password) {
+        if (password.equals(null)) {
+            return;
+        }
         this.password = password;
     }
 
@@ -46,6 +45,9 @@ public class Account {
     }
 
     public void setSubscriber(String subscriber) {
+        if (subscriber.equals(null)) {
+            return;
+        }
         this.subscriber = subscriber;
     }
 
@@ -54,6 +56,9 @@ public class Account {
     }
 
     public void setAddress(String address) {
+        if (address.equals(null)) {
+            return;
+        }
         this.address = address;
     }
 
@@ -62,6 +67,9 @@ public class Account {
     }
 
     public void setCity(String city) {
+        if (city.equals(null)) {
+            return;
+        }
         this.city = city;
     }
 }
