@@ -13,10 +13,6 @@ public class Serie {
         this.recommend = recommend;
     }
 
-    public boolean getSeries(){
-        return true;
-    }
-
     public List<Episode> getEpisodeList() {
         return episodeList;
     }
