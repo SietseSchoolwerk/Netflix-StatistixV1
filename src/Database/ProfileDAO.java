@@ -177,8 +177,21 @@ public class ProfileDAO {
 
 
 
-    public static boolean setWatched(Profile profile , Program program , int watchedPercentage){
-
+    public boolean setWatched(Profile profile , Program program , int watchedPercentage){
+        try{
+            PreparedStatement pdo = connection.prepareStatement(
+                    "INSERT INTO Watched (WatchedPercentage,ProfileId,ProgramId) values(?,?,?)"
+            );
+            
+            pdo.setInt(1,watchedPercentage);
+            pdo.setInt(2,profile.getProfileId());
+            pdo.setInt(3,program.getProgramId());
+            pdo.execute();
+            return true;
+        } catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 /*
     public static boolean getWatched(){}
