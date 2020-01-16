@@ -3,6 +3,7 @@ package Controllers;
 import Database.ProfileDAO;
 import Database.ProgramDAO;
 import Domain.Profile;
+import Domain.Watched;
 import GUI.Profiles;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,6 +20,7 @@ public class ProfileController implements EventHandler<ActionEvent> {
 
     private Stage stage;
     private Profile profile;
+    private Watched watch;
 
     private int programId;
     public ProfileController(Stage stage, Profile profile) {
@@ -43,8 +45,24 @@ public class ProfileController implements EventHandler<ActionEvent> {
                 this.handleAdd();
             } else if (btn.getId().equals("btnWatch")) {
                 this.handleWatch();
+            } else if (btn.getId().equals("btnUpdate")) {
+                this.handleUpdateWatched();
+            } else if (btn.getId().equals("btnDeleteWatched")) {
+                this.handleDeleteWatched();
             }
         }
+    }
+
+    public void handleDeleteWatched() {
+        ProfileDAO dao = new ProfileDAO();
+        dao.deleteWatched(watch.getWatchedId());
+        this.stage.setScene(new Profiles().profileList(this.stage, this.email));
+    }
+
+    public void handleUpdateWatched() {
+        ProfileDAO dao = new ProfileDAO();
+        dao.editWatched(watch.getWatchedId(), Integer.parseInt(this.txtPercentage.getText()));
+        this.stage.setScene(new Profiles().profileList(this.stage, this.email));
     }
 
     public void handleWatch() {
@@ -132,5 +150,13 @@ public class ProfileController implements EventHandler<ActionEvent> {
 
     public void setTxtPercentage(TextField txtPercentage) {
         this.txtPercentage = txtPercentage;
+    }
+
+    public Watched getWatch() {
+        return watch;
+    }
+
+    public void setWatch(Watched watch) {
+        this.watch = watch;
     }
 }

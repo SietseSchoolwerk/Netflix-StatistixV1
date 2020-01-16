@@ -212,10 +212,10 @@ public class ProfileDAO {
             PreparedStatement pdo = this.connection.prepareStatement(
                     "  UPDATE Watched" +
                             "  SET WatchedPercentage=?" +
-                            "  WatchedId WatchedId=?"
+                            "  WHERE WatchedId=?"
             );
-            pdo.setInt(1, watchedId);
-            pdo.setInt(2, watchedPercentage);
+            pdo.setInt(1, watchedPercentage);
+            pdo.setInt(2, watchedId);
             pdo.execute();
             return true;
         } catch (Exception e) {
@@ -230,7 +230,7 @@ public class ProfileDAO {
             try{
                 PreparedStatement pdo = this.connection.prepareStatement(
                         " DELETE FROM Watched" +
-                                " WatchedId WatchedId=?"
+                                " WHERE WatchedId=?"
                 );
                 pdo.setInt(1,watchedId);
                 pdo.execute();
