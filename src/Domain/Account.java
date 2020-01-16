@@ -23,7 +23,7 @@ public class Account {
     }
 
     public boolean setEmail(String email) {
-        if (email.isEmpty() || email.equals("")) {
+        if (email.isEmpty()) {
             return false;
         }
         this.email = email;
@@ -35,7 +35,7 @@ public class Account {
     }
 
     public boolean setPassword(String password) {
-        if (password.equals(null) || email.equals("")) {
+        if (email.isEmpty()) {
             return false;
         }
         this.password = password;
@@ -47,7 +47,7 @@ public class Account {
     }
 
     public boolean setSubscriber(String subscriber) {
-        if (subscriber.equals(null) || email.equals("")) {
+        if (email.isEmpty()) {
             return false;
         }
         this.subscriber = subscriber;
@@ -59,7 +59,7 @@ public class Account {
     }
 
     public boolean setAddress(String address) {
-        if (address.equals(null) || email.equals("")) {
+        if (email.isEmpty()) {
             return false;
         }
         this.address = address;
@@ -71,7 +71,7 @@ public class Account {
     }
 
     public boolean setCity(String city) {
-        if (city.equals(null) || email.equals("")) {
+        if (email.isEmpty()) {
             return false;
         }
         this.city = city;
