@@ -87,7 +87,7 @@ public class AccountDAO {
                 "ON Account.Email = Profile.Email " +
                 "WHERE Profile.Email = ? " +
                 "AND  NOT Programma.ProgramId " +
-                " IN (SELECT Episode.ProgamId FROM Episode) ";
+                " IN (SELECT Episode.ProgramId FROM Episode) ";
 
         try {
             ArrayList<Program> result = new ArrayList<>();
