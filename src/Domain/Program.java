@@ -6,13 +6,15 @@ public class Program {
     private String genre;
     private String language;
     private String lengthOfTime;
+    private int age;
 
-    public Program(int programId, String title, String genre, String language, String lengthOfTime) {
+    public Program(int programId, String title, String genre, String language,int age, String lengthOfTime) {
         this.programId = programId;
         this.title = title;
         this.genre = genre;
         this.language = language;
         this.lengthOfTime = lengthOfTime;
+        this.age = age;
     }
 
     public int getProgramId() {
@@ -53,5 +55,13 @@ public class Program {
 
     public void setLengthOfTime(String lengthOfTime) {
         this.lengthOfTime = lengthOfTime;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }
