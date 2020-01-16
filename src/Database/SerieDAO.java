@@ -1,12 +1,11 @@
 
 package Database;
 
+import Domain.Serie;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import Database.DatabaseConnection;
-import Domain.Serie;
 
 
 public class SerieDAO {
@@ -18,17 +17,20 @@ public class SerieDAO {
         this.connection = databaseConnection.getConn();
     }
 
-    public Serie getAllSeries() {
+    public Serie getSerie(int programId) {
 
         try {
 
             PreparedStatement pdo = connection.prepareStatement(
-                    "SELECT * FROM Serie"
+                    "SELECT * FROM Serie" +
+                            "INNER JOIN Episode on Episode.Title = Serie.Title" +
+                            "WHERE Episode.ProgamId = ?;"
             );
+            pdo.setInt(1,programId);
             ResultSet rs = pdo.executeQuery();
             while (rs.next()) {
-                String title = rs.getString(1)
-                String similar = rs.getString(2)
+                String title = rs.getString(1);
+                String similar = rs.getString(2);
                 return new Serie(title, similar);
             }
         } catch (Exception e) {
