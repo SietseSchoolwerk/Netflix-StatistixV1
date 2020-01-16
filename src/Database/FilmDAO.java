@@ -31,14 +31,14 @@ public class FilmDAO extends ProgramDAO {
 
     public ArrayList<Program> getAllMovies() {
         String sql = "SELECT * FROM Programma WHERE NOT Programma.ProgramId " +
-                                " IN (SELECT Episode.ProgramId FROM Episode);";
+                " IN (SELECT Episode.ProgramId FROM Episode);";
 
         try {
             ArrayList<Program> result = new ArrayList<>();
             PreparedStatement statement = this.connection.prepareStatement(sql);
             ResultSet r = statement.executeQuery();
-            while(r.next()) {
-                result.add(new Film(r.getInt("ProgramId"),r.getString("Title"),r.getString("Genre"),r.getString("Language"), r.getString("playtime"), r.getInt("Age")));
+            while (r.next()) {
+                result.add(new Film(r.getInt("ProgramId"), r.getString("Title"), r.getString("Genre"), r.getString("Language"), r.getString("playtime"), r.getInt("Age")));
             }
             return result;
         } catch (Exception e) {
@@ -47,9 +47,9 @@ public class FilmDAO extends ProgramDAO {
         return null;
     }
 
-    public Film getFilmWithAgeUnderSixteen(){
+    public Film getFilmWithAgeUnderSixteen() {
 
-        try{
+        try {
             PreparedStatement pdo = this.connection.prepareStatement(
                     "SELECT TOP 1 * FROM Programma WHERE NOT Programma.ProgramId " +
                             " IN (SELECT Episode.ProgramId FROM Episode) AND AGE < 16 " +
@@ -67,13 +67,13 @@ public class FilmDAO extends ProgramDAO {
                 arr[5] = rs.getInt(6);      // PlayTime: int
             }
             return new Film(
-                    (int)arr[0],
-                    (String)arr[1],
-                    (String)arr[2],
-                    (String)arr[3],
-                    Integer.toString((int)arr[5]),
-                    (int)arr[4]);
-        } catch(Exception e){
+                    (int) arr[0],
+                    (String) arr[1],
+                    (String) arr[2],
+                    (String) arr[3],
+                    Integer.toString((int) arr[5]),
+                    (int) arr[4]);
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -81,6 +81,29 @@ public class FilmDAO extends ProgramDAO {
 
     }
 
+    public int getFilmFullyWatched(int programId) {
+        try {
+
+            PreparedStatement pdo = connection.prepareStatement(
+                    "SELECT COUNT(ProfileId) FROM Programma " +
+                            "INNER JOIN Watched " +
+                            "ON Programma.ProgramId=Watched.ProgramId " +
+                            "WHERE WatchedPercentage = 100 AND Programma.ProgramId= ?"
+            );
+            pdo.setInt(1, programId);
+            ResultSet rs = pdo.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+
+            } else if (!rs.next()) {
+                return 0;
+            }
 
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }
