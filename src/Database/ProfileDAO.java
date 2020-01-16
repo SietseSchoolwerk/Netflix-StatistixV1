@@ -1,5 +1,6 @@
 package Database;
 import Domain.Profile;
+import Domain.Program;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -175,11 +176,11 @@ public class ProfileDAO {
 
 
 
-    /*
-    public static boolean setWatched(int watchedId, int profileId,int programId,int watchedPercentage){
+
+    public static boolean setWatched(Profile profile , Program program , int watchedPercentage){
 
     }
-
+/*
     public static boolean getWatched(){}
     */
 

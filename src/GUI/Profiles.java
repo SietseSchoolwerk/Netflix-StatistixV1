@@ -88,6 +88,12 @@ public class Profiles {
             btnWatch.setMinWidth(142);
             btnWatch.getStyleClass().add("accountButtons");
 
+            Button btnWatchedPreviously = new Button("Bekeken programma");
+            btnWatchedPreviously.setLayoutX(910);
+            btnWatchedPreviously.setLayoutY(55);
+            btnWatchedPreviously.setMinWidth(142);
+            btnWatchedPreviously.getStyleClass().add("accountButtons");
+
 
 
             Line line = new Line();
@@ -98,7 +104,7 @@ public class Profiles {
             line.setStroke(javafx.scene.paint.Color.rgb(255,255,255));
 
             accountPane.getChildren().addAll(lblName, lblAge);
-            accountPane.getChildren().addAll(btnEdit, btnDelete, btnWatch);
+            accountPane.getChildren().addAll(btnEdit, btnDelete, btnWatch, btnWatchedPreviously);
             accountPane.getChildren().add(line);
 
             verticalBox.getChildren().add(accountPane);
