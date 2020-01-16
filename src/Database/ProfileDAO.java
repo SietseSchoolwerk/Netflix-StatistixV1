@@ -208,22 +208,38 @@ public class ProfileDAO {
     }
 
 
-    public boolean editWatched(int watchedId,int watchedPercentage){
-        try{
-        PreparedStatement pdo = this.connection.prepareStatement(
-                "  UPDATE Watched" +
-                        "  SET WatchedPercentage=?" +
-                        "  WatchedId WatchedId=?"
-        );
-        pdo.setInt(1,watchedId);
-        pdo.setInt(2,watchedPercentage);
-        pdo.execute();
-        return true;
-    } catch(Exception e){
-        e.printStackTrace();
-        return false;
+    public boolean editWatched(int watchedId,int watchedPercentage) {
+        try {
+            PreparedStatement pdo = this.connection.prepareStatement(
+                    "  UPDATE Watched" +
+                            "  SET WatchedPercentage=?" +
+                            "  WatchedId WatchedId=?"
+            );
+            pdo.setInt(1, watchedId);
+            pdo.setInt(2, watchedPercentage);
+            pdo.execute();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
+
+
+        public boolean deleteWatched(int watchedId){
+            try{
+                PreparedStatement pdo = this.connection.prepareStatement(
+                        " DELETE FROM Watched" +
+                                " WatchedId WatchedId=?"
+                );
+                pdo.setInt(1,watchedId);
+                pdo.execute();
+                return true;
+            } catch(Exception e){
+                e.printStackTrace();
+                return false;
+            }
 
 }
 
