@@ -29,6 +29,7 @@ public class Movies {
         scrollPane.setLayoutY(50);
         scrollPane.setMinWidth(1160);
         scrollPane.setMinHeight(700);
+        scrollPane.setMaxHeight(700);
 
         VBox verticalBox = new VBox();
         verticalBox.setMinWidth(1160);
