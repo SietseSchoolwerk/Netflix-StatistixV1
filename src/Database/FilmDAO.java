@@ -1,7 +1,13 @@
 package Database;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import Domain.Episode;
 import Domain.Film;
+import Domain.Program;
+import Domain.Serie;
 
 /*
 
@@ -12,7 +18,7 @@ import Domain.Film;
 
 */
 
-public class FilmDAO extends ProgramDAO{
+public class FilmDAO extends ProgramDAO {
 
     private Connection connection;
     private DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -21,8 +27,10 @@ public class FilmDAO extends ProgramDAO{
         this.connection = databaseConnection.getConn();
     }
 
-    public Film getFilm(int ProgramId){
-        return (Film)super.getProgram(ProgramId);
-    };
+    public Film getFilm(int programId) {
+        ProgramDAO dao = new ProgramDAO();
+        Program prog = dao.getProgram(programId);
+        return new Film(programId, prog.getTitle(), prog.getGenre(), prog.getLanguage(), prog.getLengthOfTime(), prog.getAge());
+    }
 
 }
