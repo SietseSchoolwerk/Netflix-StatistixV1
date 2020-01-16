@@ -1,6 +1,7 @@
 package Database;
 import Domain.Episode;
 import Domain.Program;
+import Domain.Serie;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,7 +30,7 @@ public class EpisodeDAO {
         try {
 
             PreparedStatement pdo = connection.prepareStatement(
-                    "SELECT Title FROM Episode WHERE ProgramId=?"
+                    "SELECT Title, Vol FROM Episode WHERE ProgramId=?"
             );
 
             pdo.setInt(1, ProgramId);
@@ -38,7 +39,8 @@ public class EpisodeDAO {
             while (rs.next()) {
                 ProgramDAO programDAO = new ProgramDAO();
                 Program program = programDAO.getProgram(ProgramId);
-                return new Episode(ProgramId, rs.getString(3), program.getGenre(), program.getLanguage(), program.getLengthOfTime(), rs.getString(2));
+                Serie serie = new SerieDAO().getSerie(ProgramId);
+                return new Episode(ProgramId, rs.getString(1), program.getGenre(), program.getLanguage(), program.getLengthOfTime(), rs.getString(2), program.getAge());
             }
         } catch (Exception e) {
             e.printStackTrace();
