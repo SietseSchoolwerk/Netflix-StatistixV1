@@ -25,6 +25,10 @@ public class AccountController implements EventHandler<ActionEvent> {
         this.stage = stage;
     }
 
+    public AccountController(Stage stage) {
+        this.stage = stage;
+    }
+
     public void handle(ActionEvent event) {
         Button btn = null;
         if (event.getSource().toString().toLowerCase().contains("button")) {
@@ -33,7 +37,7 @@ public class AccountController implements EventHandler<ActionEvent> {
                 this.handleEdit();
             } else if (btn.getId().equals("btnDelete") && this.account != null) {
                 this.handleDelete(this.account);
-            } else if (btn.getId().equals("btnAddAccount") && this.account != null){
+            } else if (btn.getId().equals("btnAddAccount")){
                 Account account = new Account(txtEmailAccount.getText(), txtPasswordAccount.getText(), txtSubscriberAccount.getText(), txtAddressAccount.getText(), txtCityAccount.getText());
                 this.handleAdd(account);
             }

@@ -280,7 +280,7 @@ public class Accounts {
 
         Account account = new Account(txtEmail.getText(), txtPassword.getText(), txtSubscriber.getText(), txtAddress.getText(), txtCity.getText());
 
-        AccountController controller = new AccountController(stage, account);
+        AccountController controller = new AccountController(stage);
         controller.setTxtEmailAccount(txtEmail);
         controller.setTxtPasswordAccount(txtPassword);
         controller.setTxtPasswordAccount(txtPassword);
