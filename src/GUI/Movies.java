@@ -83,6 +83,11 @@ public class Movies {
             lblPlaytime.setLayoutY(54);
             lblPlaytime.setLayoutX(390);
 
+            Label lblAvgWatchPerEpisode = new Label(filmDAO.getFilmFullyWatched(program.getProgramId()) +" watched this movie 100%");
+            lblAvgWatchPerEpisode.getStyleClass().add("accountLabels");
+            lblAvgWatchPerEpisode.setLayoutY(54);
+            lblAvgWatchPerEpisode.setLayoutX(910);
+
             Line line = new Line();
             line.setStartX(-100);
             line.setEndX(1081);
@@ -90,7 +95,7 @@ public class Movies {
             line.setLayoutY(109);
             line.setStroke(javafx.scene.paint.Color.rgb(255, 255, 255));
 
-            accountPane.getChildren().addAll(lblTitle, lblGenre, lblLan, lblAge, lblPlaytimeInfo, lblPlaytime);
+            accountPane.getChildren().addAll(lblTitle, lblGenre, lblLan, lblAge, lblPlaytimeInfo, lblPlaytime, lblAvgWatchPerEpisode);
             accountPane.getChildren().add(line);
 
             verticalBox.getChildren().add(accountPane);

@@ -160,10 +160,10 @@ public class Series {
             lblPlaytime.setLayoutY(54);
             lblPlaytime.setLayoutX(390);
 
-            Label lblAvgWatchPerEpisode = new Label(serieDAO.getAvgWatchedPercentageFromSeriePerEpisode(program.getProgramId()) +" % average watched of total time");
-            lblAvgWatchPerEpisode.getStyleClass().add("accountLabels");
-            lblAvgWatchPerEpisode.setLayoutY(54);
-            lblAvgWatchPerEpisode.setLayoutX(910);
+            Label lblProfilesFullyWatched = new Label(serieDAO.getAvgWatchedPercentageFromSeriePerEpisode(program.getProgramId()) +" % average watched of total time");
+            lblProfilesFullyWatched.getStyleClass().add("accountLabels");
+            lblProfilesFullyWatched.setLayoutY(54);
+            lblProfilesFullyWatched.setLayoutX(910);
 
             Line line = new Line();
             line.setStartX(-100);
@@ -172,7 +172,7 @@ public class Series {
             line.setLayoutY(109);
             line.setStroke(javafx.scene.paint.Color.rgb(255, 255, 255));
 
-            accountPane.getChildren().addAll(lblTitle, lblGenre, lblLan, lblAge, lblPlaytimeInfo, lblPlaytime, lblAvgWatchPerEpisode);
+            accountPane.getChildren().addAll(lblTitle, lblGenre, lblLan, lblAge, lblPlaytimeInfo, lblPlaytime, lblProfilesFullyWatched);
             accountPane.getChildren().add(line);
 
             verticalBox.getChildren().add(accountPane);
