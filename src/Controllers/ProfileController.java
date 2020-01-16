@@ -1,6 +1,7 @@
 package Controllers;
 
 import Database.ProfileDAO;
+import Database.ProgramDAO;
 import Domain.Profile;
 import GUI.Profiles;
 import javafx.event.ActionEvent;
@@ -13,11 +14,13 @@ import javafx.stage.Stage;
 public class ProfileController implements EventHandler<ActionEvent> {
     private TextField txtNameProfile;
     private TextField txtAgeProfile;
+    private TextField txtPercentage;
     private String email;
 
     private Stage stage;
     private Profile profile;
 
+    private int programId;
     public ProfileController(Stage stage, Profile profile) {
         this.stage = stage;
         this.profile = profile;
@@ -38,8 +41,19 @@ public class ProfileController implements EventHandler<ActionEvent> {
                 this.handleDelete();
             } else if (btn.getId().equals("btnAdd")) {
                 this.handleAdd();
+            } else if (btn.getId().equals("btnWatch")) {
+                this.handleWatch();
             }
         }
+    }
+
+    public void handleWatch() {
+        ProfileDAO dao = new ProfileDAO();
+        ProgramDAO programDao = new ProgramDAO();
+        dao.setWatched(this.profile, programDao.getProgram(this.programId), Integer.parseInt(this.txtPercentage.getText()));
+
+
+        this.stage.setScene(new Profiles().profileList(this.stage, this.email));
     }
 
     public void handleAdd() {
@@ -94,5 +108,29 @@ public class ProfileController implements EventHandler<ActionEvent> {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public int getProgramId() {
+        return programId;
+    }
+
+    public void setProgramId(int programId) {
+        this.programId = programId;
+    }
+
+    public TextField getTxtPercentage() {
+        return txtPercentage;
+    }
+
+    public void setTxtPercentage(TextField txtPercentage) {
+        this.txtPercentage = txtPercentage;
     }
 }

@@ -88,7 +88,7 @@ public class Profiles {
             btnWatch.setLayoutY(13);
             btnWatch.setMinWidth(142);
             btnWatch.getStyleClass().add("accountButtons");
-            btnWatch.setOnAction(e -> stage.setScene(new Profiles().watchMovie(stage, email)));
+            btnWatch.setOnAction(e -> stage.setScene(new Profiles().watchMovie(stage, email, profile)));
 
             Button btnWatchedPreviously = new Button("Bekeken programma");
             btnWatchedPreviously.setLayoutX(910);
@@ -243,7 +243,7 @@ public class Profiles {
         return scene;
     }
 
-    public Scene watchMovie(Stage stage, String email) {
+    public Scene watchMovie(Stage stage, String email, Profile profile) {
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
         mainPane.prefWidth(1600.0);
@@ -333,7 +333,10 @@ public class Profiles {
             btnWatch.setMinWidth(80);
             btnWatch.getStyleClass().add("accountButtons");
             ProfileController controller = new ProfileController(stage);
-            btnWatch.setOnAction(controller);
+            controller.setProfile(profile);
+            controller.setEmail(email);
+            controller.setProgramId(program.getProgramId());
+            btnWatch.setOnAction(e -> stage.setScene(new Profiles().addWatched(stage, controller)));
 
 
 
@@ -355,6 +358,54 @@ public class Profiles {
         scrollPane.setContent(verticalBox);
 
         mainPane.getChildren().addAll(menu.getMenu(stage),scrollPane);
+
+        Scene scene = new Scene(mainPane);
+        scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
+
+        return scene;
+    }
+
+
+    public Scene addWatched(Stage stage, ProfileController controller) {
+        AnchorPane mainPane = new AnchorPane();
+        mainPane.prefHeight(800.0);
+        mainPane.setMinWidth(900.0);
+        mainPane.setStyle("-fx-background-color: #545454;");
+
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setLayoutX(407);
+        scrollPane.setLayoutY(50);
+        scrollPane.setMinWidth(1140);
+        scrollPane.setMinHeight(700);
+        scrollPane.setMaxHeight(700);
+
+        VBox verticalBox = new VBox();
+        verticalBox.setMinWidth(1160);
+        verticalBox.setMinHeight(Region.USE_COMPUTED_SIZE);
+
+        Label lblPercentage = new Label("Watched percentage");
+        lblPercentage.setLayoutX(465);
+        lblPercentage.setLayoutY(53);
+        lblPercentage.getStyleClass().add("whiteLabels");
+
+
+        TextField txtPercentage = new TextField();
+        txtPercentage.setLayoutX(666);
+        txtPercentage.setLayoutY(53);
+
+        controller.setTxtPercentage(txtPercentage);
+
+
+        Button btnWatch = new Button("Submit changes");
+        btnWatch.setId("btnWatch");
+        btnWatch.setLayoutX(465);
+        btnWatch.setLayoutY(138);
+        btnWatch.getStyleClass().add("accountButtons");
+        btnWatch.setOnAction(controller);
+
+        Menu menu = new Menu();
+
+        mainPane.getChildren().addAll(menu.getMenu(stage), lblPercentage, txtPercentage, btnWatch);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
