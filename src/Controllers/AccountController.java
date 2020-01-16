@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 
 public class AccountController implements EventHandler<ActionEvent> {
+    private TextField txtEmailAccount;
     private TextField txtPasswordAccount;
     private TextField txtSubscriberAccount;
     private TextField txtAddressAccount;
@@ -32,8 +33,9 @@ public class AccountController implements EventHandler<ActionEvent> {
                 this.handleEdit();
             } else if (btn.getId().equals("btnDelete") && this.account != null) {
                 this.handleDelete(this.account);
-            } else if (btn.getId().equals("btnAddProfile") && this.account != null){
-                this.handleAdd(this.account);
+            } else if (btn.getId().equals("btnAddAccount") && this.account != null){
+                Account account = new Account(txtEmailAccount.getText(), txtPasswordAccount.getText(), txtSubscriberAccount.getText(), txtAddressAccount.getText(), txtCityAccount.getText());
+                this.handleAdd(account);
             }
         }
     }
@@ -51,11 +53,21 @@ public class AccountController implements EventHandler<ActionEvent> {
     public void handleDelete(Account account) {
         AccountDAO accountDAO = new AccountDAO();
         accountDAO.deleteAccount(account.getEmail());
+        this.stage.setScene(new Accounts().AccountList(this.stage));
     }
 
     public void handleAdd(Account account) {
         AccountDAO accountDAO = new AccountDAO();
         accountDAO.addAccount(account);
+        this.stage.setScene(new Accounts().AccountList(this.stage));
+    }
+
+    public TextField getTxtEmailAccount() {
+        return txtEmailAccount;
+    }
+
+    public void setTxtEmailAccount(TextField txtEmailAccount) {
+        this.txtEmailAccount = txtEmailAccount;
     }
 
     public TextField getTxtPasswordAccount() {
