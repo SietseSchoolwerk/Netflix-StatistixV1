@@ -10,10 +10,6 @@ public class Episode extends Program {
         this.followNumber = followNumber;
     }
 
-    public boolean getEpisode(){
-        return true;
-    }
-
     public String getFollowNumber() {
         return followNumber;
     }
