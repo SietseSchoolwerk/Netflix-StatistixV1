@@ -8,10 +8,9 @@ public class Serie {
     private String recommend;
     private List<Episode> episodeList;
 
-    public Serie(String title, String recommend, List<Episode> episodeList) {
+    public Serie(String title, String recommend) {
         this.title = title;
         this.recommend = recommend;
-        this.episodeList = new ArrayList<>();
     }
 
     public boolean getSeries(){

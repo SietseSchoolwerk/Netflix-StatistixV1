@@ -6,6 +6,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+
+/*
+
+    Deze class selecteerd data uit de Episode table.
+    Vervolgens word met deze data een Episode object uit de Domain package gemaakt\
+    en gereturned.
+
+ */
+
+
 public class EpisodeDAO {
     private Connection connection;
     private DatabaseConnection databaseConnection = new DatabaseConnection();

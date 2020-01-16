@@ -7,6 +7,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+    /*
+
+    Deze Class bevat alle methods die met de Profile table te maken hebben.
+
+    De method: addProfile neemt een Profile object en voegd de attributen van dit\
+    object toe als records in de database.
+
+    De method deleteProfile verwijderd records
+
+    De method editProfile past een record in de database aan naar de nieuwe attributen\
+    van het bijbehorende object.
+     */
+
 public class ProfileDAO {
 
     private Connection connection;

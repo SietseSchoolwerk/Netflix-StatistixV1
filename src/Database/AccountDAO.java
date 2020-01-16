@@ -6,6 +6,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+
+/*
+
+    Deze Class bevat alle methods die met de Account table te maken hebben.
+
+    De method: getAllAccounts geeft een ArrayList met Account objecten terug van \
+    de records in de database.
+
+    De method: getAccount geeft een Account object terug, met als attributen \
+    de records uit de database
+
+    De method: addAccount neemt een Account object en voegd de attributen van dit\
+    object toe als records in de database.
+
+    De method deleteAccount verwijderd records met als unique identifier de email
+
+    De method editAccount past een record in de database aan naar de nieuwe attributen\
+    van het bijbehorende object.
+
+
+ */
+
+
 public class AccountDAO {
     private Connection connection;
     private DatabaseConnection databaseConnection = new DatabaseConnection();

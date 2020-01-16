@@ -3,6 +3,12 @@ package Database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/*
+
+        Deze Class bevat de method Connection die een DriverManager \
+        object terug waarmee verbinding met de database gemaakt kan worden.
+
+*/
 
 
 public class DatabaseConnection {

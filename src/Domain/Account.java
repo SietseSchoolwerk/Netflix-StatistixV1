@@ -2,6 +2,13 @@ package Domain;
 
 import java.util.ArrayList;
 
+
+/*
+
+
+
+ */
+
 public class Account {
     private String email;
     private String password;
