@@ -1,21 +1,16 @@
 package Database;
 
+import Domain.Film;
+import Domain.Program;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import Domain.Episode;
-import Domain.Film;
-import Domain.Program;
-import Domain.Serie;
-
 /*
 
-    Deze class bevat de method getFilm. Zoals in de ERD te lezen valt\
-    is een Film simpelweg een Program. Door de FilmDAO te extenden met\
-    de Program class kunnen simpelweg alle functionaliteiten van deze\
-    super class worden overgenomen zonder code te dupliceren.
+    Deze class bevat de method getFilm.
 
 */
 
@@ -35,7 +30,7 @@ public class FilmDAO extends ProgramDAO {
     }
 
     public ArrayList<Program> getAllMovies() {
-        String sql = "SELECT * FROM Programma WHERE NOT Programma.ProgramId \n" +
+        String sql = "SELECT * FROM Programma WHERE NOT Programma.ProgramId " +
                                 " IN (SELECT Episode.ProgramId FROM Episode);";
 
         try {

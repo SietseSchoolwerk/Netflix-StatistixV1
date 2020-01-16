@@ -41,6 +41,7 @@ public class SerieDAO {
         return null;
     }
 
+
     public ArrayList<Serie> getAllSeries(){
         String sql = "SELECT * FROM Serie;";
 
@@ -56,5 +57,33 @@ public class SerieDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public int getAvgWatchedPercentageFromSeriePerEpisode(int programId) {
+
+        try {
+
+            PreparedStatement pdo = connection.prepareStatement(
+                    "SELECT AVG(WatchedPercentage) FROM Programma " +
+                            "INNER JOIN Watched " +
+                            "ON Watched.ProgramId= Programma.ProgramId " +
+                            "WHERE Programma.ProgramId=? " +
+                            "GROUP BY Programma.Title "
+            );
+            pdo.setInt(1, programId);
+            ResultSet rs = pdo.executeQuery();
+
+            if(rs.next()) {
+                return rs.getInt(1);
+
+            }else if (!rs.next()){
+                return 0;
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }
