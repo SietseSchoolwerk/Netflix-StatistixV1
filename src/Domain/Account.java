@@ -22,54 +22,59 @@ public class Account {
         return email;
     }
 
-    public void setEmail(String email) {
-        if (email.equals(null)) {
-            return;
+    public boolean setEmail(String email) {
+        if (email.isEmpty() || email.equals("")) {
+            return false;
         }
         this.email = email;
+        return true;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        if (password.equals(null)) {
-            return;
+    public boolean setPassword(String password) {
+        if (password.equals(null) || email.equals("")) {
+            return false;
         }
         this.password = password;
+        return true;
     }
 
     public String getSubscriber() {
         return subscriber;
     }
 
-    public void setSubscriber(String subscriber) {
-        if (subscriber.equals(null)) {
-            return;
+    public boolean setSubscriber(String subscriber) {
+        if (subscriber.equals(null) || email.equals("")) {
+            return false;
         }
         this.subscriber = subscriber;
+        return true;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        if (address.equals(null)) {
-            return;
+    public boolean setAddress(String address) {
+        if (address.equals(null) || email.equals("")) {
+            return false;
         }
         this.address = address;
+        return true;
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
-        if (city.equals(null)) {
-            return;
+    public boolean setCity(String city) {
+        if (city.equals(null) || email.equals("")) {
+            return false;
         }
         this.city = city;
+        return true;
     }
 }
