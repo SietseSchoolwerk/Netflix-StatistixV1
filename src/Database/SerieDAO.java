@@ -41,6 +41,24 @@ public class SerieDAO {
         return null;
     }
 
+
+    public ArrayList<Serie> getAllSeries(){
+        String sql = "SELECT * FROM Serie;";
+
+        try {
+            ArrayList<Serie> result = new ArrayList<>();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                result.add(new Serie(rs.getString(1), rs.getString(2)));
+            }
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public ArrayList<Integer> getAvgWatchedPercentageFromSeriePerEpisode(int programId) {
 
         try {

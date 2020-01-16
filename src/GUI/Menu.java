@@ -44,6 +44,7 @@ public class Menu {
         serieBtn.setMnemonicParsing(false);
         accountBtn.setId("serieBtn");
         serieBtn.getStyleClass().add("menuBtn");
+        serieBtn.setOnAction(e -> stage.setScene(new Series().serieList(stage)));
 
         //Add margin to the nodes in the VBox
         VBox.setMargin(logo, new Insets(15.0, 0.0, 0.0, 37.0));
