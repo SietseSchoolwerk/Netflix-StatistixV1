@@ -1,9 +1,10 @@
 package Database;
-import Domain.Program;
+import Domain.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class ProgramDAO {
 
@@ -42,5 +43,63 @@ public class ProgramDAO {
             return null;
         }
 
+    }
+
+    public ArrayList<Program> getAllPrograms(){
+        try{
+            ArrayList<Program> programmaList = new ArrayList<>();
+            PreparedStatement pdo = connection.prepareStatement(
+                    "SELECT ProgramId " +
+                            "FROM Programma"
+            );
+            ResultSet rs = pdo.executeQuery();
+
+            Object[] arr = new Object[4];
+
+            while (rs.next()) {
+                int programmaId = rs.getInt(1);    //Program id
+
+                if (isSerie(programmaId)) {
+                    EpisodeDAO episodeDAO = new EpisodeDAO();
+                    Episode episode = episodeDAO.getEpisode(programmaId);
+
+                    programmaList.add(episode);
+                } else {
+                    FilmDAO filmDAO = new FilmDAO();
+                    Film film = filmDAO.getFilm(programmaId);
+
+                    programmaList.add(film);
+                }
+
+            }
+            return programmaList;
+
+        } catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public boolean isSerie(int programId) {
+        String sql = "SELECT count(*) as result FROM Episode WHERE ProgramId=?;";
+
+        try {
+            ArrayList<Profile> result = new ArrayList<>();
+            PreparedStatement statement = this.connection.prepareStatement(sql);
+            statement.setInt(1, programId);
+
+            ResultSet r = statement.executeQuery();
+            while(r.next()) {
+                if (r.getInt("result") == 0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

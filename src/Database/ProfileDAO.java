@@ -182,7 +182,7 @@ public class ProfileDAO {
             PreparedStatement pdo = connection.prepareStatement(
                     "INSERT INTO Watched (WatchedPercentage,ProfileId,ProgramId) values(?,?,?)"
             );
-            
+
             pdo.setInt(1,watchedPercentage);
             pdo.setInt(2,profile.getProfileId());
             pdo.setInt(3,program.getProgramId());
