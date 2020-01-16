@@ -476,22 +476,7 @@ public class Accounts {
         Menu menu = new Menu();
         scrollPane.setContent(verticalBox);
 
-        Button btnAddNewAccount = new Button("New Account");
-        btnAddNewAccount.getStyleClass().add("accountButtons");
-        btnAddNewAccount.getStyleClass().add("newButton");
-        btnAddNewAccount.setLayoutY(2);
-        btnAddNewAccount.setLayoutX(407);
-        btnAddNewAccount.setOnAction(e -> stage.setScene(addAccount(stage)));
-
-
-        Button btnAccountsWithOneProfile = new Button("Accounts with 1 profile");
-        btnAccountsWithOneProfile.getStyleClass().add("accountButtons");
-        btnAccountsWithOneProfile.getStyleClass().add("newButton");
-        btnAccountsWithOneProfile.setLayoutY(2);
-        btnAccountsWithOneProfile.setLayoutX(577);
-        btnAccountsWithOneProfile.setOnAction(e -> stage.setScene(accountsWithOneProfile(stage)));
-
-        mainPane.getChildren().addAll(menu.getMenu(stage), scrollPane, btnAddNewAccount, btnAccountsWithOneProfile);
+        mainPane.getChildren().addAll(menu.getMenu(stage), scrollPane);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());

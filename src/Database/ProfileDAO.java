@@ -1,6 +1,7 @@
 package Database;
 import Domain.Profile;
 import Domain.Program;
+import Domain.Watched;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,8 +39,8 @@ public class ProfileDAO {
             statement.setString(1, email);
 
             ResultSet r = statement.executeQuery();
-            while(r.next()) {
-                result.add(new Profile(r.getInt("ProfileId"), r.getString("Name"),r.getInt("Age"),r.getString("Email")));
+            while (r.next()) {
+                result.add(new Profile(r.getInt("ProfileId"), r.getString("Name"), r.getInt("Age"), r.getString("Email")));
             }
             return result;
         } catch (Exception e) {
@@ -48,8 +49,8 @@ public class ProfileDAO {
         return null;
     }
 
-    public Profile getProfile(String name){
-        try{
+    public Profile getProfile(String name) {
+        try {
             PreparedStatement pdo = connection.prepareStatement(
                     "SELECT ProfileId,name,age,Email FROM Profile WHERE Name=?"
             );
@@ -65,30 +66,30 @@ public class ProfileDAO {
                 arr[2] = rs.getInt(2); // age
             }
 
-            return new Profile(Integer.parseInt((String)arr[0]),(String)arr[1],(int)arr[2], (String)arr[3]);
+            return new Profile(Integer.parseInt((String) arr[0]), (String) arr[1], (int) arr[2], (String) arr[3]);
 
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
 
-    public String getEmailWithProfileId(int profileId){
-            String sql = "SELECT * FROM Profile WHERE ProfileId=?;";
+    public String getEmailWithProfileId(int profileId) {
+        String sql = "SELECT * FROM Profile WHERE ProfileId=?;";
 
-            try {
-                PreparedStatement statement = this.connection.prepareStatement(sql);
-                statement.setInt(1, profileId);
+        try {
+            PreparedStatement statement = this.connection.prepareStatement(sql);
+            statement.setInt(1, profileId);
 
-                ResultSet r = statement.executeQuery();
-                while(r.next()) {
-                    return r.getString("Email");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            ResultSet r = statement.executeQuery();
+            while (r.next()) {
+                return r.getString("Email");
             }
-            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
@@ -101,7 +102,7 @@ public class ProfileDAO {
             statement.setString(1, Email);
 
             ResultSet r = statement.executeQuery();
-            while(r.next()) {
+            while (r.next()) {
                 return r.getInt("result");
             }
         } catch (Exception e) {
@@ -111,26 +112,26 @@ public class ProfileDAO {
     }
 
 
-    public boolean addProfile( Profile profile){
-        try{
+    public boolean addProfile(Profile profile) {
+        try {
             PreparedStatement pdo = connection.prepareStatement(
                     "INSERT INTO Profile (Name,Age,Email) values(?,?,?)"
             );
 
             //pdo.setString(1,email);
-            pdo.setString(1,profile.getName());
-            pdo.setInt(2,profile.getAge());
-            pdo.setString(3,profile.getEmail());
+            pdo.setString(1, profile.getName());
+            pdo.setInt(2, profile.getAge());
+            pdo.setString(3, profile.getEmail());
             pdo.execute();
             return true;
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
 
-    public boolean editProfile(Profile profile){
+    public boolean editProfile(Profile profile) {
 
         String NewName = profile.getName();
         int NewAge = profile.getAge();
@@ -141,14 +142,14 @@ public class ProfileDAO {
         // Beware. This code has the same lame SQLi as in the AccountDAO.
         setStatementStringBuilder.append(String.format("UPDATE Profile SET "));
 
-            setStatementStringBuilder.append(
-                    String.format("Name='%s',",NewName)
-            );
+        setStatementStringBuilder.append(
+                String.format("Name='%s',", NewName)
+        );
 
 
-            setStatementStringBuilder.append(
-                    String.format("Age='%s',",NewAge )
-            );
+        setStatementStringBuilder.append(
+                String.format("Age='%s',", NewAge)
+        );
 
         String setStatementString = setStatementStringBuilder.toString();
         String setStatementStringSliced =
@@ -156,80 +157,95 @@ public class ProfileDAO {
 
         //setStatementStringStrSliced += " WHERE uniqueId=<uniqueId>";
         setStatementStringSliced += String.format(
-                " WHERE ProfileId='%s'",profile.getProfileId());
+                " WHERE ProfileId='%s'", profile.getProfileId());
 
 
-        try{
+        try {
             PreparedStatement pdo = connection.prepareStatement(
                     setStatementStringSliced
             );
             System.out.println(setStatementStringBuilder.toString());
             pdo.execute();
             return true;
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
 
-    public boolean deleteProfile(Profile profile){
-        try{
+    public boolean deleteProfile(Profile profile) {
+        try {
             PreparedStatement pdo = connection.prepareStatement(
                     "DELETE FROM Profile WHERE ProfileId=?"
             );
             pdo.setInt(1, profile.getProfileId());
             pdo.execute();
             return true;
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
 
-
-
-    public boolean setWatched(Profile profile , Program program , int watchedPercentage){
-        try{
+    public boolean setWatched(Profile profile, Program program, int watchedPercentage) {
+        try {
             PreparedStatement pdo = connection.prepareStatement(
                     "INSERT INTO Watched (WatchedPercentage,ProfileId,ProgramId) values(?,?,?)"
             );
 
-            pdo.setInt(1,watchedPercentage);
-            pdo.setInt(2,profile.getProfileId());
-            pdo.setInt(3,program.getProgramId());
+            pdo.setInt(1, watchedPercentage);
+            pdo.setInt(2, profile.getProfileId());
+            pdo.setInt(3, program.getProgramId());
             pdo.execute();
             return true;
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
 
-    public boolean editWatched(int watchedId,int watchedPercentage){
-        try{
-        PreparedStatement pdo = this.connection.prepareStatement(
-                "  UPDATE Watched" +
-                        "  SET WatchedPercentage=?" +
-                        "  WatchedId WatchedId=?"
-        );
-        pdo.setInt(1,watchedId);
-        pdo.setInt(2,watchedPercentage);
-        pdo.execute();
-        return true;
-    } catch(Exception e){
-        e.printStackTrace();
-        return false;
+    public boolean editWatched(int watchedId, int watchedPercentage) {
+        try {
+            PreparedStatement pdo = this.connection.prepareStatement(
+                    "  UPDATE Watched" +
+                            "  SET WatchedPercentage=?" +
+                            "  WatchedId WatchedId=?"
+            );
+            pdo.setInt(1, watchedId);
+            pdo.setInt(2, watchedPercentage);
+            pdo.execute();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+
     }
 
+    public ArrayList<Watched> getWatched(int profileId) {
+        String sql = "SELECT WatchedId, Programma.Title, Genre, Programma.Language, Programma.Age, Playtime, WatchedPercentage, Episode.Title, Vol FROM Watched " +
+                "INNER JOIN Programma on Programma.ProgramId = Watched.ProgramId " +
+                "LEFT JOIN Episode on Programma.ProgramId = Episode.ProgramId " +
+                "WHERE ProfileId = ?";
 
-}
+        try {
+            ArrayList<Watched> result = new ArrayList<>();
+            PreparedStatement statement = this.connection.prepareStatement(sql);
+            statement.setInt(1, profileId);
 
+            ResultSet r = statement.executeQuery();
+            while (r.next()) {
+                result.add(new Watched(r.getInt(1), r.getString(2), r.getString(3), r.getString(4), r.getInt(5), r.getInt(6), r.getInt(7), r.getString(8), r.getString(9)));
+            }
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
 
-/*
-    public static boolean getWatched(){}
-    */
-
+    }
 }
