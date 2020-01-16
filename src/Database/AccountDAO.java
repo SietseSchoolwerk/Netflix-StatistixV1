@@ -54,6 +54,23 @@ public class AccountDAO {
         return null;
     }
 
+    public ArrayList<Account> getAllAccountsWithOneProfile() {
+        String sql = "SELECT Account.Email, Password, Subscriber, Address, City FROM Profile INNER JOIN Account ON Account.Email = Profile.Email GROUP BY Account.Email, Password, Subscriber, Address, City Having COUNT(*) = 1";
+
+        try {
+            ArrayList<Account> result = new ArrayList<>();
+            PreparedStatement statement = this.connection.prepareStatement(sql);
+            ResultSet r = statement.executeQuery();
+            while(r.next()) {
+                result.add(new Account(r.getString("Email"),r.getString("Password"),r.getString("Subscriber"),r.getString("Address"), r.getString("City")));
+            }
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public Account getAccount(String email){
 
         try{
