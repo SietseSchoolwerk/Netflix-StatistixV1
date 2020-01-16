@@ -41,8 +41,6 @@ public class SerieDAO {
         return null;
     }
 
-    // return episode
-
     public ArrayList<Integer> getAvgWatchedPercentageFromSeriePerEpisode(int programId) {
 
         try {
