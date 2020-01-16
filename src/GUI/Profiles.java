@@ -112,6 +112,7 @@ public class Profiles {
         btnAddNewProfile.getStyleClass().add("newButton");
         btnAddNewProfile.setLayoutY(2);
         btnAddNewProfile.setLayoutX(407);
+        btnAddNewProfile.setOnAction(e -> stage.setScene(new Profiles().addProfile(stage, email)));
 
         mainPane.getChildren().addAll(menu.getMenu(stage),scrollPane, btnAddNewProfile);
 
@@ -170,6 +171,63 @@ public class Profiles {
         Menu menu = new Menu();
 
         mainPane.getChildren().addAll(menu.getMenu(stage), lblAge, lblName, txtName, txtAge, btnSubmit);
+
+        Scene scene = new Scene(mainPane);
+        scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
+
+        return scene;
+    }
+
+    public Scene addProfile(Stage stage, String email) {
+        AnchorPane mainPane = new AnchorPane();
+        mainPane.prefHeight(800.0);
+        mainPane.setMinWidth(900.0);
+        mainPane.setStyle("-fx-background-color: #545454;");
+
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setLayoutX(407);
+        scrollPane.setLayoutY(50);
+        scrollPane.setMinWidth(1140);
+        scrollPane.setMinHeight(700);
+        scrollPane.setMaxHeight(700);
+
+        VBox verticalBox = new VBox();
+        verticalBox.setMinWidth(1160);
+        verticalBox.setMinHeight(Region.USE_COMPUTED_SIZE);
+
+        Label lblName = new Label("Name profile");
+        lblName.setLayoutX(465);
+        lblName.setLayoutY(53);
+        lblName.getStyleClass().add("whiteLabels");
+
+        Label lblAge = new Label("Age");
+        lblAge.setLayoutX(465);
+        lblAge.setLayoutY(93);
+        lblAge.getStyleClass().add("whiteLabels");
+
+        TextField txtName = new TextField();
+        txtName.setLayoutX(666);
+        txtName.setLayoutY(53);
+
+        TextField txtAge = new TextField();
+        txtAge.setLayoutX(666);
+        txtAge.setLayoutY(93);
+
+        ProfileController controller = new ProfileController(stage);
+        controller.setTxtNameProfile(txtName);
+        controller.setTxtAgeProfile(txtAge);
+        controller.setEmail(email);
+
+        Button btnAdd = new Button("Submit changes");
+        btnAdd.setId("btnAdd");
+        btnAdd.setLayoutX(465);
+        btnAdd.setLayoutY(138);
+        btnAdd.getStyleClass().add("accountButtons");
+        btnAdd.setOnAction(controller);
+
+        Menu menu = new Menu();
+
+        mainPane.getChildren().addAll(menu.getMenu(stage), lblAge, lblName, txtName, txtAge, btnAdd);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
