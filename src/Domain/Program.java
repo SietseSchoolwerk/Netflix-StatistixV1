@@ -21,10 +21,6 @@ public class Program {
         return programId;
     }
 
-    public void setProgramId(int programId) {
-        this.programId = programId;
-    }
-
     public String getTitle() {
         return title;
     }
