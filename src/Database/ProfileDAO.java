@@ -25,7 +25,7 @@ public class ProfileDAO {
 
             ResultSet r = statement.executeQuery();
             while(r.next()) {
-                result.add(new Profile(r.getInt("ProfileId"), r.getString("Name"),r.getInt("Age")));
+                result.add(new Profile(r.getInt("ProfileId"), r.getString("Name"),r.getInt("Age"),r.getString("Email")));
             }
             return result;
         } catch (Exception e) {
@@ -37,7 +37,7 @@ public class ProfileDAO {
     public Profile getProfile(String name){
         try{
             PreparedStatement pdo = connection.prepareStatement(
-                    "SELECT ProfileId,name,age FROM Profile WHERE Name=?"
+                    "SELECT ProfileId,name,age,Email FROM Profile WHERE Name=?"
             );
             pdo.setString(1, name);
             ResultSet rs = pdo.executeQuery();
@@ -51,7 +51,7 @@ public class ProfileDAO {
                 arr[2] = rs.getInt(2); // age
             }
 
-            return new Profile(Integer.parseInt((String)arr[0]),(String)arr[1],(int)arr[2]);
+            return new Profile(Integer.parseInt((String)arr[0]),(String)arr[1],(int)arr[2], (String)arr[3]);
 
         } catch(Exception e){
             e.printStackTrace();
@@ -98,21 +98,15 @@ public class ProfileDAO {
 
 
     public boolean addProfile( Profile profile){
-
-        String ProfileId = profile.getName();
-        //String email = profile.getEmail();
-        String name = profile.getName();
-        int age = profile.getAge();
-
-
         try{
             PreparedStatement pdo = connection.prepareStatement(
-                    "INSERT INTO Profile (Name,Age) values(?,?)"
+                    "INSERT INTO Profile (Name,Age,Email) values(?,?,?)"
             );
 
             //pdo.setString(1,email);
-            pdo.setString(1,name);
-            pdo.setInt(2,age);
+            pdo.setString(1,profile.getName());
+            pdo.setInt(2,profile.getAge());
+            pdo.setString(3,profile.getEmail());
             pdo.execute();
             return true;
         } catch(Exception e){

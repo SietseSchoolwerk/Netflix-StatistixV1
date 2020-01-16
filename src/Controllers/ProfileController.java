@@ -13,11 +13,17 @@ import javafx.stage.Stage;
 public class ProfileController implements EventHandler<ActionEvent> {
     private TextField txtNameProfile;
     private TextField txtAgeProfile;
+    private String email;
 
     private Stage stage;
     private Profile profile;
 
     public ProfileController(Stage stage, Profile profile) {
+        this.stage = stage;
+        this.profile = profile;
+    }
+
+    public ProfileController(Stage stage) {
         this.stage = stage;
         this.profile = profile;
     }
@@ -30,8 +36,18 @@ public class ProfileController implements EventHandler<ActionEvent> {
                 this.handleEdit();
             } else if (btn.getId().equals("btnDelete")) {
                 this.handleDelete();
+            } else if (btn.getId().equals("btnAdd")) {
+                this.handleAdd();
             }
         }
+    }
+
+    public void handleAdd() {
+        ProfileDAO dao = new ProfileDAO();
+        Profile profile = new Profile(txtNameProfile.getText(), Integer.parseInt(txtAgeProfile.getText()), this.email);
+
+        dao.addProfile(profile);
+        this.stage.setScene(new Profiles().profileList(this.stage, this.email));
     }
 
     public void handleEdit() {
@@ -70,5 +86,13 @@ public class ProfileController implements EventHandler<ActionEvent> {
 
     public void setTxtAgeProfile(TextField txtAgeProfile) {
         this.txtAgeProfile = txtAgeProfile;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
