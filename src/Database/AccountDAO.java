@@ -1,6 +1,9 @@
 package Database;
 
 import Domain.Account;
+import Domain.Film;
+import Domain.Program;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,7 +58,10 @@ public class AccountDAO {
     }
 
     public ArrayList<Account> getAllAccountsWithOneProfile() {
-        String sql = "SELECT Account.Email, Password, Subscriber, Address, City FROM Profile INNER JOIN Account ON Account.Email = Profile.Email GROUP BY Account.Email, Password, Subscriber, Address, City Having COUNT(*) = 1";
+        String sql = "SELECT Account.Email, Password, Subscriber, Address, City FROM Profile " +
+                                    "INNER JOIN Account ON Account.Email = Profile.Email " +
+                                    "GROUP BY Account.Email, Password, Subscriber, Address, City " +
+                                    "Having COUNT(*) = 1";
 
         try {
             ArrayList<Account> result = new ArrayList<>();
@@ -63,6 +69,34 @@ public class AccountDAO {
             ResultSet r = statement.executeQuery();
             while(r.next()) {
                 result.add(new Account(r.getString("Email"),r.getString("Password"),r.getString("Subscriber"),r.getString("Address"), r.getString("City")));
+            }
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<Program> getAllWatchedMovies(String email) {
+        String sql = "SELECT * FROM Watched " +
+                "INNER JOIN Programma " +
+                "ON Watched.ProgramId=Programma.ProgramId " +
+                "INNER JOIN Profile " +
+                "ON Profile.ProfileId = Watched.ProfileId " +
+                "INNER JOIN Account " +
+                "ON Account.Email = Profile.Email " +
+                "WHERE Profile.Email = ? " +
+                "AND  NOT Programma.ProgramId " +
+                " IN (SELECT Episode.ProgamId FROM Episode) ";
+
+        try {
+            ArrayList<Program> result = new ArrayList<>();
+            PreparedStatement statement = this.connection.prepareStatement(sql);
+            statement.setString(1, email);
+            ResultSet r = statement.executeQuery();
+
+            while(r.next()) {
+                result.add(new Film(r.getInt("ProgramId"),r.getString("Title"),r.getString("Genre"),r.getString("Language"), r.getString("playtime"), r.getInt("Age")));
             }
             return result;
         } catch (Exception e) {
