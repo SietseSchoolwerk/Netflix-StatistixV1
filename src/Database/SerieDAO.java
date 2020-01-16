@@ -6,6 +6,7 @@ import Domain.Serie;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 
 public class SerieDAO {
@@ -38,5 +39,37 @@ public class SerieDAO {
             return null;
         }
         return null;
+    }
+
+    // return episode
+
+    public ArrayList<Integer> getAvgWatchedPercentageFromSeriePerEpisode(int programId) {
+
+        try {
+
+            PreparedStatement pdo = connection.prepareStatement(
+                    "SELECT AVG(WatchedPercentage) FROM Programma " +
+                            "INNER JOIN Watched " +
+                            "ON Watched.ProgramId= Programma.ProgramId " +
+                            "WHERE Programma.ProgramId=? " +
+                            "GROUP BY Programma.Title "
+            );
+            pdo.setInt(1, programId);
+            ResultSet rs = pdo.executeQuery();
+            ArrayList<Integer> AvgWatchedPercentageFromSeriePerEpisode =
+                    new ArrayList<Integer>();
+            while (rs.next()) {
+                AvgWatchedPercentageFromSeriePerEpisode.add(
+                        rs.getInt(1)
+                );
+            }
+            return AvgWatchedPercentageFromSeriePerEpisode;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+
+
+        }
+
     }
 }
