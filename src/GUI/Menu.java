@@ -10,6 +10,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Menu {
+
+    /**
+     * We created a function to only define the menu once
+     * to stop double pieces of code
+     * @param stage
+     * @return returns a vbox containing the menu
+     */
     public VBox getMenu(Stage stage) {
         VBox menu = new VBox();
         menu.setLayoutX(3.0);
