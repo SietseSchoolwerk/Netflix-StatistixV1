@@ -120,7 +120,11 @@ public class ProfileDAO {
         return 0;
     }
 
-
+    /**
+     * Add a new profile to the database.
+     * @param profile
+     * @return true if query executed without errors. False if there were exceptions.
+     */
     public boolean addProfile(Profile profile) {
         try {
             PreparedStatement pdo = connection.prepareStatement(
@@ -139,8 +143,16 @@ public class ProfileDAO {
         }
     }
 
+    /**
+     *  Edit a profile
+     * @param profile
+     * @return true if query executed without errors. False if there were exceptions.
+     */
 
+    // Change the StringBuilder part to something seen in AccountDAO.editAccount
     public boolean editProfile(Profile profile) {
+
+
 
         String NewName = profile.getName();
         int NewAge = profile.getAge();
@@ -164,7 +176,6 @@ public class ProfileDAO {
         String setStatementStringSliced =
                 setStatementString.substring(0, setStatementString.length() - 1);
 
-        //setStatementStringStrSliced += " WHERE uniqueId=<uniqueId>";
         setStatementStringSliced += String.format(
                 " WHERE ProfileId='%s'", profile.getProfileId());
 
@@ -182,7 +193,11 @@ public class ProfileDAO {
         }
     }
 
-
+    /**
+     * Delete a profile for a given Profile object
+     * @param profile
+     * @return true if query executed without errors. False if there were exceptions.
+     */
     public boolean deleteProfile(Profile profile) {
         try {
             PreparedStatement pdo = connection.prepareStatement(
@@ -198,6 +213,13 @@ public class ProfileDAO {
     }
 
 
+    /**
+     * Set the watched percentage for a given Program and a Profile
+     * @param profile
+     * @param program
+     * @param watchedPercentage
+     * @return true if query executed without errors. False if there were exceptions.
+     */
     public boolean setWatched(Profile profile, Program program, int watchedPercentage) {
         try {
             PreparedStatement pdo = connection.prepareStatement(
@@ -216,6 +238,12 @@ public class ProfileDAO {
     }
 
 
+    /**
+     * Update watchedPercentage for a given WatchedId
+     * @param watchedId
+     * @param watchedPercentage
+     * @return true if query executed without errors. False if there were exceptions.
+     */
     public boolean editWatched(int watchedId,int watchedPercentage) {
         try {
             PreparedStatement pdo = this.connection.prepareStatement(
@@ -234,7 +262,11 @@ public class ProfileDAO {
     }
 
 
-
+    /**
+     * Delete a Watched record for a given WatchedId
+     * @param watchedId
+     * @return true if query executed without errors. False if there were exceptions.
+     */
         public boolean deleteWatched(int watchedId){
             try{
                 PreparedStatement pdo = this.connection.prepareStatement(
@@ -251,6 +283,11 @@ public class ProfileDAO {
 
 }
 
+    /**
+     *  Get watched objects for a given profileID
+     * @param profileId
+     * @return the ArrayList with Watched objects
+     */
     public ArrayList<Watched> getWatched(int profileId) {
         String sql = "SELECT WatchedId, Programma.Title, Genre, Programma.Language, Programma.Age, Playtime, WatchedPercentage, Episode.Title, Vol FROM Watched " +
                 "INNER JOIN Programma on Programma.ProgramId = Watched.ProgramId " +
