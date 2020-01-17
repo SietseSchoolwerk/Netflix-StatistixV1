@@ -60,7 +60,7 @@ public class AccountController implements EventHandler<ActionEvent> {
     }
 
     /**
-     * Handle errors
+     * Handle errors and show them in an alert
      * @param txt
      */
     public void handleError(String txt) {
@@ -70,6 +70,9 @@ public class AccountController implements EventHandler<ActionEvent> {
     }
 
 
+    /**
+     * Edit a text field, if the input is in correct fomat.
+     */
     public void handleEdit() {
         if (!this.account.setPassword(txtPasswordAccount.getText())) {
             handleError("Password is an incorrect format");
@@ -102,7 +105,7 @@ public class AccountController implements EventHandler<ActionEvent> {
     }
 
     /**
-     *
+     * Handle delete account and call the matching DAO class to delete it from the database
      * @param account
      */
     public void handleDelete(Account account) {
@@ -117,7 +120,7 @@ public class AccountController implements EventHandler<ActionEvent> {
     }
 
     /**
-     *
+     * Handle edit account and call the matching DAO class to edit an account in the database
      * @param account
      */
     public void handleAdd(Account account) {
@@ -131,7 +134,7 @@ public class AccountController implements EventHandler<ActionEvent> {
     }
 
     /**
-     *
+     * Set the text in the email textfield
      * @param txtEmailAccount
      */
     public void setTxtEmailAccount(TextField txtEmailAccount) {
@@ -139,7 +142,7 @@ public class AccountController implements EventHandler<ActionEvent> {
     }
 
     /**
-     *
+     * Set the text in the password textfield
      * @param txtPasswordAccount
      */
     public void setTxtPasswordAccount(TextField txtPasswordAccount) {
@@ -147,7 +150,7 @@ public class AccountController implements EventHandler<ActionEvent> {
     }
 
     /**
-     *
+     *  Set the text in the account textfield
      * @param txtSubscriberAccount
      */
     public void setTxtSubscriberAccount(TextField txtSubscriberAccount) {
@@ -155,7 +158,7 @@ public class AccountController implements EventHandler<ActionEvent> {
     }
 
     /**
-     *
+     * Set the text in the address textfield
      * @param txtAddressAccount
      */
     public void setTxtAddressAccount(TextField txtAddressAccount) {
@@ -163,7 +166,7 @@ public class AccountController implements EventHandler<ActionEvent> {
     }
 
     /**
-     *
+     * Set the text in the city textfield
      * @param txtCityAccount
      */
     public void setTxtCityAccount(TextField txtCityAccount) {
