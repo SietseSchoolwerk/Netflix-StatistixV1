@@ -7,6 +7,7 @@ import Domain.Watched;
 import GUI.Profiles;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -18,19 +19,24 @@ public class ProfileController implements EventHandler<ActionEvent> {
     private TextField txtPercentage;
     private String email;
 
+    private Alert alert;
+
     private Stage stage;
     private Profile profile;
     private Watched watch;
 
     private int programId;
     public ProfileController(Stage stage, Profile profile) {
-        this.stage = stage;
+        this(stage);
         this.profile = profile;
     }
 
     public ProfileController(Stage stage) {
         this.stage = stage;
-        this.profile = profile;
+        this.stage = stage;
+        this.alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning Dialog");
+        alert.setHeaderText("Error occured while creating account");
     }
 
     public void handle(ActionEvent event) {
@@ -53,24 +59,49 @@ public class ProfileController implements EventHandler<ActionEvent> {
         }
     }
 
+
+    public void handleError(String txt) {
+        alert.setContentText(txt);
+        alert.showAndWait();
+        return;
+    }
+
     public void handleDeleteWatched() {
         ProfileDAO dao = new ProfileDAO();
-        dao.deleteWatched(watch.getWatchedId());
+        if (!dao.deleteWatched(watch.getWatchedId())) {
+            handleError("Database Error");
+            return;
+        }
         this.stage.setScene(new Profiles().profileList(this.stage, this.email));
     }
 
     public void handleUpdateWatched() {
         ProfileDAO dao = new ProfileDAO();
-        dao.editWatched(watch.getWatchedId(), Integer.parseInt(this.txtPercentage.getText()));
+        try {
+            if (!dao.editWatched(watch.getWatchedId(), Integer.parseInt(this.txtPercentage.getText()))) {
+                handleError("Database error");
+                return;
+            }
+        } catch (Exception e) {
+            handleError("Please only enter numbers");
+            return;
+        }
         this.stage.setScene(new Profiles().profileList(this.stage, this.email));
     }
 
     public void handleWatch() {
         ProfileDAO dao = new ProfileDAO();
         ProgramDAO programDao = new ProgramDAO();
-        dao.setWatched(this.profile, programDao.getProgram(this.programId), Integer.parseInt(this.txtPercentage.getText()));
 
-
+        try {
+            if (!dao.setWatched(this.profile, programDao.getProgram(this.programId), Integer.parseInt(this.txtPercentage.getText()))) {
+                handleError("Database error");
+                return;
+            }
+        } catch (Exception e) {
+            handleError("Please only enter numbers");
+            return;
+        }
         this.stage.setScene(new Profiles().profileList(this.stage, this.email));
     }
 
@@ -78,16 +109,31 @@ public class ProfileController implements EventHandler<ActionEvent> {
         ProfileDAO dao = new ProfileDAO();
         Profile profile = new Profile(txtNameProfile.getText(), Integer.parseInt(txtAgeProfile.getText()), this.email);
 
-        dao.addProfile(profile);
+        if (!dao.addProfile(profile)) {
+            handleError("Database error");
+            return;
+        }
         this.stage.setScene(new Profiles().profileList(this.stage, this.email));
     }
 
     public void handleEdit() {
-        this.profile.setAge(Integer.parseInt(txtAgeProfile.getText()));
-        this.profile.setName(txtNameProfile.getText());
+        if (!this.profile.setAge(Integer.parseInt(txtAgeProfile.getText()))) {
+            handleError("Age is an incorrect format");
+            return;
+        }
+        if (!this.profile.setName(txtNameProfile.getText())) {
+            handleError("Name is an incorrect format");
+            return;
+        }
 
         Boolean result = new ProfileDAO().editProfile(this.profile);
+        if (!result) {
+            handleError("Database error");
+            return;
+        }
+
         String attachedEmail = new ProfileDAO().getEmailWithProfileId(this.profile.getProfileId());
+
         this.stage.setScene(new Profiles().profileList(this.stage, attachedEmail));
     }
 
@@ -97,9 +143,13 @@ public class ProfileController implements EventHandler<ActionEvent> {
 
         int count = dao.profileCounter(attachedEmail);
         if (count == 1) {
-
+            handleError("An account needs to have atleast one profile");
+            return;
         } else {
-            dao.deleteProfile(this.profile);
+            if (!dao.deleteProfile(this.profile)) {
+                handleError("City is an incorrect format");
+                return;
+            }
         }
         this.stage.setScene(new Profiles().profileList(this.stage, attachedEmail));
     }
