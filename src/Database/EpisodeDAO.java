@@ -1,7 +1,6 @@
 package Database;
 import Domain.Episode;
 import Domain.Program;
-import Domain.Serie;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,10 +21,10 @@ public class EpisodeDAO {
 
     /**
      * Get an Episode object for a given ProgramId
-     * @param ProgramId
+     * @param programId
      * @return an Episode object
      */
-    public Episode getEpisode(int ProgramId) {
+    public Episode getEpisode(int programId) {
         try {
 
             PreparedStatement pdo = connection.prepareStatement(
