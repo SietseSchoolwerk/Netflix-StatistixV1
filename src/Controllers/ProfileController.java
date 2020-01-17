@@ -26,11 +26,17 @@ public class ProfileController implements EventHandler<ActionEvent> {
     private Watched watch;
 
     private int programId;
+
+    // Default constructor for the ProfileController
     public ProfileController(Stage stage, Profile profile) {
         this(stage);
         this.profile = profile;
     }
 
+    /**
+     *
+     * @param stage
+     */
     public ProfileController(Stage stage) {
         this.stage = stage;
         this.stage = stage;
@@ -39,6 +45,10 @@ public class ProfileController implements EventHandler<ActionEvent> {
         alert.setHeaderText("Error occured with profile");
     }
 
+    /**
+     * Handle ActionEvents
+     * @param event
+     */
     public void handle(ActionEvent event) {
         Button btn = null;
         if (event.getSource().toString().toLowerCase().contains("button")) {
@@ -60,11 +70,16 @@ public class ProfileController implements EventHandler<ActionEvent> {
     }
 
 
+    /**
+     *
+     * @param txt
+     */
     public void handleError(String txt) {
         alert.setContentText(txt);
         alert.showAndWait();
         return;
     }
+
 
     public void handleDeleteWatched() {
         ProfileDAO dao = new ProfileDAO();
@@ -74,6 +89,7 @@ public class ProfileController implements EventHandler<ActionEvent> {
         }
         this.stage.setScene(new Profiles().profileList(this.stage, this.email));
     }
+
 
     public void handleUpdateWatched() {
         ProfileDAO dao = new ProfileDAO();
@@ -216,10 +232,26 @@ public class ProfileController implements EventHandler<ActionEvent> {
         this.stage.setScene(new Profiles().profileList(this.stage, attachedEmail));
     }
 
+    public TextField getTxtNameProfile() {
+        return txtNameProfile;
+    }
+
+    /**
+     *
+     * @param txtNameProfile
+     */
     public void setTxtNameProfile(TextField txtNameProfile) {
         this.txtNameProfile = txtNameProfile;
     }
 
+    public TextField getTxtAgeProfile() {
+        return txtAgeProfile;
+    }
+
+    /**
+     *
+     * @param txtAgeProfile
+     */
     public void setTxtAgeProfile(TextField txtAgeProfile) {
         this.txtAgeProfile = txtAgeProfile;
     }
@@ -228,18 +260,46 @@ public class ProfileController implements EventHandler<ActionEvent> {
         return email;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    public Profile getProfile() {
+        return profile;
+    }
+
+    /**
+     *
+     * @param profile
+     */
     public void setProfile(Profile profile) {
         this.profile = profile;
     }
 
+    public int getProgramId() {
+        return programId;
+    }
+
+    /**
+     *
+     * @param programId
+     */
     public void setProgramId(int programId) {
         this.programId = programId;
     }
 
+    public TextField getTxtPercentage() {
+        return txtPercentage;
+    }
+
+    /**
+     *
+     * @param txtPercentage
+     */
     public void setTxtPercentage(TextField txtPercentage) {
         this.txtPercentage = txtPercentage;
     }

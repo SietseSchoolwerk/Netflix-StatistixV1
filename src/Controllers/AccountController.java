@@ -26,11 +26,16 @@ public class AccountController implements EventHandler<ActionEvent> {
     private Stage stage;
     private Account account;
 
+    // Default constructor for the AccountController
     public AccountController(Stage stage, Account account) {
         this(stage);
         this.account = account;
     }
 
+    /**
+     *
+     * @param stage
+     */
     public AccountController(Stage stage) {
         this.stage = stage;
         this.alert = new Alert(Alert.AlertType.WARNING);
@@ -38,6 +43,10 @@ public class AccountController implements EventHandler<ActionEvent> {
         alert.setHeaderText("Error occured with account");
     }
 
+    /**
+     * Handle ActionEvents
+     * @param event
+     */
     public void handle(ActionEvent event) {
         Button btn = null;
         if (event.getSource().toString().toLowerCase().contains("button")) {
@@ -53,11 +62,16 @@ public class AccountController implements EventHandler<ActionEvent> {
         }
     }
 
+    /**
+     * Handle errors
+     * @param txt
+     */
     public void handleError(String txt) {
         alert.setContentText(txt);
         alert.showAndWait();
         return;
     }
+
 
     public void handleEdit() {
         if (!this.account.setPassword(txtPasswordAccount.getText())) {
@@ -90,6 +104,10 @@ public class AccountController implements EventHandler<ActionEvent> {
         this.stage.setScene(new Accounts().AccountList(this.stage));
     }
 
+    /**
+     *
+     * @param account
+     */
     public void handleDelete(Account account) {
         AccountDAO accountDAO = new AccountDAO();
 
@@ -101,6 +119,10 @@ public class AccountController implements EventHandler<ActionEvent> {
         this.stage.setScene(new Accounts().AccountList(this.stage));
     }
 
+    /**
+     *
+     * @param account
+     */
     public void handleAdd(Account account) {
         AccountDAO accountDAO = new AccountDAO();
 
@@ -148,23 +170,42 @@ public class AccountController implements EventHandler<ActionEvent> {
         this.stage.setScene(new Accounts().AccountList(this.stage));
     }
 
+    /**
+     *
+     * @param txtEmailAccount
+     */
     public void setTxtEmailAccount(TextField txtEmailAccount) {
         this.txtEmailAccount = txtEmailAccount;
     }
 
+    /**
+     *
+     * @param txtPasswordAccount
+     */
     public void setTxtPasswordAccount(TextField txtPasswordAccount) {
         this.txtPasswordAccount = txtPasswordAccount;
     }
 
+    /**
+     *
+     * @param txtSubscriberAccount
+     */
     public void setTxtSubscriberAccount(TextField txtSubscriberAccount) {
         this.txtSubscriberAccount = txtSubscriberAccount;
     }
 
+    /**
+     *
+     * @param txtAddressAccount
+     */
     public void setTxtAddressAccount(TextField txtAddressAccount) {
         this.txtAddressAccount = txtAddressAccount;
     }
 
-
+    /**
+     *
+     * @param txtCityAccount
+     */
     public void setTxtCityAccount(TextField txtCityAccount) {
         this.txtCityAccount = txtCityAccount;
     }

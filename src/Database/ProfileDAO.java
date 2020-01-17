@@ -8,28 +8,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-    /*
-
-    Deze Class bevat alle methods die met de Profile table te maken hebben.
-
-    De method: addProfile neemt een Profile object en voegd de attributen van dit\
-    object toe als records in de database.
-
-    De method deleteProfile verwijderd records
-
-    De method editProfile past een record in de database aan naar de nieuwe attributen\
-    van het bijbehorende object.
-     */
 
 public class ProfileDAO {
 
     private Connection connection;
     private DatabaseConnection databaseConnection = new DatabaseConnection();
 
+   //Default constructor for the ProfileDAO class
     public ProfileDAO() {
         this.connection = databaseConnection.getConn();
     }
 
+    /**
+     * Get all profiles for an account (by a given email)
+     * @param email
+     * @return an ArrayList with Profile objects
+     */
     public ArrayList<Profile> getAllProfiles(String email) {
         String sql = "SELECT * FROM Profile WHERE Email=?;";
 
@@ -49,6 +43,13 @@ public class ProfileDAO {
         return null;
     }
 
+    
+    /**
+     * Get a profile for a given name and email
+     * @param name
+     * @param email
+     * @return a Profile object
+     */
     public Profile getProfile(String name, String email) {
         try {
             PreparedStatement pdo = connection.prepareStatement(
@@ -81,6 +82,11 @@ public class ProfileDAO {
     }
 
 
+    /**
+     * get the email address for a given profileId
+     * @param profileId
+     * @return the string with the email address
+     */
     public String getEmailWithProfileId(int profileId) {
         String sql = "SELECT * FROM Profile WHERE ProfileId=?;";
 
@@ -99,6 +105,11 @@ public class ProfileDAO {
     }
 
 
+    /**
+     * Count how many profiles an account has (for a given email)
+     * @param Email
+     * @return an int with the number of profiles
+     */
     public int profileCounter(String Email) {
         String sql = "SELECT count(*) as result FROM Profile WHERE Email=?;";
 
@@ -117,7 +128,11 @@ public class ProfileDAO {
         return 0;
     }
 
-
+    /**
+     * Add a new profile to the database.
+     * @param profile
+     * @return true if query executed without errors. False if there were exceptions.
+     */
     public boolean addProfile(Profile profile) {
         try {
             PreparedStatement pdo = connection.prepareStatement(
@@ -136,8 +151,16 @@ public class ProfileDAO {
         }
     }
 
+    /**
+     *  Edit a profile
+     * @param profile
+     * @return true if query executed without errors. False if there were exceptions.
+     */
 
+    // Change the StringBuilder part to something seen in AccountDAO.editAccount
     public boolean editProfile(Profile profile) {
+
+
 
         String NewName = profile.getName();
         int NewAge = profile.getAge();
@@ -161,7 +184,6 @@ public class ProfileDAO {
         String setStatementStringSliced =
                 setStatementString.substring(0, setStatementString.length() - 1);
 
-        //setStatementStringStrSliced += " WHERE uniqueId=<uniqueId>";
         setStatementStringSliced += String.format(
                 " WHERE ProfileId='%s'", profile.getProfileId());
 
@@ -179,7 +201,11 @@ public class ProfileDAO {
         }
     }
 
-
+    /**
+     * Delete a profile for a given Profile object
+     * @param profile
+     * @return true if query executed without errors. False if there were exceptions.
+     */
     public boolean deleteProfile(Profile profile) {
         try {
             PreparedStatement pdo = connection.prepareStatement(
@@ -195,6 +221,13 @@ public class ProfileDAO {
     }
 
 
+    /**
+     * Set the watched percentage for a given Program and a Profile
+     * @param profile
+     * @param program
+     * @param watchedPercentage
+     * @return true if query executed without errors. False if there were exceptions.
+     */
     public boolean setWatched(Profile profile, Program program, int watchedPercentage) {
         try {
             PreparedStatement pdo = connection.prepareStatement(
@@ -213,6 +246,12 @@ public class ProfileDAO {
     }
 
 
+    /**
+     * Update watchedPercentage for a given WatchedId
+     * @param watchedId
+     * @param watchedPercentage
+     * @return true if query executed without errors. False if there were exceptions.
+     */
     public boolean editWatched(int watchedId,int watchedPercentage) {
         try {
             PreparedStatement pdo = this.connection.prepareStatement(
@@ -231,7 +270,11 @@ public class ProfileDAO {
     }
 
 
-
+    /**
+     * Delete a Watched record for a given WatchedId
+     * @param watchedId
+     * @return true if query executed without errors. False if there were exceptions.
+     */
         public boolean deleteWatched(int watchedId){
             try{
                 PreparedStatement pdo = this.connection.prepareStatement(
@@ -248,6 +291,11 @@ public class ProfileDAO {
 
 }
 
+    /**
+     *  Get watched objects for a given profileID
+     * @param profileId
+     * @return the ArrayList with Watched objects
+     */
     public ArrayList<Watched> getWatched(int profileId) {
         String sql = "SELECT WatchedId, Programma.Title, Genre, Programma.Language, Programma.Age, Playtime, WatchedPercentage, Episode.Title, Vol FROM Watched " +
                 "INNER JOIN Programma on Programma.ProgramId = Watched.ProgramId " +

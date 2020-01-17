@@ -8,27 +8,31 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-/*
-
-    Deze class bevat de method getFilm.
-
-*/
 
 public class FilmDAO extends ProgramDAO {
 
     private Connection connection;
     private DatabaseConnection databaseConnection = new DatabaseConnection();
 
+    // Default constructor for the FilmDAO class
     public FilmDAO() {
         this.connection = databaseConnection.getConn();
     }
 
+    /**
+     * Get a Film object for a given ProgramId
+     * @return Return the title of the current instance.
+     */
     public Film getFilm(int programId) {
         ProgramDAO dao = new ProgramDAO();
         Program prog = dao.getProgram(programId);
         return new Film(programId, prog.getTitle(), prog.getGenre(), prog.getLanguage(), prog.getLengthOfTime(), prog.getAge());
     }
 
+    /**
+     * Get an ArayList of all Program objects in the database that are movies.
+     * @return ArrayList with movies
+     */
     public ArrayList<Program> getAllMovies() {
         String sql = "SELECT * FROM Programma WHERE NOT Programma.ProgramId " +
                 " IN (SELECT Episode.ProgramId FROM Episode);";
@@ -47,6 +51,11 @@ public class FilmDAO extends ProgramDAO {
         return null;
     }
 
+    /**
+     * Get a Film object for the Film that is for viewers under 16
+     * that has the longest playtime
+     * @return a Film object
+     */
     public Film getFilmWithAgeUnderSixteen() {
 
         try {
@@ -81,6 +90,11 @@ public class FilmDAO extends ProgramDAO {
 
     }
 
+    /**
+     * Get how many profiles have watched a film for a given ProgramId
+     * @param programId
+     * @return an int of the number of profiles
+     */
     public int getFilmFullyWatched(int programId) {
         try {
 

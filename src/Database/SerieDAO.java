@@ -14,10 +14,16 @@ public class SerieDAO {
     private Connection connection;
     private DatabaseConnection databaseConnection = new DatabaseConnection();
 
+    // Default constructor for the SerieDAO class
     public SerieDAO() {
         this.connection = databaseConnection.getConn();
     }
 
+    /**
+     * Get a series for a given programID
+     * @param programId
+     * @return a Serie object
+     */
     public Serie getSerie(int programId) {
 
         try {
@@ -42,6 +48,10 @@ public class SerieDAO {
     }
 
 
+    /**
+     * Get an ArrayList of all series
+     * @return an ArrayList with Serie object of all the series in the database
+     */
     public ArrayList<Serie> getAllSeries(){
         String sql = "SELECT * FROM Serie;";
 
@@ -59,6 +69,11 @@ public class SerieDAO {
         return null;
     }
 
+    /**
+     * Get the average watched percentage of a give series per episode
+     * @param programId
+     * @return an integer of the query result
+     */
     public int getAvgWatchedPercentageFromSeriePerEpisode(int programId) {
 
         try {
@@ -87,6 +102,12 @@ public class SerieDAO {
         return 0;
     }
 
+    /**
+     * Get the average percentage of a series per episode for a given account (by email)
+     * @param programId
+     * @param email
+     * @return an int of the query result
+     */
     public int getAvgWatchedPercentageFromSeriePerEpisodeWithAccount(int programId, String email) {
 
         try {
