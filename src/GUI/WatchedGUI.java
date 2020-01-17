@@ -258,7 +258,7 @@ public class WatchedGUI {
             if (watched.getEpisode() != null) {
                 Label lblSerieTitle = new Label(watched.getEpisode());
                 lblSerieTitle.getStyleClass().add("accountLabels");
-                lblSerieTitle.setLayoutY(14);
+                lblSerieTitle.setLayoutY(15);
                 lblSerieTitle.setLayoutX(253);
 
                 Label lblVolume = new Label(watched.getFollowNumber());
@@ -267,6 +267,11 @@ public class WatchedGUI {
                 lblVolume.setLayoutX(253);
                 accountPane.getChildren().addAll(lblSerieTitle, lblVolume);
             }
+
+            Label lblWatchedTime = new Label(watched.getWatchedPercentage() + "% watched");
+            lblWatchedTime.getStyleClass().add("accountLabels");
+            lblWatchedTime.setLayoutY(37);
+            lblWatchedTime.setLayoutX(253);
 
             Button btnEdit = new Button("Edit");
             btnEdit.setLayoutX(1089);
@@ -293,7 +298,7 @@ public class WatchedGUI {
             line.setLayoutY(109);
             line.setStroke(javafx.scene.paint.Color.rgb(255, 255, 255));
 
-            accountPane.getChildren().addAll(lblTitle, lblAge, lblGenre, lblPlaytimeInfo, lblLan, lblPlaytime);
+            accountPane.getChildren().addAll(lblTitle, lblAge, lblGenre, lblPlaytimeInfo, lblLan, lblPlaytime, lblWatchedTime);
             accountPane.getChildren().addAll(btnEdit, btnDelete);
             accountPane.getChildren().add(line);
 
