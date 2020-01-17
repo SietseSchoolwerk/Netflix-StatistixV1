@@ -210,7 +210,7 @@ class AccountTest {
         String invalidCity = "";
 
         //Act
-        boolean result = account.setSubscriber(invalidCity);
+        boolean result = account.setCity(invalidCity);
 
         //Assert
         Assertions.assertFalse(result);
