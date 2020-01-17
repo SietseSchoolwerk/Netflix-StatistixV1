@@ -86,4 +86,36 @@ public class SerieDAO {
         }
         return 0;
     }
+
+    public int getAvgWatchedPercentageFromSeriePerEpisodeWithAccount(int programId, String email) {
+
+        try {
+
+            PreparedStatement pdo = connection.prepareStatement(
+                    "SELECT AVG(WatchedPercentage) FROM Programma " +
+                            "INNER JOIN Watched " +
+                            "ON Watched.ProgramId= Programma.ProgramId " +
+                            "INNER JOIN Profile " +
+                            "ON Watched.ProfileId = Profile.ProfileId " +
+                            "WHERE Programma.ProgramId= ? " +
+                            "AND Profile.Email = ? " +
+                            "GROUP BY Programma.Title "
+            );
+            pdo.setInt(1, programId);
+            pdo.setString(2, email);
+            ResultSet rs = pdo.executeQuery();
+
+            if(rs.next()) {
+                return rs.getInt(1);
+
+            }else if (!rs.next()){
+                return 0;
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }
