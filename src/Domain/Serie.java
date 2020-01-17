@@ -6,30 +6,26 @@ import java.util.List;
 public class Serie {
     private String title;
     private String recommend;
-    private List<Episode> episodeList;
 
+    //Default constructor of the serie class
     public Serie(String title, String recommend) {
         this.title = title;
         this.recommend = recommend;
     }
 
-    public List<Episode> getEpisodeList() {
-        return episodeList;
-    }
-
+    /**
+     * Get the title of the current instance of Serie
+     * @return Return the title of the current instance.
+     */
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
+    /**
+     * Get the recommended of the serie.
+     * @return the recommended.
+     */
     public String getRecommend() {
         return recommend;
-    }
-
-    public void setRecommend(String recommend) {
-        this.recommend = recommend;
     }
 }
