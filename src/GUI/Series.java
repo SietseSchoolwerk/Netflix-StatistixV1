@@ -18,6 +18,11 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class Series {
+    /**
+     * List of all the series
+     * @param stage
+     * @return scene
+     */
     public Scene serieList(Stage stage) {
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
@@ -99,6 +104,12 @@ public class Series {
         return scene;
     }
 
+    /**
+     * Scene
+     * @param stage
+     * @param email
+     * @return
+     */
     public Scene serieListWithAccount(Stage stage, String email) {
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
@@ -180,6 +191,12 @@ public class Series {
         return scene;
     }
 
+    /**
+     * A list with the average watched per episode
+     * @param stage
+     * @param serie
+     * @return Scene
+     */
     public Scene avgWatchedEpisodes(Stage stage, String serie){
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
