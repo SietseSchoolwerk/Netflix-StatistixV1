@@ -20,7 +20,13 @@ import java.util.ArrayList;
 
 public class WatchedGUI {
 
-
+    /**
+     *
+     * @param stage
+     * @param email
+     * @param profile
+     * @return a scene where the user can watch a movie
+     */
     public Scene watchMovie(Stage stage, String email, Profile profile) {
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
@@ -146,6 +152,12 @@ public class WatchedGUI {
     }
 
 
+    /**
+     * The gui to add a percentage of watched to the watched table
+     * @param stage
+     * @param controller
+     * @return scene
+     */
     public Scene addWatched(Stage stage, ProfileController controller) {
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
@@ -198,6 +210,14 @@ public class WatchedGUI {
         return scene;
     }
 
+    /**
+     * Returns a list of all watched items
+     * @param stage
+     * @param profileId // To get the list
+     * @param email
+     * @param profileName
+     * @return Scene
+     */
     public Scene watchedList(Stage stage, int profileId, String email, String profileName) {
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
@@ -327,6 +347,7 @@ public class WatchedGUI {
         return scene;
     }
 
+    //A scene to edit the watched percentage
     public Scene editWatched(Stage stage, Watched watched,String email) {
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
