@@ -5,6 +5,7 @@ import Domain.Account;
 import GUI.Accounts;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -17,16 +18,21 @@ public class AccountController implements EventHandler<ActionEvent> {
     private TextField txtAddressAccount;
     private TextField txtCityAccount;
 
+    private Alert alert;
+
     private Stage stage;
     private Account account;
 
     public AccountController(Stage stage, Account account) {
+        this(stage);
         this.account = account;
-        this.stage = stage;
     }
 
     public AccountController(Stage stage) {
         this.stage = stage;
+        this.alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning Dialog");
+        alert.setHeaderText("Error occured while creating account");
     }
 
     public void handle(ActionEvent event) {
@@ -44,63 +50,80 @@ public class AccountController implements EventHandler<ActionEvent> {
         }
     }
 
+    public void handleError(String txt) {
+        alert.setContentText(txt);
+        alert.showAndWait();
+        return;
+    }
+
     public void handleEdit() {
-        this.account.setPassword(txtPasswordAccount.getText());
-        this.account.setSubscriber(txtSubscriberAccount.getText());
-        this.account.setAddress(txtAddressAccount.getText());
-        this.account.setCity(txtCityAccount.getText());
+        if (!this.account.setPassword(txtPasswordAccount.getText())) {
+            handleError("Password is an incorrect format");
+            return;
+        }
+
+        if (!this.account.setSubscriber(txtSubscriberAccount.getText())) {
+            handleError("Subscriber is an incorrect format");
+            return;
+        }
+
+        if (!this.account.setAddress(txtAddressAccount.getText())) {
+            handleError("Address is an incorrect format");
+            return;
+        }
+
+        if (!this.account.setCity(txtCityAccount.getText())) {
+            handleError("City is an incorrect format");
+            return;
+        }
 
         Boolean result = new AccountDAO().editAccount(this.account);
+
+        if (!result) {
+            handleError("Database error");
+            return;
+        }
+
         this.stage.setScene(new Accounts().AccountList(this.stage));
     }
 
     public void handleDelete(Account account) {
         AccountDAO accountDAO = new AccountDAO();
-        accountDAO.deleteAccount(account.getEmail());
+
+        if (!accountDAO.deleteAccount(account.getEmail())) {
+            handleError("Database error");
+            return;
+        }
+
         this.stage.setScene(new Accounts().AccountList(this.stage));
     }
 
     public void handleAdd(Account account) {
         AccountDAO accountDAO = new AccountDAO();
-        accountDAO.addAccount(account);
-        this.stage.setScene(new Accounts().AccountList(this.stage));
-    }
 
-    public TextField getTxtEmailAccount() {
-        return txtEmailAccount;
+        if (!accountDAO.addAccount(account)) {
+            handleError("Database error");
+            return;
+        }
+        this.stage.setScene(new Accounts().AccountList(this.stage));
     }
 
     public void setTxtEmailAccount(TextField txtEmailAccount) {
         this.txtEmailAccount = txtEmailAccount;
     }
 
-    public TextField getTxtPasswordAccount() {
-        return txtPasswordAccount;
-    }
-
     public void setTxtPasswordAccount(TextField txtPasswordAccount) {
         this.txtPasswordAccount = txtPasswordAccount;
-    }
-
-    public TextField getTxtSubscriberAccount() {
-        return txtSubscriberAccount;
     }
 
     public void setTxtSubscriberAccount(TextField txtSubscriberAccount) {
         this.txtSubscriberAccount = txtSubscriberAccount;
     }
 
-    public TextField getTxtAddressAccount() {
-        return txtAddressAccount;
-    }
-
     public void setTxtAddressAccount(TextField txtAddressAccount) {
         this.txtAddressAccount = txtAddressAccount;
     }
 
-    public TextField getTxtCityAccount() {
-        return txtCityAccount;
-    }
 
     public void setTxtCityAccount(TextField txtCityAccount) {
         this.txtCityAccount = txtCityAccount;

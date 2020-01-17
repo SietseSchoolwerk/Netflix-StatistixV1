@@ -35,7 +35,7 @@ public class Account {
     }
 
     public boolean setPassword(String password) {
-        if (email.isEmpty()) {
+        if (password.isEmpty()) {
             return false;
         }
         this.password = password;
@@ -47,7 +47,7 @@ public class Account {
     }
 
     public boolean setSubscriber(String subscriber) {
-        if (email.isEmpty()) {
+        if (subscriber.isEmpty()) {
             return false;
         }
         this.subscriber = subscriber;
@@ -59,7 +59,7 @@ public class Account {
     }
 
     public boolean setAddress(String address) {
-        if (email.isEmpty()) {
+        if (address.isEmpty()) {
             return false;
         }
         this.address = address;
@@ -71,7 +71,7 @@ public class Account {
     }
 
     public boolean setCity(String city) {
-        if (email.isEmpty()) {
+        if (city.isEmpty()) {
             return false;
         }
         this.city = city;
