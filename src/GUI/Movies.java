@@ -18,6 +18,11 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class Movies {
+    /**
+     * Returns a list with all the movies in the database
+     * @param stage
+     * @return scene with list
+     */
     public Scene movieList(Stage stage) {
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
@@ -124,6 +129,11 @@ public class Movies {
         return scene;
     }
 
+    /**
+     * Movie undersixteen with the longest playtime
+     * @param stage
+     * @return returns a scene
+     */
     public Scene movieAgeUnderSixteenWithLongestPlaytime(Stage stage) {
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
