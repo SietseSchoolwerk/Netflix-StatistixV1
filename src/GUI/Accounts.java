@@ -108,7 +108,7 @@ public class Accounts {
             btnSeries.setMinWidth(142);
             btnSeries.setMinHeight(70);
             btnSeries.getStyleClass().add("accountButtons");
-            btnSeries.setOnAction(e -> stage.setScene(new Series().serieList(stage, accounts.getEmail())));
+            btnSeries.setOnAction(e -> stage.setScene(new Series().serieListWithAccount(stage, accounts.getEmail())));
 
             Button btnWatchedMovies = new Button("Watched movies");
             btnWatchedMovies.setLayoutX(910);
@@ -134,22 +134,25 @@ public class Accounts {
         Menu menu = new Menu();
         scrollPane.setContent(verticalBox);
 
+        Label lblPageTitle = new Label("Account overview");
+        lblPageTitle.setLayoutX(407);
+        lblPageTitle.getStyleClass().add("lblPageTitle");
+
         Button btnAddNewAccount = new Button("New Account");
         btnAddNewAccount.getStyleClass().add("accountButtons");
         btnAddNewAccount.getStyleClass().add("newButton");
         btnAddNewAccount.setLayoutY(2);
-        btnAddNewAccount.setLayoutX(407);
+        btnAddNewAccount.setLayoutX(1444);
         btnAddNewAccount.setOnAction(e -> stage.setScene(addAccount(stage)));
-
 
         Button btnAccountsWithOneProfile = new Button("Accounts with 1 profile");
         btnAccountsWithOneProfile.getStyleClass().add("accountButtons");
         btnAccountsWithOneProfile.getStyleClass().add("newButton");
         btnAccountsWithOneProfile.setLayoutY(2);
-        btnAccountsWithOneProfile.setLayoutX(577);
+        btnAccountsWithOneProfile.setLayoutX(1140);
         btnAccountsWithOneProfile.setOnAction(e -> stage.setScene(accountsWithOneProfile(stage)));
 
-        mainPane.getChildren().addAll(menu.getMenu(stage), scrollPane, btnAddNewAccount, btnAccountsWithOneProfile);
+        mainPane.getChildren().addAll(menu.getMenu(stage), scrollPane, btnAddNewAccount, btnAccountsWithOneProfile, lblPageTitle);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
@@ -218,14 +221,23 @@ public class Accounts {
 
         Button btnSubmit = new Button("Submit changes");
         btnSubmit.setId("btnSubmit");
-        btnSubmit.setLayoutX(465);
-        btnSubmit.setLayoutY(218);
+        btnSubmit.setLayoutX(666);
+        btnSubmit.setMinWidth(149);
+        btnSubmit.setLayoutY(258);
         btnSubmit.getStyleClass().add("accountButtons");
         btnSubmit.setOnAction(controller);
 
+        Label lblPageTitle = new Label("Edit account: ");
+        lblPageTitle.setLayoutX(465);
+        lblPageTitle.getStyleClass().add("lblEditTitle");
+
+        Label lblAccount = new Label(account.getEmail());
+        lblAccount.setLayoutX(620);
+        lblAccount.getStyleClass().add("lblEditTitle");
+
         Menu menu = new Menu();
 
-        mainPane.getChildren().addAll(menu.getMenu(stage), lblPassword, lblSubscriber, lblAddress, lblCity, txtPassword, txtSubscriber, txtAddress, txtCity, btnSubmit);
+        mainPane.getChildren().addAll(menu.getMenu(stage),lblAccount , lblPageTitle, lblPassword, lblSubscriber, lblAddress, lblCity, txtPassword, txtSubscriber, txtAddress, txtCity, btnSubmit);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
@@ -295,8 +307,6 @@ public class Accounts {
         txtCity.setLayoutX(666);
         txtCity.setLayoutY(213);
 
-        Account account = new Account(txtEmail.getText(), txtPassword.getText(), txtSubscriber.getText(), txtAddress.getText(), txtCity.getText());
-
         AccountController controller = new AccountController(stage);
         controller.setTxtEmailAccount(txtEmail);
         controller.setTxtPasswordAccount(txtPassword);
@@ -307,14 +317,19 @@ public class Accounts {
 
         Button btnSubmit = new Button("Add Account");
         btnSubmit.setId("btnAddAccount");
-        btnSubmit.setLayoutX(465);
+        btnSubmit.setLayoutX(666);
+        btnSubmit.setMinWidth(149);
         btnSubmit.setLayoutY(258);
         btnSubmit.getStyleClass().add("accountButtons");
         btnSubmit.setOnAction(controller);
 
+        Label lblPageTitle = new Label("Add account");
+        lblPageTitle.setLayoutX(465);
+        lblPageTitle.getStyleClass().add("lblEditTitle");
+
         Menu menu = new Menu();
 
-        mainPane.getChildren().addAll(menu.getMenu(stage), lblEmail, lblPassword, lblSubscriber, lblAddress, lblCity, txtPassword, txtSubscriber, txtAddress, txtCity, txtEmail, btnSubmit);
+        mainPane.getChildren().addAll(menu.getMenu(stage), lblPageTitle, lblEmail, lblPassword, lblSubscriber, lblAddress, lblCity, txtPassword, txtSubscriber, txtAddress, txtCity, txtEmail, btnSubmit);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
@@ -391,9 +406,13 @@ public class Accounts {
             verticalBox.getChildren().add(accountPane);
         }
 
+        Label lblPageTitle = new Label("Accounts with only one profile");
+        lblPageTitle.setLayoutX(407);
+        lblPageTitle.getStyleClass().add("lblPageTitle");
+
         Menu menu = new Menu();
         scrollPane.setContent(verticalBox);
-        mainPane.getChildren().addAll(menu.getMenu(stage), scrollPane);
+        mainPane.getChildren().addAll(menu.getMenu(stage), lblPageTitle, scrollPane);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
@@ -479,10 +498,14 @@ public class Accounts {
             verticalBox.getChildren().add(accountPane);
         }
 
+        Label lblPageTitle = new Label("Watched movies of " + email);
+        lblPageTitle.setLayoutX(407);
+        lblPageTitle.getStyleClass().add("lblPageTitle");
+
         Menu menu = new Menu();
         scrollPane.setContent(verticalBox);
 
-        mainPane.getChildren().addAll(menu.getMenu(stage), scrollPane);
+        mainPane.getChildren().addAll(menu.getMenu(stage), lblPageTitle , scrollPane);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());

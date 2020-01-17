@@ -1,5 +1,6 @@
 package GUI;
 
+import Database.AccountDAO;
 import Database.EpisodeDAO;
 import Database.SerieDAO;
 import Domain.Program;
@@ -69,7 +70,7 @@ public class Series {
             line.setLayoutY(109);
             line.setStroke(javafx.scene.paint.Color.rgb(255, 255, 255));
 
-            Button btnAvgWatchedOfSerie = new Button("Episodes Watched AVG");
+            Button btnAvgWatchedOfSerie = new Button("Episodes watched AVG of all profiles");
             btnAvgWatchedOfSerie.setLayoutX(910);
             btnAvgWatchedOfSerie.setLayoutY(13);
             btnAvgWatchedOfSerie.setMinWidth(142);
@@ -83,10 +84,14 @@ public class Series {
 
         }
 
+        Label lblPageTitle = new Label("Serie overview");
+        lblPageTitle.setLayoutX(407);
+        lblPageTitle.getStyleClass().add("lblPageTitle");
+
         Menu menu = new Menu();
         scrollPane.setContent(verticalBox);
 
-        mainPane.getChildren().addAll(menu.getMenu(stage), scrollPane);
+        mainPane.getChildren().addAll(menu.getMenu(stage), lblPageTitle, scrollPane);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
@@ -94,7 +99,7 @@ public class Series {
         return scene;
     }
 
-    public Scene serieList(Stage stage, String email) {
+    public Scene serieListWithAccount(Stage stage, String email) {
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
         mainPane.prefWidth(1600.0);
@@ -146,7 +151,7 @@ public class Series {
             line.setLayoutY(109);
             line.setStroke(javafx.scene.paint.Color.rgb(255, 255, 255));
 
-            Button btnAvgWatchedOfSerie = new Button("Episodes Watched AVG");
+            Button btnAvgWatchedOfSerie = new Button("AVG watched episodes of account");
             btnAvgWatchedOfSerie.setLayoutX(910);
             btnAvgWatchedOfSerie.setLayoutY(13);
             btnAvgWatchedOfSerie.setMinWidth(142);
@@ -156,14 +161,18 @@ public class Series {
             accountPane.getChildren().addAll(lblTitle, lblRecommend, btnAvgWatchedOfSerie);
             accountPane.getChildren().add(line);
 
-            verticalBox.getChildren().add(accountPane);
+            verticalBox.getChildren().addAll(accountPane);
 
         }
+
+        Label lblPageTitle = new Label("Serie overview with account " + email);
+        lblPageTitle.setLayoutX(407);
+        lblPageTitle.getStyleClass().add("lblPageTitle");
 
         Menu menu = new Menu();
         scrollPane.setContent(verticalBox);
 
-        mainPane.getChildren().addAll(menu.getMenu(stage), scrollPane);
+        mainPane.getChildren().addAll(menu.getMenu(stage),lblPageTitle, scrollPane);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
@@ -256,10 +265,14 @@ public class Series {
 
         }
 
+        Label lblPageTitle = new Label("Average watched percentage of an episode with all profiles");
+        lblPageTitle.setLayoutX(407);
+        lblPageTitle.getStyleClass().add("lblPageTitle");
+
         Menu menu = new Menu();
         scrollPane.setContent(verticalBox);
 
-        mainPane.getChildren().addAll(menu.getMenu(stage), scrollPane);
+        mainPane.getChildren().addAll(menu.getMenu(stage),lblPageTitle, scrollPane);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
@@ -352,10 +365,14 @@ public class Series {
 
         }
 
+        Label lblPageTitle = new Label("Average watched percentage of an episode from one account");
+        lblPageTitle.setLayoutX(407);
+        lblPageTitle.getStyleClass().add("lblPageTitle");
+
         Menu menu = new Menu();
         scrollPane.setContent(verticalBox);
 
-        mainPane.getChildren().addAll(menu.getMenu(stage), scrollPane);
+        mainPane.getChildren().addAll(menu.getMenu(stage), lblPageTitle, scrollPane);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
