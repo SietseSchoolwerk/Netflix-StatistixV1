@@ -1,6 +1,7 @@
 package Domain;
 
 public class Program {
+    // Read only properties since this application includes no edit of the class
     private int programId;
     private String title;
     private String genre;
@@ -8,6 +9,7 @@ public class Program {
     private String lengthOfTime;
     private int age;
 
+    //Default constructor for the program class.
     public Program(int programId, String title, String genre, String language,int age, String lengthOfTime) {
         this.programId = programId;
         this.title = title;
@@ -25,39 +27,19 @@ public class Program {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getGenre() {
         return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
     }
 
     public String getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
     public String getLengthOfTime() {
         return lengthOfTime;
     }
 
-    public void setLengthOfTime(String lengthOfTime) {
-        this.lengthOfTime = lengthOfTime;
-    }
-
     public int getAge() {
         return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 }
