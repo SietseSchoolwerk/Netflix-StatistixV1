@@ -17,6 +17,11 @@ public class ProgramDAO {
     // Default constructor for the ProgramDAO class
     public ProgramDAO() { this.connection = databaseConnection.getConn(); }
 
+    /**
+     * get a Program object for a given ProgramId
+     * @param ProgramId
+     * @return the Program object
+     */
     public Program getProgram(int ProgramId){
         try{
             PreparedStatement pdo = connection.prepareStatement(
@@ -51,6 +56,10 @@ public class ProgramDAO {
 
     }
 
+    /**
+     * Get an ArrayList of ProgramIds with all of the programs in the database
+     * @return the ArrayList with Program objects
+     */
     public ArrayList<Program> getAllPrograms(){
         try{
             ArrayList<Program> programList = new ArrayList<>();
@@ -77,6 +86,11 @@ public class ProgramDAO {
 
     }
 
+    /**
+     * Check if a program is a serie
+     * @param programId
+     * @return true if program is a series, false if not
+     */
     public boolean isSerie(int programId) {
         String sql = "SELECT count(*) as result FROM Episode WHERE ProgramId=?;";
 
