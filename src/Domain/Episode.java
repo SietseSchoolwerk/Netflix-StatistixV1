@@ -10,11 +10,11 @@ public class Episode extends Program {
         this.followNumber = followNumber;
     }
 
+    /**
+     * Gets the follow number of the current episode.
+     * @return String follownumber
+     */
     public String getFollowNumber() {
         return followNumber;
-    }
-
-    public void setFollowNumber(String followNumber) {
-        this.followNumber = followNumber;
     }
 }
