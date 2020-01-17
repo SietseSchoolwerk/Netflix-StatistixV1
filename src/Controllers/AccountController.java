@@ -32,7 +32,7 @@ public class AccountController implements EventHandler<ActionEvent> {
         this.stage = stage;
         this.alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning Dialog");
-        alert.setHeaderText("Error occured while creating account");
+        alert.setHeaderText("Error occured with account");
     }
 
     public void handle(ActionEvent event) {

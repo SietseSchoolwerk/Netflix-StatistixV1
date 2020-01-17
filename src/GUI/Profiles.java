@@ -96,7 +96,7 @@ public class Profiles {
             btnWatchedPreviously.setLayoutY(55);
             btnWatchedPreviously.setMinWidth(142);
             btnWatchedPreviously.getStyleClass().add("accountButtons");
-            btnWatchedPreviously.setOnAction(e -> stage.setScene(new WatchedGUI().watchedList(stage, profile.getProfileId(), email)));
+            btnWatchedPreviously.setOnAction(e -> stage.setScene(new WatchedGUI().watchedList(stage, profile.getProfileId(), email, profile.getName())));
 
             Line line = new Line();
             line.setStartX(-100);
@@ -112,6 +112,10 @@ public class Profiles {
             verticalBox.getChildren().add(accountPane);
         }
 
+        Label lblPageTitle = new Label("Profile overview of " + email);
+        lblPageTitle.setLayoutX(407);
+        lblPageTitle.getStyleClass().add("lblPageTitle");
+
         Menu menu = new Menu();
         scrollPane.setContent(verticalBox);
 
@@ -119,10 +123,10 @@ public class Profiles {
         btnAddNewProfile.getStyleClass().add("accountButtons");
         btnAddNewProfile.getStyleClass().add("newButton");
         btnAddNewProfile.setLayoutY(2);
-        btnAddNewProfile.setLayoutX(407);
+        btnAddNewProfile.setLayoutX(1457);
         btnAddNewProfile.setOnAction(e -> stage.setScene(new Profiles().addProfile(stage, email)));
 
-        mainPane.getChildren().addAll(menu.getMenu(stage),scrollPane, btnAddNewProfile);
+        mainPane.getChildren().addAll(menu.getMenu(stage), lblPageTitle, scrollPane, btnAddNewProfile);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
@@ -171,14 +175,19 @@ public class Profiles {
 
         Button btnSubmit = new Button("Submit changes");
         btnSubmit.setId("btnSubmit");
-        btnSubmit.setLayoutX(465);
+        btnSubmit.setLayoutX(666);
+        btnSubmit.setMinWidth(149);
         btnSubmit.setLayoutY(138);
         btnSubmit.getStyleClass().add("accountButtons");
         btnSubmit.setOnAction(controller);
 
+        Label lblPageTitle = new Label("Edit profile");
+        lblPageTitle.setLayoutX(465);
+        lblPageTitle.getStyleClass().add("lblEditTitle");
+
         Menu menu = new Menu();
 
-        mainPane.getChildren().addAll(menu.getMenu(stage), lblAge, lblName, txtName, txtAge, btnSubmit);
+        mainPane.getChildren().addAll(menu.getMenu(stage), lblPageTitle, lblAge, lblName, txtName, txtAge, btnSubmit);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
@@ -226,16 +235,21 @@ public class Profiles {
         controller.setTxtAgeProfile(txtAge);
         controller.setEmail(email);
 
-        Button btnAdd = new Button("Submit changes");
+        Button btnAdd = new Button("Add profile");
         btnAdd.setId("btnAdd");
-        btnAdd.setLayoutX(465);
+        btnAdd.setLayoutX(666);
+        btnAdd.setMinWidth(149);
         btnAdd.setLayoutY(138);
         btnAdd.getStyleClass().add("accountButtons");
         btnAdd.setOnAction(controller);
 
+        Label lblPageTitle = new Label("Add profile");
+        lblPageTitle.setLayoutX(465);
+        lblPageTitle.getStyleClass().add("lblEditTitle");
+
         Menu menu = new Menu();
 
-        mainPane.getChildren().addAll(menu.getMenu(stage), lblAge, lblName, txtName, txtAge, btnAdd);
+        mainPane.getChildren().addAll(menu.getMenu(stage), lblPageTitle, lblAge, lblName, txtName, txtAge, btnAdd);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());

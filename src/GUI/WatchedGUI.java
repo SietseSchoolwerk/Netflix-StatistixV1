@@ -116,8 +116,6 @@ public class WatchedGUI {
             controller.setProgramId(program.getProgramId());
             btnWatch.setOnAction(e -> stage.setScene(new WatchedGUI().addWatched(stage, controller)));
 
-
-
             Line line = new Line();
             line.setStartX(-100);
             line.setEndX(1081);
@@ -132,10 +130,14 @@ public class WatchedGUI {
             verticalBox.getChildren().add(accountPane);
         }
 
+        Label lblPageTitle = new Label("Select program to watch ");
+        lblPageTitle.setLayoutX(407);
+        lblPageTitle.getStyleClass().add("lblPageTitle");
+
         Menu menu = new Menu();
         scrollPane.setContent(verticalBox);
 
-        mainPane.getChildren().addAll(menu.getMenu(stage),scrollPane);
+        mainPane.getChildren().addAll(menu.getMenu(stage), lblPageTitle,scrollPane);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
@@ -174,16 +176,21 @@ public class WatchedGUI {
         controller.setTxtPercentage(txtPercentage);
 
 
-        Button btnWatch = new Button("Submit changes");
+        Button btnWatch = new Button("Add watched");
         btnWatch.setId("btnWatch");
-        btnWatch.setLayoutX(465);
         btnWatch.setLayoutY(138);
+        btnWatch.setLayoutX(666);
+        btnWatch.setMinWidth(149);
         btnWatch.getStyleClass().add("accountButtons");
         btnWatch.setOnAction(controller);
 
+        Label lblPageTitle = new Label("Add watched");
+        lblPageTitle.setLayoutX(465);
+        lblPageTitle.getStyleClass().add("lblEditTitle");
+
         Menu menu = new Menu();
 
-        mainPane.getChildren().addAll(menu.getMenu(stage), lblPercentage, txtPercentage, btnWatch);
+        mainPane.getChildren().addAll(menu.getMenu(stage), lblPageTitle, lblPercentage, txtPercentage, btnWatch);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
@@ -191,7 +198,7 @@ public class WatchedGUI {
         return scene;
     }
 
-    public Scene watchedList(Stage stage, int profileId, String email) {
+    public Scene watchedList(Stage stage, int profileId, String email, String profileName) {
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
         mainPane.prefWidth(1600.0);
@@ -304,10 +311,15 @@ public class WatchedGUI {
 
             verticalBox.getChildren().add(accountPane);
         }
+
+        Label lblPageTitle = new Label("Watched overview of " + profileName);
+        lblPageTitle.setLayoutX(407);
+        lblPageTitle.getStyleClass().add("lblPageTitle");
+
         Menu menu = new Menu();
         scrollPane.setContent(verticalBox);
 
-        mainPane.getChildren().addAll(menu.getMenu(stage),scrollPane);
+        mainPane.getChildren().addAll(menu.getMenu(stage), lblPageTitle, scrollPane);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
@@ -350,14 +362,19 @@ public class WatchedGUI {
 
         Button btnUpdate = new Button("Submit changes");
         btnUpdate.setId("btnUpdate");
-        btnUpdate.setLayoutX(465);
         btnUpdate.setLayoutY(138);
+        btnUpdate.setLayoutX(666);
+        btnUpdate.setMinWidth(149);
         btnUpdate.getStyleClass().add("accountButtons");
         btnUpdate.setOnAction(controller);
 
+        Label lblPageTitle = new Label("Edit watched");
+        lblPageTitle.setLayoutX(465);
+        lblPageTitle.getStyleClass().add("lblEditTitle");
+
         Menu menu = new Menu();
 
-        mainPane.getChildren().addAll(menu.getMenu(stage), lblPercentage, txtPercentage, btnUpdate);
+        mainPane.getChildren().addAll(menu.getMenu(stage), lblPageTitle, lblPercentage, txtPercentage, btnUpdate);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());

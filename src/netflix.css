@@ -31,6 +31,12 @@
     -fx-text-fill: WHITE;
     -fx-border-width: 1 1 1 1;
         -fx-border-color:WHITE;
+    -fx-cursor: hand;
+}
+
+.menuBtn:hover{
+    -fx-background-color: #4d4d4d;
+    -fx-cursor: hand;
 }
 
 .newButton{
@@ -39,5 +45,15 @@
 
 .whiteLabels {
     -fx-alignment: CENTER;
+    -fx-text-fill: WHITE;
+}
+
+.lblPageTitle{
+    -fx-font-size: 29pt Ariel;
+    -fx-text-fill: WHITE;
+}
+
+.lblEditTitle{
+    -fx-font-size: 20pt Ariel;
     -fx-text-fill: WHITE;
 }

@@ -29,18 +29,18 @@ public class Menu {
         logo.setPreserveRatio(true);
         logo.setImage(imageLogo);
 
-        Button accountBtn = new Button("Account");
+        Button accountBtn = new Button("Accounts");
         accountBtn.setId("accountBtn");
         accountBtn.getStyleClass().add("menuBtn");
         accountBtn.setOnAction(e -> stage.setScene(new Accounts().AccountList(stage)));
 
-        Button movieBtn = new Button("Movie");
+        Button movieBtn = new Button("Movies");
         movieBtn.setMnemonicParsing(false);
         accountBtn.setId("movieBtn");
         movieBtn.getStyleClass().add("menuBtn");
         movieBtn.setOnAction(e -> stage.setScene(new Movies().movieList(stage)));
 
-        Button serieBtn = new Button("Serie");
+        Button serieBtn = new Button("Series");
         serieBtn.setMnemonicParsing(false);
         accountBtn.setId("serieBtn");
         serieBtn.getStyleClass().add("menuBtn");

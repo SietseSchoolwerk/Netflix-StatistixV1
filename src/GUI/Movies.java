@@ -83,9 +83,9 @@ public class Movies {
             lblPlaytime.setLayoutY(54);
             lblPlaytime.setLayoutX(390);
 
-            Label lblAvgWatchPerEpisode = new Label(filmDAO.getFilmFullyWatched(program.getProgramId()) +" watched this movie 100%");
+            Label lblAvgWatchPerEpisode = new Label(filmDAO.getFilmFullyWatched(program.getProgramId()) +" watcher(s) watched this movie 100%");
             lblAvgWatchPerEpisode.getStyleClass().add("accountLabels");
-            lblAvgWatchPerEpisode.setLayoutY(54);
+            lblAvgWatchPerEpisode.setLayoutY(50);
             lblAvgWatchPerEpisode.setLayoutX(910);
 
             Line line = new Line();
@@ -102,17 +102,21 @@ public class Movies {
 
         }
 
+        Label lblPageTitle = new Label("Movies overview");
+        lblPageTitle.setLayoutX(407);
+        lblPageTitle.getStyleClass().add("lblPageTitle");
+
         Button btnFilmAgeUnder16 = new Button("See film with age under 16 and longest watch time");
         btnFilmAgeUnder16.getStyleClass().add("accountButtons");
         btnFilmAgeUnder16.getStyleClass().add("newButton");
         btnFilmAgeUnder16.setLayoutY(2);
-        btnFilmAgeUnder16.setLayoutX(407);
+        btnFilmAgeUnder16.setLayoutX(1114);
         btnFilmAgeUnder16.setOnAction(e -> stage.setScene(new Movies().movieAgeUnderSixteenWithLongestPlaytime(stage)));
 
         Menu menu = new Menu();
         scrollPane.setContent(verticalBox);
 
-        mainPane.getChildren().addAll(menu.getMenu(stage), scrollPane, btnFilmAgeUnder16);
+        mainPane.getChildren().addAll(menu.getMenu(stage), scrollPane, btnFilmAgeUnder16, lblPageTitle);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
@@ -190,10 +194,14 @@ public class Movies {
 
         verticalBox.getChildren().add(accountPane);
 
+        Label lblPageTitle = new Label("The longest movie with age under 16");
+        lblPageTitle.setLayoutX(407);
+        lblPageTitle.getStyleClass().add("lblPageTitle");
+
         Menu menu = new Menu();
         scrollPane.setContent(verticalBox);
 
-        mainPane.getChildren().addAll(menu.getMenu(stage), scrollPane);
+        mainPane.getChildren().addAll(menu.getMenu(stage), scrollPane, lblPageTitle);
 
         Scene scene = new Scene(mainPane);
         scene.getStylesheets().add(getClass().getResource("/netflix.css").toExternalForm());
