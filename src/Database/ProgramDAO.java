@@ -53,32 +53,22 @@ public class ProgramDAO {
 
     public ArrayList<Program> getAllPrograms(){
         try{
-            ArrayList<Program> programmaList = new ArrayList<>();
+            ArrayList<Program> programList = new ArrayList<>();
             PreparedStatement pdo = connection.prepareStatement(
-                    "SELECT ProgramId " +
-                            "FROM Programma"
+                    "SELECT * FROM Programma " +
+                            "LEFT JOIN Episode on Episode.ProgramId = Programma.ProgramId"
             );
             ResultSet rs = pdo.executeQuery();
 
             Object[] arr = new Object[4];
 
             while (rs.next()) {
-                int programmaId = rs.getInt(1);    //Program id
+                int programId = rs.getInt(1);    //Program id
 
-                if (isSerie(programmaId)) {
-                    EpisodeDAO episodeDAO = new EpisodeDAO();
-                    Program episode = (Program)episodeDAO.getEpisode(programmaId);
-
-                    programmaList.add(episode);
-                } else {
-                    FilmDAO filmDAO = new FilmDAO();
-                    Program film = (Program)filmDAO.getFilm(programmaId);
-
-                    programmaList.add(film);
-                }
+                programList.add(new Episode(programId, rs.getString(2), rs.getString("Genre"), rs.getString("Language"), rs.getString("Playtime"), rs.getString("Vol"),  rs.getInt("Age")));
 
             }
-            return programmaList;
+            return programList;
 
         } catch(Exception e){
             e.printStackTrace();

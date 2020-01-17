@@ -36,7 +36,7 @@ public class Profiles {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setLayoutX(407);
         scrollPane.setLayoutY(50);
-        scrollPane.setMinWidth(1140);
+        scrollPane.setMinWidth(1160);
         scrollPane.setMinHeight(700);
         scrollPane.setMaxHeight(700);
 
@@ -63,13 +63,13 @@ public class Profiles {
                 accountPane.setStyle("-fx-background-color: #383838;");
             }
 
-            Label lblName = new Label(profile.getName());
-            lblName.getStyleClass().add("accountEmail");
+            Label lblName = new Label("Name: " + profile.getName());
+            lblName.getStyleClass().add("headLabels");
             lblName.setLayoutX(65);
             lblName.setLayoutY(14);
 
-            Label lblAge = new Label(Integer.toString(profile.getAge()));
-            lblAge.getStyleClass().add("accountLabels");
+            Label lblAge = new Label("Age: " +(profile.getAge()));
+            lblAge.getStyleClass().add("labels");
             lblAge.setLayoutY(37);
             lblAge.setLayoutX(65);
 
@@ -78,14 +78,14 @@ public class Profiles {
             btnEdit.setLayoutX(1089);
             btnEdit.setLayoutY(55);
             btnEdit.setMinWidth(80);
-            btnEdit.getStyleClass().add("accountButtons");
+            btnEdit.getStyleClass().add("buttons");
             btnEdit.setOnAction(e -> stage.setScene(new Profiles().editProfile(stage, profile)));
 
             Button btnDelete = new Button("Delete");
             btnDelete.setLayoutX(1089);
             btnDelete.setLayoutY(13);
             btnDelete.setMinWidth(80);
-            btnDelete.getStyleClass().add("accountButtons");
+            btnDelete.getStyleClass().add("buttons");
             btnDelete.setId("btnDelete");
             ProfileController controller = new ProfileController(stage, profile);
             btnDelete.setOnAction(controller);
@@ -95,14 +95,14 @@ public class Profiles {
             btnWatch.setLayoutX(910);
             btnWatch.setLayoutY(13);
             btnWatch.setMinWidth(142);
-            btnWatch.getStyleClass().add("accountButtons");
+            btnWatch.getStyleClass().add("buttons");
             btnWatch.setOnAction(e -> stage.setScene(new WatchedGUI().watchMovie(stage, email, profile)));
 
             Button btnWatchedPreviously = new Button("Watched programs");
             btnWatchedPreviously.setLayoutX(910);
             btnWatchedPreviously.setLayoutY(55);
             btnWatchedPreviously.setMinWidth(142);
-            btnWatchedPreviously.getStyleClass().add("accountButtons");
+            btnWatchedPreviously.getStyleClass().add("buttons");
             btnWatchedPreviously.setOnAction(e -> stage.setScene(new WatchedGUI().watchedList(stage, profile.getProfileId(), email, profile.getName())));
 
             Line line = new Line();
@@ -127,7 +127,7 @@ public class Profiles {
         scrollPane.setContent(verticalBox);
 
         Button btnAddNewProfile = new Button("New Profile");
-        btnAddNewProfile.getStyleClass().add("accountButtons");
+        btnAddNewProfile.getStyleClass().add("buttons");
         btnAddNewProfile.getStyleClass().add("newButton");
         btnAddNewProfile.setLayoutY(2);
         btnAddNewProfile.setLayoutX(1457);
@@ -157,7 +157,7 @@ public class Profiles {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setLayoutX(407);
         scrollPane.setLayoutY(50);
-        scrollPane.setMinWidth(1140);
+        scrollPane.setMinWidth(1160);
         scrollPane.setMinHeight(700);
         scrollPane.setMaxHeight(700);
 
@@ -192,7 +192,7 @@ public class Profiles {
         btnSubmit.setLayoutX(666);
         btnSubmit.setMinWidth(149);
         btnSubmit.setLayoutY(138);
-        btnSubmit.getStyleClass().add("accountButtons");
+        btnSubmit.getStyleClass().add("buttons");
         btnSubmit.setOnAction(controller);
 
         Label lblPageTitle = new Label("Edit profile");
@@ -225,7 +225,7 @@ public class Profiles {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setLayoutX(407);
         scrollPane.setLayoutY(50);
-        scrollPane.setMinWidth(1140);
+        scrollPane.setMinWidth(1160);
         scrollPane.setMinHeight(700);
         scrollPane.setMaxHeight(700);
 
@@ -261,7 +261,7 @@ public class Profiles {
         btnAdd.setLayoutX(666);
         btnAdd.setMinWidth(149);
         btnAdd.setLayoutY(138);
-        btnAdd.getStyleClass().add("accountButtons");
+        btnAdd.getStyleClass().add("buttons");
         btnAdd.setOnAction(controller);
 
         Label lblPageTitle = new Label("Add profile");

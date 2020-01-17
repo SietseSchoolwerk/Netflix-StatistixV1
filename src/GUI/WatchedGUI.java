@@ -52,6 +52,7 @@ public class WatchedGUI {
 
         int count = 0;
         for (Program program: programList) {
+            Episode episode = (Episode)program;
             count++;
             AnchorPane accountPane = new AnchorPane();
             accountPane.setMinHeight(110);
@@ -63,49 +64,58 @@ public class WatchedGUI {
                 accountPane.setStyle("-fx-background-color: #383838;");
             }
 
-            Label lblTitel = new Label(program.getTitle());
-            lblTitel.getStyleClass().add("accountEmail");
-            lblTitel.setLayoutX(65);
-            lblTitel.setLayoutY(14);
+            Label lblTitle = new Label(program.getTitle());
 
-            Label lblGenre = new Label((program.getGenre()));
-            lblGenre.getStyleClass().add("accountLabels");
+            if (episode.getFollowNumber() == null){
+                lblTitle.getStyleClass().add("headLabels");
+                lblTitle.setLayoutX(65);
+                lblTitle.setLayoutY(14);
+            }else{
+                lblTitle.getStyleClass().add("labels");
+                lblTitle.setLayoutY(20);
+                lblTitle.setLayoutX(253);
+            }
+
+
+
+            Label lblGenre = new Label("Genre: " + program.getGenre());
+            lblGenre.getStyleClass().add("labels");
             lblGenre.setLayoutY(37);
             lblGenre.setLayoutX(65);
 
-            Label lblLan = new Label(program.getLanguage());
-            lblLan.getStyleClass().add("accountLabels");
+            Label lblLan = new Label("Language: " + program.getLanguage());
+            lblLan.getStyleClass().add("labels");
             lblLan.setLayoutY(54);
             lblLan.setLayoutX(65);
 
-            Label lblAge = new Label(Integer.toString(program.getAge()));
-            lblAge.getStyleClass().add("accountLabels");
+            Label lblAge = new Label("Age:  " +program.getAge());
+            lblAge.getStyleClass().add("labels");
             lblAge.setLayoutY(73);
             lblAge.setLayoutX(65);
 
             Label lblPlaytimeInfo = new Label("Playtime in minutes: ");
-            lblPlaytimeInfo.getStyleClass().add("accountLabels");
+            lblPlaytimeInfo.getStyleClass().add("labels");
             lblPlaytimeInfo.setLayoutY(54);
             lblPlaytimeInfo.setLayoutX(253);
 
             Label lblPlaytime = new Label(program.getLengthOfTime());
-            lblPlaytime.getStyleClass().add("accountLabels");
+            lblPlaytime.getStyleClass().add("labels");
             lblPlaytime.setLayoutY(54);
             lblPlaytime.setLayoutX(390);
 
-            if (new ProgramDAO().isSerie(program.getProgramId())) {
-                Episode episode = (Episode)program;
+            if (episode.getFollowNumber() != null) {
 
                 Serie serie = new SerieDAO().getSerie(program.getProgramId());
 
                 Label lblSerieTitle = new Label(serie.getTitle());
-                lblSerieTitle.getStyleClass().add("accountLabels");
+                lblSerieTitle.getStyleClass().add("headLabels");
+                lblSerieTitle.setLayoutX(65);
                 lblSerieTitle.setLayoutY(14);
-                lblSerieTitle.setLayoutX(253);
 
-                Label lblVolume = new Label(episode.getFollowNumber());
-                lblVolume.getStyleClass().add("accountLabels");
-                lblVolume.setLayoutY(73);
+
+                Label lblVolume = new Label("Episode: " + episode.getFollowNumber());
+                lblVolume.getStyleClass().add("labels");
+                lblVolume.setLayoutY(38);
                 lblVolume.setLayoutX(253);
                 accountPane.getChildren().addAll(lblSerieTitle, lblVolume);
             }
@@ -115,7 +125,7 @@ public class WatchedGUI {
             btnWatch.setLayoutX(1089);
             btnWatch.setLayoutY(13);
             btnWatch.setMinWidth(80);
-            btnWatch.getStyleClass().add("accountButtons");
+            btnWatch.getStyleClass().add("buttons");
             ProfileController controller = new ProfileController(stage);
             controller.setProfile(profile);
             controller.setEmail(email);
@@ -129,14 +139,14 @@ public class WatchedGUI {
             line.setLayoutY(109);
             line.setStroke(javafx.scene.paint.Color.rgb(255,255,255));
 
-            accountPane.getChildren().addAll(lblTitel, lblGenre, lblLan, lblAge, lblPlaytime, lblPlaytimeInfo);
+            accountPane.getChildren().addAll(lblTitle, lblGenre, lblLan, lblAge, lblPlaytime, lblPlaytimeInfo);
             accountPane.getChildren().addAll(btnWatch);
             accountPane.getChildren().add(line);
 
             verticalBox.getChildren().add(accountPane);
         }
 
-        Label lblPageTitle = new Label("Select program to watch ");
+        Label lblPageTitle = new Label("Select program to watch");
         lblPageTitle.setLayoutX(407);
         lblPageTitle.getStyleClass().add("lblPageTitle");
 
@@ -193,7 +203,7 @@ public class WatchedGUI {
         btnWatch.setLayoutY(138);
         btnWatch.setLayoutX(666);
         btnWatch.setMinWidth(149);
-        btnWatch.getStyleClass().add("accountButtons");
+        btnWatch.getStyleClass().add("buttons");
         btnWatch.setOnAction(controller);
 
         Label lblPageTitle = new Label("Add watched");
@@ -229,6 +239,7 @@ public class WatchedGUI {
         scrollPane.setLayoutY(50);
         scrollPane.setMinWidth(1160);
         scrollPane.setMinHeight(700);
+        scrollPane.setMaxHeight(700);
 
         VBox verticalBox = new VBox();
         verticalBox.setMinWidth(1160);
@@ -253,65 +264,72 @@ public class WatchedGUI {
             }
 
             Label lblTitle = new Label(watched.getProgram());
-            lblTitle.getStyleClass().add("accountEmail");
-            lblTitle.setLayoutX(65);
-            lblTitle.setLayoutY(14);
 
-            Label lblGenre = new Label(watched.getGenre());
-            lblGenre.getStyleClass().add("accountLabels");
+            if (watched.getEpisode() == null){
+                lblTitle.getStyleClass().add("headLabels");
+                lblTitle.setLayoutX(65);
+                lblTitle.setLayoutY(14);
+            }else{
+                lblTitle.getStyleClass().add("labels");
+                lblTitle.setLayoutY(20);
+                lblTitle.setLayoutX(253);
+            }
+
+            Label lblGenre = new Label("Genre: " +watched.getGenre());
+            lblGenre.getStyleClass().add("labels");
             lblGenre.setLayoutY(37);
             lblGenre.setLayoutX(65);
 
-            Label lblLan = new Label(watched.getLanguage());
-            lblLan.getStyleClass().add("accountLabels");
+            Label lblLan = new Label("Language: " + watched.getLanguage());
+            lblLan.getStyleClass().add("labels");
             lblLan.setLayoutY(54);
             lblLan.setLayoutX(65);
 
-            Label lblAge = new Label(Integer.toString(watched.getAge()));
-            lblAge.getStyleClass().add("accountLabels");
+            Label lblAge = new Label("Age: " + watched.getAge());
+            lblAge.getStyleClass().add("labels");
             lblAge.setLayoutY(73);
             lblAge.setLayoutX(65);
 
             Label lblPlaytimeInfo = new Label("Playtime in minutes: ");
-            lblPlaytimeInfo.getStyleClass().add("accountLabels");
+            lblPlaytimeInfo.getStyleClass().add("labels");
             lblPlaytimeInfo.setLayoutY(54);
             lblPlaytimeInfo.setLayoutX(253);
 
             Label lblPlaytime = new Label(Integer.toString(watched.getPlaytime()));
-            lblPlaytime.getStyleClass().add("accountLabels");
+            lblPlaytime.getStyleClass().add("labels");
             lblPlaytime.setLayoutY(54);
             lblPlaytime.setLayoutX(390);
 
             if (watched.getEpisode() != null) {
                 Label lblSerieTitle = new Label(watched.getEpisode());
-                lblSerieTitle.getStyleClass().add("accountLabels");
-                lblSerieTitle.setLayoutY(15);
-                lblSerieTitle.setLayoutX(253);
+                lblSerieTitle.getStyleClass().add("headLabels");
+                lblSerieTitle.setLayoutX(65);
+                lblSerieTitle.setLayoutY(14);
 
-                Label lblVolume = new Label(watched.getFollowNumber());
-                lblVolume.getStyleClass().add("accountLabels");
-                lblVolume.setLayoutY(73);
+                Label lblVolume = new Label("Episode: " + watched.getFollowNumber());
+                lblVolume.getStyleClass().add("labels");
+                lblVolume.setLayoutY(38);
                 lblVolume.setLayoutX(253);
                 accountPane.getChildren().addAll(lblSerieTitle, lblVolume);
             }
 
             Label lblWatchedTime = new Label(watched.getWatchedPercentage() + "% watched");
-            lblWatchedTime.getStyleClass().add("accountLabels");
-            lblWatchedTime.setLayoutY(37);
+            lblWatchedTime.getStyleClass().add("labels");
+            lblWatchedTime.setLayoutY(73);
             lblWatchedTime.setLayoutX(253);
 
             Button btnEdit = new Button("Edit");
             btnEdit.setLayoutX(1089);
             btnEdit.setLayoutY(55);
             btnEdit.setMinWidth(80);
-            btnEdit.getStyleClass().add("accountButtons");
+            btnEdit.getStyleClass().add("buttons");
             btnEdit.setOnAction(e -> stage.setScene(new WatchedGUI().editWatched(stage, watched, email)));
 
             Button btnDelete = new Button("Delete");
             btnDelete.setLayoutX(1089);
             btnDelete.setLayoutY(13);
             btnDelete.setMinWidth(80);
-            btnDelete.getStyleClass().add("accountButtons");
+            btnDelete.getStyleClass().add("buttons");
             btnDelete.setId("btnDeleteWatched");
             ProfileController controller = new ProfileController(stage);
             controller.setWatch(watched);
@@ -386,7 +404,7 @@ public class WatchedGUI {
         btnUpdate.setLayoutY(138);
         btnUpdate.setLayoutX(666);
         btnUpdate.setMinWidth(149);
-        btnUpdate.getStyleClass().add("accountButtons");
+        btnUpdate.getStyleClass().add("buttons");
         btnUpdate.setOnAction(controller);
 
         Label lblPageTitle = new Label("Edit watched");

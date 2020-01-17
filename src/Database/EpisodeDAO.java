@@ -29,17 +29,16 @@ public class EpisodeDAO {
         try {
 
             PreparedStatement pdo = connection.prepareStatement(
-                    "SELECT Title, Vol FROM Episode WHERE ProgramId=?"
+                    "SELECT * FROM Programma " +
+                            "INNER JOIN Episode on Episode.ProgramId = Programma.ProgramId\n" +
+                            "WHERE Programma.ProgramId=?"
             );
 
-            pdo.setInt(1, ProgramId);
+            pdo.setInt(1, programId);
             ResultSet rs = pdo.executeQuery();
 
             while (rs.next()) {
-                ProgramDAO programDAO = new ProgramDAO();
-                Program program = programDAO.getProgram(ProgramId);
-                Serie serie = new SerieDAO().getSerie(ProgramId);
-                return new Episode(ProgramId, rs.getString(1), program.getGenre(), program.getLanguage(), program.getLengthOfTime(), rs.getString(2), program.getAge());
+                return new Episode(programId, rs.getString(2), rs.getString("Genre"), rs.getString("Language"), rs.getString("Playtime"), rs.getString("Vol"), rs.getInt("Age"));
             }
         } catch (Exception e) {
             e.printStackTrace();

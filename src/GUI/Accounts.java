@@ -61,23 +61,23 @@ public class Accounts {
                 accountPane.setStyle("-fx-background-color: #383838;");
             }
 
-            Label lblEmail = new Label(accounts.getEmail());
-            lblEmail.getStyleClass().add("accountEmail");
+            Label lblEmail = new Label("Email: " +accounts.getEmail());
+            lblEmail.getStyleClass().add("headLabels");
             lblEmail.setLayoutX(65);
             lblEmail.setLayoutY(14);
 
-            Label lblSubscriber = new Label(accounts.getSubscriber());
-            lblSubscriber.getStyleClass().add("accountLabels");
+            Label lblSubscriber = new Label("Subscriber: " +accounts.getSubscriber());
+            lblSubscriber.getStyleClass().add("labels");
             lblSubscriber.setLayoutY(37);
             lblSubscriber.setLayoutX(65);
 
-            Label lblAdress = new Label(accounts.getAddress());
-            lblAdress.getStyleClass().add("accountLabels");
+            Label lblAdress = new Label("Address: " +accounts.getAddress());
+            lblAdress.getStyleClass().add("labels");
             lblAdress.setLayoutX(65);
             lblAdress.setLayoutY(54);
 
-            Label lblCity = new Label(accounts.getCity());
-            lblCity.getStyleClass().add("accountLabels");
+            Label lblCity = new Label("City: " +accounts.getCity());
+            lblCity.getStyleClass().add("labels");
             lblCity.setLayoutY(71);
             lblCity.setLayoutX(65);
 
@@ -85,14 +85,14 @@ public class Accounts {
             btnEdit.setLayoutX(1089);
             btnEdit.setLayoutY(55);
             btnEdit.setMinWidth(80);
-            btnEdit.getStyleClass().add("accountButtons");
+            btnEdit.getStyleClass().add("buttons");
             btnEdit.setOnAction(e -> stage.setScene(new Accounts().editAccount(stage, accounts)));
 
             Button btnDelete = new Button("Delete");
             btnDelete.setLayoutX(1089);
             btnDelete.setLayoutY(13);
             btnDelete.setMinWidth(80);
-            btnDelete.getStyleClass().add("accountButtons");
+            btnDelete.getStyleClass().add("buttons");
             btnDelete.setId("btnDelete");
             AccountController controller = new AccountController(stage, accounts);
             btnDelete.setOnAction(controller);
@@ -101,7 +101,7 @@ public class Accounts {
             btnProfiles.setLayoutX(910);
             btnProfiles.setLayoutY(13);
             btnProfiles.setMinWidth(142);
-            btnProfiles.getStyleClass().add("accountButtons");
+            btnProfiles.getStyleClass().add("buttons");
             btnProfiles.setOnAction(e -> stage.setScene(new Profiles().profileList(stage, accounts.getEmail())));
 
             Button btnSeries = new Button("Series");
@@ -109,14 +109,14 @@ public class Accounts {
             btnSeries.setLayoutY(13);
             btnSeries.setMinWidth(142);
             btnSeries.setMinHeight(70);
-            btnSeries.getStyleClass().add("accountButtons");
+            btnSeries.getStyleClass().add("buttons");
             btnSeries.setOnAction(e -> stage.setScene(new Series().serieListWithAccount(stage, accounts.getEmail())));
 
             Button btnWatchedMovies = new Button("Watched movies");
             btnWatchedMovies.setLayoutX(910);
             btnWatchedMovies.setLayoutY(55);
             btnWatchedMovies.setMinWidth(142);
-            btnWatchedMovies.getStyleClass().add("accountButtons");
+            btnWatchedMovies.getStyleClass().add("buttons");
             btnWatchedMovies.setOnAction(e -> stage.setScene(watchedMovies(stage, accounts.getEmail())));
 
             Line line = new Line();
@@ -142,7 +142,7 @@ public class Accounts {
 
         /** A button sending us to the create new account page. */
         Button btnAddNewAccount = new Button("New Account");
-        btnAddNewAccount.getStyleClass().add("accountButtons");
+        btnAddNewAccount.getStyleClass().add("buttons");
         btnAddNewAccount.getStyleClass().add("newButton");
         btnAddNewAccount.setLayoutY(2);
         btnAddNewAccount.setLayoutX(1444);
@@ -150,7 +150,7 @@ public class Accounts {
 
         /** Creating a button to send us to the page with all the accounts with one profile */
         Button btnAccountsWithOneProfile = new Button("Accounts with 1 profile");
-        btnAccountsWithOneProfile.getStyleClass().add("accountButtons");
+        btnAccountsWithOneProfile.getStyleClass().add("buttons");
         btnAccountsWithOneProfile.getStyleClass().add("newButton");
         btnAccountsWithOneProfile.setLayoutY(2);
         btnAccountsWithOneProfile.setLayoutX(1140);
@@ -242,7 +242,7 @@ public class Accounts {
         btnSubmit.setLayoutX(666);
         btnSubmit.setMinWidth(149);
         btnSubmit.setLayoutY(258);
-        btnSubmit.getStyleClass().add("accountButtons");
+        btnSubmit.getStyleClass().add("buttons");
 
         //Attaching the controller to the onAction.
         btnSubmit.setOnAction(controller);
@@ -348,7 +348,7 @@ public class Accounts {
         btnSubmit.setLayoutX(666);
         btnSubmit.setMinWidth(149);
         btnSubmit.setLayoutY(258);
-        btnSubmit.getStyleClass().add("accountButtons");
+        btnSubmit.getStyleClass().add("buttons");
         //Binding the controller to the onaction of the add button.
         btnSubmit.setOnAction(controller);
 
@@ -407,23 +407,23 @@ public class Accounts {
                 accountPane.setStyle("-fx-background-color: #383838;");
             }
 
-            Label lblEmail = new Label(accounts.getEmail());
-            lblEmail.getStyleClass().add("accountEmail");
+            Label lblEmail = new Label("Email: " +accounts.getEmail());
+            lblEmail.getStyleClass().add("headLabels");
             lblEmail.setLayoutX(65);
             lblEmail.setLayoutY(14);
 
-            Label lblSubscriber = new Label(accounts.getSubscriber());
-            lblSubscriber.getStyleClass().add("accountLabels");
+            Label lblSubscriber = new Label("Subscriber: " + accounts.getSubscriber());
+            lblSubscriber.getStyleClass().add("labels");
             lblSubscriber.setLayoutY(37);
             lblSubscriber.setLayoutX(65);
 
-            Label lblAdress = new Label(accounts.getAddress());
-            lblAdress.getStyleClass().add("accountLabels");
+            Label lblAdress = new Label("Address: " +accounts.getAddress());
+            lblAdress.getStyleClass().add("labels");
             lblAdress.setLayoutX(65);
             lblAdress.setLayoutY(54);
 
-            Label lblCity = new Label(accounts.getCity());
-            lblCity.getStyleClass().add("accountLabels");
+            Label lblCity = new Label("City: " +accounts.getCity());
+            lblCity.getStyleClass().add("labels");
             lblCity.setLayoutY(71);
             lblCity.setLayoutX(65);
 
@@ -496,32 +496,32 @@ public class Accounts {
             }
 
             Label lblTitle = new Label(movie.getTitle());
-            lblTitle.getStyleClass().add("accountEmail");
+            lblTitle.getStyleClass().add("headLabels");
             lblTitle.setLayoutX(65);
             lblTitle.setLayoutY(14);
 
-            Label lblGenre = new Label((movie.getGenre()));
-            lblGenre.getStyleClass().add("accountLabels");
+            Label lblGenre = new Label("Genre: " +(movie.getGenre()));
+            lblGenre.getStyleClass().add("labels");
             lblGenre.setLayoutY(37);
             lblGenre.setLayoutX(65);
 
-            Label lblLan = new Label(movie.getLanguage());
-            lblLan.getStyleClass().add("accountLabels");
+            Label lblLan = new Label("Language: " +movie.getLanguage());
+            lblLan.getStyleClass().add("labels");
             lblLan.setLayoutY(54);
             lblLan.setLayoutX(65);
 
-            Label lblAge = new Label(Integer.toString(movie.getAge()));
-            lblAge.getStyleClass().add("accountLabels");
+            Label lblAge = new Label("Age:" +(movie.getAge()));
+            lblAge.getStyleClass().add("labels");
             lblAge.setLayoutY(73);
             lblAge.setLayoutX(65);
 
             Label lblPlaytimeInfo = new Label("Playtime in minutes: ");
-            lblPlaytimeInfo.getStyleClass().add("accountLabels");
+            lblPlaytimeInfo.getStyleClass().add("labels");
             lblPlaytimeInfo.setLayoutY(54);
             lblPlaytimeInfo.setLayoutX(253);
 
             Label lblPlaytime = new Label(movie.getLengthOfTime());
-            lblPlaytime.getStyleClass().add("accountLabels");
+            lblPlaytime.getStyleClass().add("labels");
             lblPlaytime.setLayoutY(54);
             lblPlaytime.setLayoutX(390);
 
