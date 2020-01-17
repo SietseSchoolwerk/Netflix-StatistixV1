@@ -2,96 +2,109 @@ package Domain;
 
 public class Watched {
     private int watchedId;
-    private String programma;
+    private String program;
     private String genre;
     private String language;
-    private int Age;
+    private int age;
     private int playtime;
     private float watchedPercentage;
     private String episode;
     private String followNumber;
 
-    public Watched(int watchedId, String programma, String genre, String language, int age, int playtime, float watchedPercentage, String episode, String followNumber) {
+    /**
+     * Default constructor for watched.
+     * @param watchedId
+     * @param program
+     * @param genre
+     * @param language
+     * @param age
+     * @param playtime
+     * @param watchedPercentage
+     * @param episode
+     * @param followNumber
+     */
+    public Watched(int watchedId, String program, String genre, String language, int age, int playtime, float watchedPercentage, String episode, String followNumber) {
         this.watchedId = watchedId;
-        this.programma = programma;
+        this.program = program;
         this.genre = genre;
         this.language = language;
-        this.Age = age;
+        this.age = age;
         this.playtime = playtime;
         this.watchedPercentage = watchedPercentage;
         this.episode = episode;
         this.followNumber = followNumber;
     }
 
+    /**
+     * Returns watchedId of the current instance of account.
+     * @return int watchedId
+     */
     public int getWatchedId() {
         return watchedId;
     }
 
-    public void setWatchedId(int watchedId) {
-        this.watchedId = watchedId;
+    /**
+     * Returns program of the current instance of account.
+     * @return String program
+     */
+    public String getProgram() {
+        return program;
     }
 
-    public String getProgramma() {
-        return programma;
-    }
-
-    public void setProgramma(String programma) {
-        this.programma = programma;
-    }
-
+    /**
+     * Returns genre of the current instance of account.
+     * @return String genre
+     */
     public String getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
+    /**
+     * Returns language of the current instance of account.
+     * @return String language
+     */
     public String getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
+    /**
+     * Returns age of the current instance of account.
+     * @return int age
+     */
     public int getAge() {
-        return Age;
+        return age;
     }
 
-    public void setAge(int age) {
-        Age = age;
-    }
-
+    /**
+     * Returns playtime of the current instance of account.
+     * @return int playtime
+     */
     public int getPlaytime() {
         return playtime;
     }
 
-    public void setPlaytime(int playtime) {
-        this.playtime = playtime;
-    }
-
+    /**
+     * Returns watchedPercentage of the current instance of account.
+     * @return float watchedPercentage
+     */
     public float getWatchedPercentage() {
         return watchedPercentage;
     }
 
-    public void setWatchedPercentage(int watchedPercentage) {
-        this.watchedPercentage = watchedPercentage;
-    }
-
+    /**
+     * Returns episode of the current instance of account.
+     * @return String episode
+     */
     public String getEpisode() {
         return episode;
     }
 
-    public void setEpisode(String episode) {
-        this.episode = episode;
-    }
-
-    public String getFollowNumber() {
+    /**
+     * Returns followNumber of the current instance of account.
+     * @return String followNumber
+     */
+     public String getFollowNumber() {
         return followNumber;
     }
 
-    public void setFollowNumber(String followNumber) {
-        this.followNumber = followNumber;
-    }
 }

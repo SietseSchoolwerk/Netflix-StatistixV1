@@ -232,7 +232,7 @@ public class WatchedGUI {
                 accountPane.setStyle("-fx-background-color: #383838;");
             }
 
-            Label lblTitle = new Label(watched.getProgramma());
+            Label lblTitle = new Label(watched.getProgram());
             lblTitle.getStyleClass().add("accountEmail");
             lblTitle.setLayoutX(65);
             lblTitle.setLayoutY(14);
