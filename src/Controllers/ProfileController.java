@@ -36,7 +36,7 @@ public class ProfileController implements EventHandler<ActionEvent> {
         this.stage = stage;
         this.alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning Dialog");
-        alert.setHeaderText("Error occured while creating account");
+        alert.setHeaderText("Error occured with profile");
     }
 
     public void handle(ActionEvent event) {
