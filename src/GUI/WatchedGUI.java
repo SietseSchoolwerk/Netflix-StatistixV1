@@ -64,9 +64,9 @@ public class WatchedGUI {
             }
 
             Label lblTitel = new Label(program.getTitle());
-            lblTitel.getStyleClass().add("accountEmail");
-            lblTitel.setLayoutX(65);
+            lblTitel.getStyleClass().add("accountLabels");
             lblTitel.setLayoutY(14);
+            lblTitel.setLayoutX(253);
 
             Label lblGenre = new Label((program.getGenre()));
             lblGenre.getStyleClass().add("accountLabels");
@@ -93,15 +93,15 @@ public class WatchedGUI {
             lblPlaytime.setLayoutY(54);
             lblPlaytime.setLayoutX(390);
 
-            if (new ProgramDAO().isSerie(program.getProgramId())) {
-                Episode episode = (Episode)program;
+            Episode episode = (Episode)program;
+            if (episode.getFollowNumber() != null) {
 
                 Serie serie = new SerieDAO().getSerie(program.getProgramId());
 
                 Label lblSerieTitle = new Label(serie.getTitle());
-                lblSerieTitle.getStyleClass().add("accountLabels");
+                lblSerieTitle.getStyleClass().add("accountEmail");
+                lblSerieTitle.setLayoutX(65);
                 lblSerieTitle.setLayoutY(14);
-                lblSerieTitle.setLayoutX(253);
 
                 Label lblVolume = new Label(episode.getFollowNumber());
                 lblVolume.getStyleClass().add("accountLabels");
