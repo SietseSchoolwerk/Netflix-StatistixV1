@@ -10,6 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class AccountController implements EventHandler<ActionEvent> {
     private TextField txtEmailAccount;
@@ -126,10 +129,47 @@ public class AccountController implements EventHandler<ActionEvent> {
     public void handleAdd(Account account) {
         AccountDAO accountDAO = new AccountDAO();
 
+        if (accountDAO.getAccount(account.getEmail()).getEmail() != null){
+            handleError("This is email is already in use");
+            return;
+        }
+
+        if(!account.setEmail(account.getEmail())){
+            handleError("This is not a valid email");
+            return;
+        }
+
+
+        if (!account.setPassword(account.getPassword())) {
+            handleError("Password is an incorrect format");
+            return;
+        }
+
+        if (!account.setPassword(account.getPassword())) {
+            handleError("Password is an incorrect format");
+            return;
+        }
+
+        if (!account.setSubscriber(account.getSubscriber())) {
+            handleError("Subscriber is an incorrect format");
+            return;
+        }
+
+        if (!account.setAddress(account.getAddress())) {
+            handleError("Address is an incorrect format");
+            return;
+        }
+
+        if (!account.setCity(txtCityAccount.getText())) {
+            handleError("City is an incorrect format");
+            return;
+        }
+
         if (!accountDAO.addAccount(account)) {
             handleError("Database error");
             return;
         }
+
         this.stage.setScene(new Accounts().AccountList(this.stage));
     }
 

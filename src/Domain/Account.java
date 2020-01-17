@@ -1,6 +1,8 @@
 package Domain;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Account {
     private String email;
@@ -38,7 +40,14 @@ public class Account {
      */
     public boolean setEmail(String email) {
         // Needing to check if the string is not empty.
+        Pattern p = Pattern.compile("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$");
+        Matcher m = p.matcher(email);
+
         if (email.isEmpty()) {
+            return false;
+        }
+
+        if (!m.find()){
             return false;
         }
         this.email = email;

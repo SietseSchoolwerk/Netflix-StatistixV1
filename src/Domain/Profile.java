@@ -62,7 +62,7 @@ public class Profile {
      * @return a boolean with the status of changing the age. Can be succesfull if true and unsucessful if false.
      */
     public boolean setAge(int age) {
-        if (age == 0) {
+        if (age == 0 || age < 0) {
             return false;
         }
         this.age = age;
