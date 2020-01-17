@@ -9,24 +9,22 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 
-/*
-
-    Deze class selecteerd data uit de Episode table.
-    Vervolgens word met deze data een Episode object uit de Domain package gemaakt\
-    en gereturned.
-
- */
-
 
 public class EpisodeDAO {
     private Connection connection;
     private DatabaseConnection databaseConnection = new DatabaseConnection();
 
+    // Default constructor for the EpisodeDAO class
     public EpisodeDAO() {
         this.connection = databaseConnection.getConn();
     }
 
 
+    /**
+     * Get an Episode object for a given ProgramId
+     * @param ProgramId
+     * @return an Episode object
+     */
     public Episode getEpisode(int ProgramId) {
         try {
 
@@ -50,6 +48,11 @@ public class EpisodeDAO {
         return null;
     }
 
+    /**
+     * Get an ArrayList with all episodes in a series
+     * @param serie
+     * @return an ArrayList with all Episode objects in a series
+     */
     public ArrayList<Program> getAllEpisodes(String serie) {
         try {
 

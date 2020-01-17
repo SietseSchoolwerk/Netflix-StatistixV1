@@ -7,16 +7,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-/*
- * Deze class selecteerd data uit de Programs table.
- * Vervolgens word met deze data een Program object gemaakt\
- * en gereturned.
- */
+
+
 public class ProgramDAO {
 
     private Connection connection;
     private DatabaseConnection databaseConnection = new DatabaseConnection();
 
+    // Default constructor for the ProgramDAO class
     public ProgramDAO() { this.connection = databaseConnection.getConn(); }
 
     public Program getProgram(int ProgramId){

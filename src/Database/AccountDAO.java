@@ -10,36 +10,20 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 
-/*
-
-    Deze Class bevat alle methods die met de Account table te maken hebben.
-
-    De method: getAllAccounts geeft een ArrayList met Account objecten terug van \
-    de records in de database.
-
-    De method: getAccount geeft een Account object terug, met als attributen \
-    de records uit de database
-
-    De method: addAccount neemt een Account object en voegd de attributen van dit\
-    object toe als records in de database.
-
-    De method deleteAccount verwijderd records met als unique identifier de email
-
-    De method editAccount past een record in de database aan naar de nieuwe attributen\
-    van het bijbehorende object.
-
-
- */
-
 
 public class AccountDAO {
     private Connection connection;
     private DatabaseConnection databaseConnection = new DatabaseConnection();
 
+    // Default constructor for the AccountDAO class
     public AccountDAO() {
         this.connection = databaseConnection.getConn();
     }
 
+    /**
+     * Get an array of all the Accounts that are in the database.
+     * @return the ArrayList with Account objects
+     */
     public ArrayList<Account> getAllAccounts() {
         String sql = "SELECT * FROM Account;";
 
@@ -57,6 +41,10 @@ public class AccountDAO {
         return null;
     }
 
+    /**
+     * Gets all of the account that have one profile.
+     * @return an ArrayList with the accounts that match the query
+     */
     public ArrayList<Account> getAllAccountsWithOneProfile() {
         String sql = "SELECT Account.Email, Password, Subscriber, Address, City FROM Profile " +
                                     "INNER JOIN Account ON Account.Email = Profile.Email " +
@@ -77,6 +65,11 @@ public class AccountDAO {
         return null;
     }
 
+    /**
+     * Executes a query that gets all watched movies for account.
+     * @param email
+     * @return an ArrayList with Program objects that have been watched
+     */
     public ArrayList<Program> getAllWatchedMovies(String email) {
         String sql = "SELECT * FROM Watched " +
                 "INNER JOIN Programma " +
@@ -105,6 +98,11 @@ public class AccountDAO {
         return null;
     }
 
+    /**
+     * Returns an Account object for a given email.
+     * @param email
+     * @return an Account object
+     */
     public Account getAccount(String email){
 
         try{
@@ -135,6 +133,11 @@ public class AccountDAO {
         }
     }
 
+    /**
+     * Gets an account object, and puts all of the attributes in the database.
+     * @param account
+     * @return
+     */
     public boolean addAccount(Account account){
         try{
             PreparedStatement pdo = this.connection.prepareStatement(
@@ -156,6 +159,11 @@ public class AccountDAO {
 
     }
 
+    /**
+     * Deletes an account from the database for a given email.
+     * @param email
+     * @return
+     */
     public boolean deleteAccount(String email){
         String sql = "DELETE Account WHERE Email = ?;";
 
@@ -171,6 +179,11 @@ public class AccountDAO {
 
     }
 
+    /**
+     * Takes an object and edits the table in the database to the new attributes.
+     * @param newAccount
+     * @return
+     */
     public boolean editAccount(Account newAccount) {
         String sql = "UPDATE Account SET Password=?,Subscriber=?,Address=?,City=? WHERE Email=?";
 

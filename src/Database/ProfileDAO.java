@@ -8,28 +8,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-    /*
-
-    Deze Class bevat alle methods die met de Profile table te maken hebben.
-
-    De method: addProfile neemt een Profile object en voegd de attributen van dit\
-    object toe als records in de database.
-
-    De method deleteProfile verwijderd records
-
-    De method editProfile past een record in de database aan naar de nieuwe attributen\
-    van het bijbehorende object.
-     */
 
 public class ProfileDAO {
 
     private Connection connection;
     private DatabaseConnection databaseConnection = new DatabaseConnection();
 
+   //Default constructor for the ProfileDAO class
     public ProfileDAO() {
         this.connection = databaseConnection.getConn();
     }
 
+    /**
+     * Get all profiles for an account (by a given email)
+     * @param email
+     * @return an ArrayList with Profile objects
+     */
     public ArrayList<Profile> getAllProfiles(String email) {
         String sql = "SELECT * FROM Profile WHERE Email=?;";
 
@@ -49,6 +43,11 @@ public class ProfileDAO {
         return null;
     }
 
+    /**
+     * Get a profile for a given name
+     * @param name
+     * @return a Profile object
+     */
     public Profile getProfile(String name) {
         try {
             PreparedStatement pdo = connection.prepareStatement(
@@ -75,6 +74,11 @@ public class ProfileDAO {
     }
 
 
+    /**
+     * get the email address for a given profileId
+     * @param profileId
+     * @return the string with the email address
+     */
     public String getEmailWithProfileId(int profileId) {
         String sql = "SELECT * FROM Profile WHERE ProfileId=?;";
 
@@ -93,6 +97,11 @@ public class ProfileDAO {
     }
 
 
+    /**
+     * Count how many profiles an account has (for a given email)
+     * @param Email
+     * @return an int with the number of profiles
+     */
     public int profileCounter(String Email) {
         String sql = "SELECT count(*) as result FROM Profile WHERE Email=?;";
 
