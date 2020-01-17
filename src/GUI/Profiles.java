@@ -84,14 +84,14 @@ public class Profiles {
             btnDelete.setOnAction(controller);
 
 
-            Button btnWatch = new Button("Bekijk programma");
+            Button btnWatch = new Button("Watch program");
             btnWatch.setLayoutX(910);
             btnWatch.setLayoutY(13);
             btnWatch.setMinWidth(142);
             btnWatch.getStyleClass().add("accountButtons");
             btnWatch.setOnAction(e -> stage.setScene(new WatchedGUI().watchMovie(stage, email, profile)));
 
-            Button btnWatchedPreviously = new Button("Bekeken programma");
+            Button btnWatchedPreviously = new Button("Watched programs");
             btnWatchedPreviously.setLayoutX(910);
             btnWatchedPreviously.setLayoutY(55);
             btnWatchedPreviously.setMinWidth(142);
