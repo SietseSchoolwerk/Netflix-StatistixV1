@@ -34,16 +34,24 @@ public class Profile {
         return name;
     }
 
-    public void setName(String name) {
+    public boolean setName(String name) {
+        if (name.isEmpty()) {
+            return false;
+        }
         this.name = name;
+        return true;
     }
 
     public int getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public boolean setAge(int age) {
+        if (age == 0) {
+            return false;
+        }
         this.age = age;
+        return true;
     }
 
     public String getEmail() {
