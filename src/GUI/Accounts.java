@@ -47,12 +47,14 @@ public class Accounts {
         scrollPane.setStyle("-fx-background: #383838;");
 
         int count = 0;
+        /** To load all the accounts in a scroll list within the application */
         for (Account accounts : accountList) {
             count++;
             AnchorPane accountPane = new AnchorPane();
             accountPane.setMinHeight(110);
             accountPane.setMinWidth(1160);
 
+            /** Changing the color of the row every time */
             if ((count % 2) == 0) {
                 accountPane.setStyle("-fx-background-color: #4d4d4d;");
             } else {
@@ -138,6 +140,7 @@ public class Accounts {
         lblPageTitle.setLayoutX(407);
         lblPageTitle.getStyleClass().add("lblPageTitle");
 
+        /** A button sending us to the create new account page. */
         Button btnAddNewAccount = new Button("New Account");
         btnAddNewAccount.getStyleClass().add("accountButtons");
         btnAddNewAccount.getStyleClass().add("newButton");
@@ -145,6 +148,7 @@ public class Accounts {
         btnAddNewAccount.setLayoutX(1444);
         btnAddNewAccount.setOnAction(e -> stage.setScene(addAccount(stage)));
 
+        /** Creating a button to send us to the page with all the accounts with one profile */
         Button btnAccountsWithOneProfile = new Button("Accounts with 1 profile");
         btnAccountsWithOneProfile.getStyleClass().add("accountButtons");
         btnAccountsWithOneProfile.getStyleClass().add("newButton");
@@ -160,6 +164,17 @@ public class Accounts {
         return scene;
     }
 
+
+    /**
+     * This function sends a scene
+     * This scence is the editing of the account
+     * @param stage
+     * @param account
+     * @return scene of the edit account
+     *
+     * This is a smaller scene and not 1600 pixels wide, since this is not needed in this case
+     *
+     */
     public Scene editAccount(Stage stage, Account account) {
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
@@ -213,6 +228,9 @@ public class Accounts {
         txtCity.setLayoutX(666);
         txtCity.setLayoutY(173);
 
+
+        //Creating a new controller
+        //Assigning all data to the controller.
         AccountController controller = new AccountController(stage, account);
         controller.setTxtPasswordAccount(txtPassword);
         controller.setTxtSubscriberAccount(txtSubscriber);
@@ -225,6 +243,8 @@ public class Accounts {
         btnSubmit.setMinWidth(149);
         btnSubmit.setLayoutY(258);
         btnSubmit.getStyleClass().add("accountButtons");
+
+        //Attaching the controller to the onAction.
         btnSubmit.setOnAction(controller);
 
         Label lblPageTitle = new Label("Edit account: ");
@@ -245,6 +265,12 @@ public class Accounts {
         return scene;
     }
 
+    /**
+     * This returns the scene of add account
+     * This is again a smaller view so not 1600 pixels wide
+     * @param stage
+     * @return a scene of add account.
+     */
     public Scene addAccount(Stage stage) {
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
@@ -307,6 +333,8 @@ public class Accounts {
         txtCity.setLayoutX(666);
         txtCity.setLayoutY(213);
 
+        //Creates a new instance of the accountcontroller
+        //Attaching of all the variables to the controller.
         AccountController controller = new AccountController(stage);
         controller.setTxtEmailAccount(txtEmail);
         controller.setTxtPasswordAccount(txtPassword);
@@ -321,6 +349,7 @@ public class Accounts {
         btnSubmit.setMinWidth(149);
         btnSubmit.setLayoutY(258);
         btnSubmit.getStyleClass().add("accountButtons");
+        //Binding the controller to the onaction of the add button.
         btnSubmit.setOnAction(controller);
 
         Label lblPageTitle = new Label("Add account");
@@ -337,6 +366,11 @@ public class Accounts {
         return scene;
     }
 
+    /**
+     * Displaying all the accounts with only one profile
+     * @param stage
+     * @return a scene with all the accounts with only one profile.
+     */
     public Scene accountsWithOneProfile(Stage stage) {
 
         AnchorPane mainPane = new AnchorPane();
@@ -420,6 +454,12 @@ public class Accounts {
         return scene;
     }
 
+    /**
+     * Returns the scene of a list of all the watched movies within an account
+     * @param stage
+     * @param email
+     * @return a scene with a list of all watched movies.
+     */
     public Scene watchedMovies(Stage stage, String email) {
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
