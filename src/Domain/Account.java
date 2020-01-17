@@ -10,6 +10,15 @@ public class Account {
     private String city;
     private ArrayList<Profile> profilesList;
 
+
+    /**
+     * Default constructor for account.
+     * @param email
+     * @param password
+     * @param subscriber
+     * @param address
+     * @param city
+     */
     public Account(String email, String password, String subscriber, String address, String city) {
         this.email = email;
         this.password = password;
@@ -22,59 +31,101 @@ public class Account {
         return email;
     }
 
+    /**
+     * Setting the email of the account of this instance
+     * @param email
+     * @return boolean to indicate if it was succesfull
+     */
     public boolean setEmail(String email) {
+        // Needing to check if the string is not empty.
         if (email.isEmpty()) {
             return false;
         }
         this.email = email;
-        return true;
+        return true; // Return Succesfull
     }
 
+    /**
+     * Returns the password.
+     * @return String Password of this instance of account
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Setting the password of the current instance of account
+     * @param password
+     * @return boolean indicates if its been succesfull or not.
+     */
     public boolean setPassword(String password) {
+        // Needing to check if the string is not empty.
         if (password.isEmpty()) {
             return false;
         }
         this.password = password;
-        return true;
+        return true; //Password has been succesfully changed
     }
 
+    /**
+     * Returns the subscriber of this current instance of account.
+     * @return String subscriber
+     */
     public String getSubscriber() {
         return subscriber;
     }
 
+    /**
+     * Sets subscriber of the current instance of account.
+     * @param subscriber
+     * @return boolean to indicate if it has been succesfully changed.
+     */
     public boolean setSubscriber(String subscriber) {
+        // Needing to check if the string is not empty.
         if (subscriber.isEmpty()) {
             return false;
         }
         this.subscriber = subscriber;
-        return true;
+        return true; // Subscriber succesfully changed
     }
 
+    /**
+     * Returns address of the current instance of account.
+     * @return String Address
+     */
     public String getAddress() {
         return address;
     }
 
+
+    /**
+     * Set address of the current instance of the user
+     * @param address
+     * @return boolean, to indicate if it has been succesfull.
+     */
     public boolean setAddress(String address) {
+        // Needing to check if the string is not empty.
         if (address.isEmpty()) {
             return false;
         }
         this.address = address;
-        return true;
+        return true; // The data has been changed.
     }
 
+    /**
+     * Get the city of the current instance of the class
+     * @return string city
+     */
     public String getCity() {
         return city;
     }
 
     public boolean setCity(String city) {
+        // Needing to check if the string is not empty.
         if (city.isEmpty()) {
             return false;
         }
         this.city = city;
-        return true;
+        return true; //Data has been changed.
     }
 }
