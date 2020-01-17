@@ -20,6 +20,13 @@ import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 public class Profiles {
+
+    /**
+     * Returns a scene with a list of all profiles.
+     * @param stage
+     * @param email
+     * @return list with all the profiles.
+     */
     public Scene profileList(Stage stage, String email){
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
@@ -134,6 +141,13 @@ public class Profiles {
         return scene;
     }
 
+
+    /**
+     * A scene to edit the profile
+     * @param stage
+     * @param profile the profile to edit
+     * @return scene
+     */
     public Scene editProfile(Stage stage, Profile profile) {
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
@@ -195,6 +209,13 @@ public class Profiles {
         return scene;
     }
 
+
+    /**
+     * Add profile scene
+     * @param stage
+     * @param email the email of the account to attach the profile to
+     * @return a scene
+     */
     public Scene addProfile(Stage stage, String email) {
         AnchorPane mainPane = new AnchorPane();
         mainPane.prefHeight(800.0);
