@@ -136,7 +136,7 @@ public class AccountDAO {
     /**
      * Gets an account object, and puts all of the attributes in the database.
      * @param account
-     * @return
+     * @return true if query executed without errors. False if there were exceptions.
      */
     public boolean addAccount(Account account){
         try{
@@ -162,7 +162,7 @@ public class AccountDAO {
     /**
      * Deletes an account from the database for a given email.
      * @param email
-     * @return
+     * @return true if query executed without errors. False if there were exceptions.
      */
     public boolean deleteAccount(String email){
         String sql = "DELETE Account WHERE Email = ?;";
@@ -182,7 +182,7 @@ public class AccountDAO {
     /**
      * Takes an object and edits the table in the database to the new attributes.
      * @param newAccount
-     * @return
+     * @return true if query executed without errors. False if there were exceptions.
      */
     public boolean editAccount(Account newAccount) {
         String sql = "UPDATE Account SET Password=?,Subscriber=?,Address=?,City=? WHERE Email=?";
