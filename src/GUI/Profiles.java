@@ -186,6 +186,7 @@ public class Profiles {
         ProfileController controller = new ProfileController(stage, profile);
         controller.setTxtAgeProfile(txtAge);
         controller.setTxtNameProfile(txtName);
+        controller.setEmail(profile.getEmail());
 
         Button btnSubmit = new Button("Submit changes");
         btnSubmit.setId("btnSubmit");

@@ -82,6 +82,10 @@ public class ProfileController implements EventHandler<ActionEvent> {
                 handleError("Database error");
                 return;
             }
+            else if (Integer.parseInt(this.txtPercentage.getText()) > 100 || Integer.parseInt(this.txtPercentage.getText()) < 0){
+                handleError("Please only enter numbers between 0 and 100");
+                return;
+            }
         } catch (Exception e) {
             handleError("Please only enter numbers");
             return;
@@ -97,6 +101,9 @@ public class ProfileController implements EventHandler<ActionEvent> {
             if (!dao.setWatched(this.profile, programDao.getProgram(this.programId), Integer.parseInt(this.txtPercentage.getText()))) {
                 handleError("Database error");
                 return;
+            } else if (Integer.parseInt(this.txtPercentage.getText()) > 100 || Integer.parseInt(this.txtPercentage.getText()) < 0){
+                    handleError("Please only enter numbers between 0 and 100");
+                    return;
             }
         } catch (Exception e) {
             handleError("Please only enter numbers");
@@ -105,9 +112,43 @@ public class ProfileController implements EventHandler<ActionEvent> {
         this.stage.setScene(new Profiles().profileList(this.stage, this.email));
     }
 
+    public boolean checkString(String string, String regex){
+        if(string.matches(regex)){
+            return true;
+        }
+        return false;
+    }
+
     public void handleAdd() {
         ProfileDAO dao = new ProfileDAO();
+
+        if (dao.getAllProfiles(email).size() == 5){
+            handleError("You can only have 5 profiles per account delete one or edit one");
+            return;
+        }
+
+        if (!checkString(txtNameProfile.getText(), "[a-zA-Z]+$")){
+            handleError("Please enter a profile name without numbers");
+            return;
+        }
+
+        if (!checkString(txtAgeProfile.getText(), ("\\d+(\\.\\d+)?"))) {
+            handleError("Please enter numbers as age");
+            return;
+
+        } else if (Integer.parseInt(txtAgeProfile.getText())== 0 || Integer.parseInt(txtAgeProfile.getText()) < 0){
+            handleError("Please number must be greater than 0");
+            return;
+        }
+
         Profile profile = new Profile(txtNameProfile.getText(), Integer.parseInt(txtAgeProfile.getText()), this.email);
+
+        if (dao.getProfile(profile.getName(), email).getName() != null){
+            if (dao.getProfile(profile.getName(), email).getName().equals(txtNameProfile.getText())){
+                handleError("Profile name already exists on this account");
+                return;
+            }
+        }
 
         if (!dao.addProfile(profile)) {
             handleError("Database error");
@@ -117,6 +158,16 @@ public class ProfileController implements EventHandler<ActionEvent> {
     }
 
     public void handleEdit() {
+        if (!checkString(txtNameProfile.getText(), "[a-zA-Z]+$")){
+            handleError("Please enter a profile name without numbers");
+            return;
+        }
+
+        if (!checkString(txtAgeProfile.getText(), ("\\d+(\\.\\d+)?"))) {
+            handleError("Please enter numbers as age");
+            return;
+        }
+
         if (!this.profile.setAge(Integer.parseInt(txtAgeProfile.getText()))) {
             handleError("Age is an incorrect format");
             return;
@@ -126,7 +177,18 @@ public class ProfileController implements EventHandler<ActionEvent> {
             return;
         }
 
+        ProfileDAO dao = new ProfileDAO();
+        if (dao.getProfile(profile.getName(), email).getName() != null){
+            if (dao.getProfile(profile.getName(), email).getName().equals(txtNameProfile.getText())){
+                handleError("Profile name already exists on this account");
+                return;
+            }
+        }
+
         Boolean result = new ProfileDAO().editProfile(this.profile);
+
+
+
         if (!result) {
             handleError("Database error");
             return;
@@ -147,23 +209,15 @@ public class ProfileController implements EventHandler<ActionEvent> {
             return;
         } else {
             if (!dao.deleteProfile(this.profile)) {
-                handleError("City is an incorrect format");
+                handleError("Database Error");
                 return;
             }
         }
         this.stage.setScene(new Profiles().profileList(this.stage, attachedEmail));
     }
 
-    public TextField getTxtNameProfile() {
-        return txtNameProfile;
-    }
-
     public void setTxtNameProfile(TextField txtNameProfile) {
         this.txtNameProfile = txtNameProfile;
-    }
-
-    public TextField getTxtAgeProfile() {
-        return txtAgeProfile;
     }
 
     public void setTxtAgeProfile(TextField txtAgeProfile) {
@@ -178,32 +232,16 @@ public class ProfileController implements EventHandler<ActionEvent> {
         this.email = email;
     }
 
-    public Profile getProfile() {
-        return profile;
-    }
-
     public void setProfile(Profile profile) {
         this.profile = profile;
-    }
-
-    public int getProgramId() {
-        return programId;
     }
 
     public void setProgramId(int programId) {
         this.programId = programId;
     }
 
-    public TextField getTxtPercentage() {
-        return txtPercentage;
-    }
-
     public void setTxtPercentage(TextField txtPercentage) {
         this.txtPercentage = txtPercentage;
-    }
-
-    public Watched getWatch() {
-        return watch;
     }
 
     public void setWatch(Watched watch) {

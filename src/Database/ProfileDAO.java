@@ -49,24 +49,30 @@ public class ProfileDAO {
         return null;
     }
 
-    public Profile getProfile(String name) {
+    public Profile getProfile(String name, String email) {
         try {
             PreparedStatement pdo = connection.prepareStatement(
-                    "SELECT ProfileId,name,age,Email FROM Profile WHERE Name=?"
+                    "SELECT * FROM Profile WHERE Email=? AND Name = ?"
             );
-            pdo.setString(1, name);
+            pdo.setString(1, email);
+            pdo.setString(2, name);
             ResultSet rs = pdo.executeQuery();
 
 
-            Object[] arr = new Object[2];
+            Object[] arr = new Object[4];
 
             while (rs.next()) {
-                arr[0] = rs.getInt(0); //Id
-                arr[1] = rs.getString(1); //name
-                arr[2] = rs.getInt(2); // age
+                arr[0] = rs.getInt(1); //Id
+                arr[1] = rs.getString(2); // email
+                arr[2] = rs.getString(3); //name
+                arr[3] = rs.getInt(4); // age
             }
 
-            return new Profile(Integer.parseInt((String) arr[0]), (String) arr[1], (int) arr[2], (String) arr[3]);
+            if (arr[1] == null){
+                arr[0] = 0;
+                arr[3] = 0;
+            }
+            return new Profile((int)arr[0], (String)arr[2], (int)arr[3], (String)arr[1]);
 
         } catch (Exception e) {
             e.printStackTrace();
