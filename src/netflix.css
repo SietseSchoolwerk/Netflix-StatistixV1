@@ -7,17 +7,17 @@
     -fx-min-height: 97.0;
 }
 
-.accountLabels {
+.labels {
     -fx-text-fill: WHITE;
     -fx-font-size: 10pt Ariel;
 }
 
-.accountEmail {
+.headLabels {
     -fx-text-fill: WHITE;
     -fx-font-size: 15pt Ariel;
 }
 
-.accountButtons{
+.buttons{
     -fx-background-color: #383838;
     -fx-alignment: CENTER;
     -fx-text-fill: WHITE;
@@ -25,7 +25,7 @@
         -fx-border-color:WHITE;
 }
 
-.accountButtons:hover{
+.buttons:hover{
     -fx-background-color: #4d4d4d;
     -fx-alignment: CENTER;
     -fx-text-fill: WHITE;

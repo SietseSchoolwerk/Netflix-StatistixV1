@@ -59,12 +59,12 @@ public class Series {
             }
 
             Label lblTitle = new Label(serie.getTitle());
-            lblTitle.getStyleClass().add("accountEmail");
+            lblTitle.getStyleClass().add("headLabels");
             lblTitle.setLayoutX(65);
             lblTitle.setLayoutY(14);
 
-            Label lblRecommend = new Label(serie.getRecommend());
-            lblRecommend.getStyleClass().add("accountLabels");
+            Label lblRecommend = new Label("Similar to: " +serie.getRecommend());
+            lblRecommend.getStyleClass().add("labels");
             lblRecommend.setLayoutY(37);
             lblRecommend.setLayoutX(65);
 
@@ -79,7 +79,7 @@ public class Series {
             btnAvgWatchedOfSerie.setLayoutX(910);
             btnAvgWatchedOfSerie.setLayoutY(13);
             btnAvgWatchedOfSerie.setMinWidth(142);
-            btnAvgWatchedOfSerie.getStyleClass().add("accountButtons");
+            btnAvgWatchedOfSerie.getStyleClass().add("buttons");
             btnAvgWatchedOfSerie.setOnAction(e -> stage.setScene(new Series().avgWatchedEpisodes(stage, serie.getTitle())));
 
             accountPane.getChildren().addAll(lblTitle, lblRecommend, btnAvgWatchedOfSerie);
@@ -146,12 +146,12 @@ public class Series {
             }
 
             Label lblTitle = new Label(serie.getTitle());
-            lblTitle.getStyleClass().add("accountEmail");
+            lblTitle.getStyleClass().add("headLabels");
             lblTitle.setLayoutX(65);
             lblTitle.setLayoutY(14);
 
-            Label lblRecommend = new Label(serie.getRecommend());
-            lblRecommend.getStyleClass().add("accountLabels");
+            Label lblRecommend = new Label("Similar to " + serie.getRecommend());
+            lblRecommend.getStyleClass().add("labels");
             lblRecommend.setLayoutY(37);
             lblRecommend.setLayoutX(65);
 
@@ -166,7 +166,7 @@ public class Series {
             btnAvgWatchedOfSerie.setLayoutX(910);
             btnAvgWatchedOfSerie.setLayoutY(13);
             btnAvgWatchedOfSerie.setMinWidth(142);
-            btnAvgWatchedOfSerie.getStyleClass().add("accountButtons");
+            btnAvgWatchedOfSerie.getStyleClass().add("buttons");
             btnAvgWatchedOfSerie.setOnAction(e -> stage.setScene(new Series().avgWatchedEpisodesWithAccount(stage, serie.getTitle(), email)));
 
             accountPane.getChildren().addAll(lblTitle, lblRecommend, btnAvgWatchedOfSerie);
@@ -234,37 +234,37 @@ public class Series {
             }
 
             Label lblTitle = new Label(program.getTitle());
-            lblTitle.getStyleClass().add("accountEmail");
+            lblTitle.getStyleClass().add("headLabels");
             lblTitle.setLayoutX(65);
             lblTitle.setLayoutY(14);
 
-            Label lblGenre = new Label((program.getGenre()));
-            lblGenre.getStyleClass().add("accountLabels");
+            Label lblGenre = new Label("Genre: "+ (program.getGenre()));
+            lblGenre.getStyleClass().add("labels");
             lblGenre.setLayoutY(37);
             lblGenre.setLayoutX(65);
 
-            Label lblLan = new Label(program.getLanguage());
-            lblLan.getStyleClass().add("accountLabels");
+            Label lblLan = new Label("Language: "+ program.getLanguage());
+            lblLan.getStyleClass().add("labels");
             lblLan.setLayoutY(54);
             lblLan.setLayoutX(65);
 
-            Label lblAge = new Label(Integer.toString(program.getAge()));
-            lblAge.getStyleClass().add("accountLabels");
+            Label lblAge = new Label("Age: "+ program.getAge());
+            lblAge.getStyleClass().add("labels");
             lblAge.setLayoutY(73);
             lblAge.setLayoutX(65);
 
             Label lblPlaytimeInfo = new Label("Playtime in minutes: ");
-            lblPlaytimeInfo.getStyleClass().add("accountLabels");
+            lblPlaytimeInfo.getStyleClass().add("labels");
             lblPlaytimeInfo.setLayoutY(54);
             lblPlaytimeInfo.setLayoutX(253);
 
             Label lblPlaytime = new Label(program.getLengthOfTime());
-            lblPlaytime.getStyleClass().add("accountLabels");
+            lblPlaytime.getStyleClass().add("labels");
             lblPlaytime.setLayoutY(54);
             lblPlaytime.setLayoutX(390);
 
             Label lblProfilesFullyWatched = new Label(serieDAO.getAvgWatchedPercentageFromSeriePerEpisode(program.getProgramId()) +" % average watched of total time");
-            lblProfilesFullyWatched.getStyleClass().add("accountLabels");
+            lblProfilesFullyWatched.getStyleClass().add("labels");
             lblProfilesFullyWatched.setLayoutY(54);
             lblProfilesFullyWatched.setLayoutX(910);
 
@@ -334,37 +334,37 @@ public class Series {
             }
 
             Label lblTitle = new Label(program.getTitle());
-            lblTitle.getStyleClass().add("accountEmail");
+            lblTitle.getStyleClass().add("headLabels");
             lblTitle.setLayoutX(65);
             lblTitle.setLayoutY(14);
 
-            Label lblGenre = new Label((program.getGenre()));
-            lblGenre.getStyleClass().add("accountLabels");
+            Label lblGenre = new Label("Genre: "+ program.getGenre());
+            lblGenre.getStyleClass().add("labels");
             lblGenre.setLayoutY(37);
             lblGenre.setLayoutX(65);
 
-            Label lblLan = new Label(program.getLanguage());
-            lblLan.getStyleClass().add("accountLabels");
+            Label lblLan = new Label("Language: "+ program.getLanguage());
+            lblLan.getStyleClass().add("labels");
             lblLan.setLayoutY(54);
             lblLan.setLayoutX(65);
 
-            Label lblAge = new Label(Integer.toString(program.getAge()));
-            lblAge.getStyleClass().add("accountLabels");
+            Label lblAge = new Label("Age: "+ program.getAge());
+            lblAge.getStyleClass().add("labels");
             lblAge.setLayoutY(73);
             lblAge.setLayoutX(65);
 
             Label lblPlaytimeInfo = new Label("Playtime in minutes: ");
-            lblPlaytimeInfo.getStyleClass().add("accountLabels");
+            lblPlaytimeInfo.getStyleClass().add("labels");
             lblPlaytimeInfo.setLayoutY(54);
             lblPlaytimeInfo.setLayoutX(253);
 
             Label lblPlaytime = new Label(program.getLengthOfTime());
-            lblPlaytime.getStyleClass().add("accountLabels");
+            lblPlaytime.getStyleClass().add("labels");
             lblPlaytime.setLayoutY(54);
             lblPlaytime.setLayoutX(390);
 
             Label lblProfilesFullyWatched = new Label(serieDAO.getAvgWatchedPercentageFromSeriePerEpisodeWithAccount(program.getProgramId(), email) +" % average watched of total time");
-            lblProfilesFullyWatched.getStyleClass().add("accountLabels");
+            lblProfilesFullyWatched.getStyleClass().add("labels");
             lblProfilesFullyWatched.setLayoutY(54);
             lblProfilesFullyWatched.setLayoutX(910);
 

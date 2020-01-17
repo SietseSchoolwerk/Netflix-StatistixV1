@@ -59,37 +59,37 @@ public class Movies {
             }
 
             Label lblTitle = new Label(program.getTitle());
-            lblTitle.getStyleClass().add("accountEmail");
+            lblTitle.getStyleClass().add("headLabels");
             lblTitle.setLayoutX(65);
             lblTitle.setLayoutY(14);
 
-            Label lblGenre = new Label((program.getGenre()));
-            lblGenre.getStyleClass().add("accountLabels");
+            Label lblGenre = new Label("Genre: " +program.getGenre());
+            lblGenre.getStyleClass().add("labels");
             lblGenre.setLayoutY(37);
             lblGenre.setLayoutX(65);
 
-            Label lblLan = new Label(program.getLanguage());
-            lblLan.getStyleClass().add("accountLabels");
+            Label lblLan = new Label("Language: " +program.getLanguage());
+            lblLan.getStyleClass().add("labels");
             lblLan.setLayoutY(54);
             lblLan.setLayoutX(65);
 
-            Label lblAge = new Label(Integer.toString(program.getAge()));
-            lblAge.getStyleClass().add("accountLabels");
+            Label lblAge = new Label("Age: " +(program.getAge()));
+            lblAge.getStyleClass().add("labels");
             lblAge.setLayoutY(73);
             lblAge.setLayoutX(65);
 
             Label lblPlaytimeInfo = new Label("Playtime in minutes: ");
-            lblPlaytimeInfo.getStyleClass().add("accountLabels");
+            lblPlaytimeInfo.getStyleClass().add("labels");
             lblPlaytimeInfo.setLayoutY(54);
             lblPlaytimeInfo.setLayoutX(253);
 
             Label lblPlaytime = new Label(program.getLengthOfTime());
-            lblPlaytime.getStyleClass().add("accountLabels");
+            lblPlaytime.getStyleClass().add("labels");
             lblPlaytime.setLayoutY(54);
             lblPlaytime.setLayoutX(390);
 
             Label lblAvgWatchPerEpisode = new Label(filmDAO.getFilmFullyWatched(program.getProgramId()) +" watcher(s) watched this movie 100%");
-            lblAvgWatchPerEpisode.getStyleClass().add("accountLabels");
+            lblAvgWatchPerEpisode.getStyleClass().add("labels");
             lblAvgWatchPerEpisode.setLayoutY(50);
             lblAvgWatchPerEpisode.setLayoutX(910);
 
@@ -112,7 +112,7 @@ public class Movies {
         lblPageTitle.getStyleClass().add("lblPageTitle");
 
         Button btnFilmAgeUnder16 = new Button("See film with age under 16 and longest watch time");
-        btnFilmAgeUnder16.getStyleClass().add("accountButtons");
+        btnFilmAgeUnder16.getStyleClass().add("buttons");
         btnFilmAgeUnder16.getStyleClass().add("newButton");
         btnFilmAgeUnder16.setLayoutY(2);
         btnFilmAgeUnder16.setLayoutX(1114);
@@ -163,32 +163,32 @@ public class Movies {
 
 
         Label lblTitle = new Label(movie.getTitle());
-        lblTitle.getStyleClass().add("accountEmail");
+        lblTitle.getStyleClass().add("headLabels");
         lblTitle.setLayoutX(65);
         lblTitle.setLayoutY(14);
 
-        Label lblGenre = new Label((movie.getGenre()));
-        lblGenre.getStyleClass().add("accountLabels");
+        Label lblGenre = new Label("Genre: " +(movie.getGenre()));
+        lblGenre.getStyleClass().add("labels");
         lblGenre.setLayoutY(37);
         lblGenre.setLayoutX(65);
 
-        Label lblLan = new Label(movie.getLanguage());
-        lblLan.getStyleClass().add("accountLabels");
+        Label lblLan = new Label("Language: " +movie.getLanguage());
+        lblLan.getStyleClass().add("labels");
         lblLan.setLayoutY(54);
         lblLan.setLayoutX(65);
 
-        Label lblAge = new Label(Integer.toString(movie.getAge()));
-        lblAge.getStyleClass().add("accountLabels");
+        Label lblAge = new Label("Age: " + movie.getAge());
+        lblAge.getStyleClass().add("labels");
         lblAge.setLayoutY(73);
         lblAge.setLayoutX(65);
 
         Label lblPlaytimeInfo = new Label("Playtime in minutes: ");
-        lblPlaytimeInfo.getStyleClass().add("accountLabels");
+        lblPlaytimeInfo.getStyleClass().add("labels");
         lblPlaytimeInfo.setLayoutY(54);
         lblPlaytimeInfo.setLayoutX(253);
 
         Label lblPlaytime = new Label(movie.getLengthOfTime());
-        lblPlaytime.getStyleClass().add("accountLabels");
+        lblPlaytime.getStyleClass().add("labels");
         lblPlaytime.setLayoutY(54);
         lblPlaytime.setLayoutX(390);
 
