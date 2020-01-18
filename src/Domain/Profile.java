@@ -1,5 +1,7 @@
 package Domain;
 
+import java.text.ParseException;
+
 public class Profile {
     private int profileId;
     private String name;
@@ -64,14 +66,14 @@ public class Profile {
      * @param age
      * @return a boolean with the status of changing the age. Can be succesfull if true and unsucessful if false.
      */
-    public boolean checkAge(int age) {
-        if (!checkString(Integer.toString(age), "\\d+(\\.\\d+)?")){
+    public boolean checkAge(String age) {
+        if (!checkString(age , "\\d+(\\.\\d+)?")){
             return false;
         }
-        if (age == 0 || age < 0) {
+        if (Integer.parseInt(age) == 0 || Integer.parseInt(age) < 0) {
             return false;
         }
-        this.age = age;
+        this.age = Integer.parseInt(age);
         return true;
     }
 

@@ -88,7 +88,7 @@ class ProfileTest {
         int inValidAge = -1;
 
         //Act
-        boolean result = profile.checkAge(inValidAge);
+        boolean result = profile.checkAge(Integer.toString(inValidAge));
 
         //Assert
         Assertions.assertFalse(result);
@@ -107,7 +107,7 @@ class ProfileTest {
         int inValidAge = 0;
 
         //Act
-        boolean result = profile.checkAge(inValidAge);
+        boolean result = profile.checkAge(Integer.toString(inValidAge));
 
         //Assert
         Assertions.assertFalse(result);
@@ -125,7 +125,7 @@ class ProfileTest {
         int validAge = 1;
 
         //Act
-        boolean result = profile.checkAge(validAge);
+        boolean result = profile.checkAge(Integer.toString(validAge));
 
         //Assert
         Assertions.assertTrue(result);

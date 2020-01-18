@@ -166,11 +166,12 @@ public class ProfileDAO {
         try {
             PreparedStatement pdo = this.connection.prepareStatement(
                     "  UPDATE Profile" +
-                            "  SET Name=?" +
-                            "  ,Age= ?"
+                            "  SET Name=? ,Age= ?" +
+                            "  WHERE Name = ?"
             );
             pdo.setString(1, NewName);
             pdo.setInt(2, NewAge);
+            pdo.setString(3, profile.getName());
             pdo.execute();
             return true;
         } catch (Exception e) {
