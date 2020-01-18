@@ -10,9 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 
 public class AccountController implements EventHandler<ActionEvent> {
     private TextField txtEmailAccount;
@@ -33,7 +30,7 @@ public class AccountController implements EventHandler<ActionEvent> {
     }
 
     /**
-     *
+     * Show a warning dialog
      * @param stage
      */
     public AccountController(Stage stage) {
