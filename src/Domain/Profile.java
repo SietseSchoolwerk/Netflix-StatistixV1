@@ -39,7 +39,10 @@ public class Profile {
      * @param name
      * @return boolean to indicate if the change was succesfull.
      */
-    public boolean setName(String name) {
+    public boolean checkName(String name) {
+        if (!checkString(name, "[a-zA-Z]+$")){
+            return false;
+        }
         // Need to check that the name that the user wants to set is not empty.
         if (name.isEmpty()) {
             return false;
@@ -61,7 +64,10 @@ public class Profile {
      * @param age
      * @return a boolean with the status of changing the age. Can be succesfull if true and unsucessful if false.
      */
-    public boolean setAge(int age) {
+    public boolean checkAge(int age) {
+        if (!checkString(Integer.toString(age), "\\d+(\\.\\d+)?")){
+            return false;
+        }
         if (age == 0 || age < 0) {
             return false;
         }
@@ -77,5 +83,12 @@ public class Profile {
      */
     public String getEmail() {
         return email;
+    }
+
+    public boolean checkString(String string, String regex){
+        if(string.matches(regex)){
+            return true;
+        }
+        return false;
     }
 }

@@ -92,6 +92,17 @@ public class Watched {
     }
 
     /**
+     * Checks watchedPercentage of the current instance of account.
+     * @return true or false
+     */
+    public boolean checkWatchedPercentage(int watchedPercentage) {
+        if (watchedPercentage <= 100 && watchedPercentage > 0){
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Returns episode of the current instance of account.
      * @return String episode
      */

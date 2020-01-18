@@ -43,13 +43,13 @@ public class Menu {
 
         Button movieBtn = new Button("Movies");
         movieBtn.setMnemonicParsing(false);
-        accountBtn.setId("movieBtn");
+        movieBtn.setId("movieBtn");
         movieBtn.getStyleClass().add("menuBtn");
         movieBtn.setOnAction(e -> stage.setScene(new Movies().movieList(stage)));
 
         Button serieBtn = new Button("Series");
         serieBtn.setMnemonicParsing(false);
-        accountBtn.setId("serieBtn");
+        serieBtn.setId("serieBtn");
         serieBtn.getStyleClass().add("menuBtn");
         serieBtn.setOnAction(e -> stage.setScene(new Series().serieList(stage)));
 

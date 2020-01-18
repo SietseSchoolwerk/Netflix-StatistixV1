@@ -54,13 +54,13 @@ public class ProfileController implements EventHandler<ActionEvent> {
         if (event.getSource().toString().toLowerCase().contains("button")) {
             btn = (Button) event.getTarget();
             if (btn.getId().equals("btnSubmit")) {
-                this.handleEdit();
+                this.handleEditProfile();
             } else if (btn.getId().equals("btnDelete")) {
-                this.handleDelete();
+                this.handleDeleteProfile();
             } else if (btn.getId().equals("btnAdd")) {
-                this.handleAdd();
+                this.handleAddProfile();
             } else if (btn.getId().equals("btnWatch")) {
-                this.handleWatch();
+                this.handleAddWatch();
             } else if (btn.getId().equals("btnUpdate")) {
                 this.handleUpdateWatched();
             } else if (btn.getId().equals("btnDeleteWatched")) {
@@ -80,7 +80,6 @@ public class ProfileController implements EventHandler<ActionEvent> {
         return;
     }
 
-
     /**
      * Delete a profile from the database
      */
@@ -98,9 +97,13 @@ public class ProfileController implements EventHandler<ActionEvent> {
      */
     public void handleUpdateWatched() {
         ProfileDAO dao = new ProfileDAO();
+        Watched watchedCheck = new Watched(0, null, null, null, 0 ,0,0, null, null);
         try {
             if (!dao.editWatched(watch.getWatchedId(), Integer.parseInt(this.txtPercentage.getText()))) {
                 handleError("Database error");
+                return;
+            } else if (!watchedCheck.checkWatchedPercentage(Integer.parseInt(this.txtPercentage.getText()))) {
+                handleError("Please only enter numbers between 1 and 100");
                 return;
             }
         } catch (Exception e) {
@@ -113,13 +116,18 @@ public class ProfileController implements EventHandler<ActionEvent> {
     /**
      * Handle adding a new watched to the database
      */
-    public void handleWatch() {
+    public void handleAddWatch() {
         ProfileDAO dao = new ProfileDAO();
         ProgramDAO programDao = new ProgramDAO();
 
+        Watched watchedCheck = new Watched(0, null, null, null, 0 ,0,0, null, null);
         try {
             if (!dao.setWatched(this.profile, programDao.getProgram(this.programId), Integer.parseInt(this.txtPercentage.getText()))) {
                 handleError("Database error");
+                return;
+            }
+            else if (!watchedCheck.checkWatchedPercentage(Integer.parseInt(this.txtPercentage.getText()))) {
+                handleError("Please only enter numbers between 1 and 100");
                 return;
             }
         } catch (Exception e) {
@@ -132,9 +140,34 @@ public class ProfileController implements EventHandler<ActionEvent> {
     /**
      * Add a new profile to the database
      */
-    public void handleAdd() {
+    public void handleAddProfile() {
         ProfileDAO dao = new ProfileDAO();
+
+        Profile profileCheck = new Profile("null", 0);
+
+        if (dao.getAllProfiles(email).size() == 5){
+            handleError("You can only have 5 profiles per account delete one or edit one");
+            return;
+        }
+
+        if (!profileCheck.checkName(txtNameProfile.getText())){
+            handleError("Please enter a profile name without numbers");
+            return;
+        }
+
+        if (!profileCheck.checkAge(Integer.parseInt(txtAgeProfile.getText()))) {
+            handleError("Please enter numbers as age and number must be greater than 0");
+            return;
+        }
+
         Profile profile = new Profile(txtNameProfile.getText(), Integer.parseInt(txtAgeProfile.getText()), this.email);
+
+        if (dao.getProfile(profile.getName(), email).getName() != null){
+            if (dao.getProfile(profile.getName(), email).getName().equals(txtNameProfile.getText())){
+                handleError("Profile name already exists on this account");
+                return;
+            }
+        }
 
         if (!dao.addProfile(profile)) {
             handleError("Database error");
@@ -146,14 +179,22 @@ public class ProfileController implements EventHandler<ActionEvent> {
     /**
      * Edit the profile object, if the data is in the correct format.
      */
-    public void handleEdit() {
-        if (!this.profile.setAge(Integer.parseInt(txtAgeProfile.getText()))) {
+    public void handleEditProfile() {
+        if (!this.profile.checkAge(Integer.parseInt(txtAgeProfile.getText()))) {
             handleError("Age is an incorrect format");
             return;
         }
-        if (!this.profile.setName(txtNameProfile.getText())) {
+        if (!this.profile.checkName(txtNameProfile.getText())) {
             handleError("Name is an incorrect format");
             return;
+        }
+
+        ProfileDAO dao = new ProfileDAO();
+        if (dao.getProfile(profile.getName(), email).getName() != null){
+            if (dao.getProfile(profile.getName(), email).getName().equals(txtNameProfile.getText())){
+                handleError("Profile name already exists on this account");
+                return;
+            }
         }
 
         Boolean result = new ProfileDAO().editProfile(this.profile);
@@ -170,7 +211,7 @@ public class ProfileController implements EventHandler<ActionEvent> {
     /**
      * Handle the deleteion of a profile, and call the matching DAO class to delte it from the database
      */
-    public void handleDelete() {
+    public void handleDeleteProfile() {
         ProfileDAO dao = new ProfileDAO();
         String attachedEmail = dao.getEmailWithProfileId(this.profile.getProfileId());
 
