@@ -14,7 +14,7 @@ public class Account {
 
 
     /**
-     * Default constructor for account.
+     * Default constructor for Account.
      * @param email
      * @param password
      * @param subscriber
@@ -29,6 +29,10 @@ public class Account {
         this.city = city;
     }
 
+    /**
+     * Get the email attribute
+     * @return the email string
+     */
     public String getEmail() {
         return email;
     }
