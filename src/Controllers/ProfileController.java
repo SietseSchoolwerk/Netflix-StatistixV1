@@ -27,14 +27,18 @@ public class ProfileController implements EventHandler<ActionEvent> {
 
     private int programId;
 
-    // Default constructor for the ProfileController
+    /**
+     * Constructor for the AccountController with profile
+     * @param stage
+     * @param profile
+     */
     public ProfileController(Stage stage, Profile profile) {
         this(stage);
         this.profile = profile;
     }
 
     /**
-     * Show an error
+     * Default constructor for the AccountController
      * @param stage
      */
     public ProfileController(Stage stage) {
@@ -81,7 +85,7 @@ public class ProfileController implements EventHandler<ActionEvent> {
     }
 
     /**
-     * Delete a profile from the database
+     * Delete a watched from the database
      */
     public void handleDeleteWatched() {
         ProfileDAO dao = new ProfileDAO();
@@ -94,6 +98,7 @@ public class ProfileController implements EventHandler<ActionEvent> {
 
     /**
      * Handle updating watched, and update it in the database through the matching DAO class
+     * it also checks if the WatchedPercentage given is correct
      */
     public void handleUpdateWatched() {
         ProfileDAO dao = new ProfileDAO();
@@ -116,6 +121,7 @@ public class ProfileController implements EventHandler<ActionEvent> {
 
     /**
      * Handle adding a new watched to the database
+     * it also checks if the WatchedPercentage given is correct
      */
     public void handleAddWatch() {
         ProfileDAO dao = new ProfileDAO();
@@ -140,6 +146,9 @@ public class ProfileController implements EventHandler<ActionEvent> {
 
     /**
      * Add a new profile to the database
+     * it also checks if the correct values are entered
+     * and if the profile already exists in the account
+     * and if the maximum amount of profiles is reached
      */
     public void handleAddProfile() {
         ProfileDAO dao = new ProfileDAO();
@@ -211,7 +220,7 @@ public class ProfileController implements EventHandler<ActionEvent> {
     }
 
     /**
-     * Handle the deleteion of a profile, and call the matching DAO class to delte it from the database
+     * Handle the deletion of a profile, and call the matching DAO class to delte it from the database
      */
     public void handleDeleteProfile() {
         ProfileDAO dao = new ProfileDAO();
@@ -230,13 +239,6 @@ public class ProfileController implements EventHandler<ActionEvent> {
         this.stage.setScene(new Profiles().profileList(this.stage, attachedEmail));
     }
 
-    /**
-     * get the textNameProfile textfield
-     * @return
-     */
-    public TextField getTxtNameProfile() {
-        return txtNameProfile;
-    }
 
     /**
      * Set the text in the nameProfile textfield
@@ -244,14 +246,6 @@ public class ProfileController implements EventHandler<ActionEvent> {
      */
     public void setTxtNameProfile(TextField txtNameProfile) {
         this.txtNameProfile = txtNameProfile;
-    }
-
-    /**
-     * Get the ageProfile textfield
-     * @return the ageProfile textfield
-     */
-    public TextField getTxtAgeProfile() {
-        return txtAgeProfile;
     }
 
     /**
@@ -264,7 +258,7 @@ public class ProfileController implements EventHandler<ActionEvent> {
 
     /**
      * get the email attribute
-     * @return
+     * @return String email
      */
     public String getEmail() {
         return email;
@@ -295,14 +289,6 @@ public class ProfileController implements EventHandler<ActionEvent> {
     }
 
     /**
-     * get the programId attribute
-     * @return programId
-     */
-    public int getProgramId() {
-        return programId;
-    }
-
-    /**
      * Set the programId attribute
      * @param programId
      */
@@ -311,27 +297,11 @@ public class ProfileController implements EventHandler<ActionEvent> {
     }
 
     /**
-     * Get the percentage attribute
-     * @return the percentage Textfield
-     */
-    public TextField getTxtPercentage() {
-        return txtPercentage;
-    }
-
-    /**
      * Set the text in the percentage textfield
      * @param txtPercentage
      */
     public void setTxtPercentage(TextField txtPercentage) {
         this.txtPercentage = txtPercentage;
-    }
-
-    /**
-     * Get the watch attribute
-     * @return the watch attribute object
-     */
-    public Watched getWatch() {
-        return watch;
     }
 
     /**

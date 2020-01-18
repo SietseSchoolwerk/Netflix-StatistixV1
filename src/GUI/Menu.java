@@ -1,6 +1,5 @@
 package GUI;
 
-import Domain.Account;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;

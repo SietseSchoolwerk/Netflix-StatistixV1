@@ -2,12 +2,8 @@ package GUI;
 
 import Controllers.ProfileController;
 import Database.ProfileDAO;
-import Database.ProgramDAO;
-import Database.SerieDAO;
 import Domain.*;
-import com.sun.javafx.image.IntPixelGetter;
 import javafx.scene.Scene;
-
 import java.util.ArrayList;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

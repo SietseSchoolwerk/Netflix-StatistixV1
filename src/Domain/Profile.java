@@ -1,37 +1,56 @@
 package Domain;
 
-import java.text.ParseException;
-
 public class Profile {
     private int profileId;
     private String name;
     private int age;
     private String email;
 
-    // Alternative constructor
+    /**
+     * Alternative constructor for profile
+     * @param name
+     * @param age
+     */
     public Profile(String name, int age) {
         this.name = name;
         this.age = age;
     }
 
-    //Alternative constructor
+    /**
+     * Alternative constructor for profile
+     * @param profileId
+     * @param name
+     * @param age
+     * @param email
+     */
     public Profile(int profileId, String name, int age, String email) {
         this(name, age, email);
         this.profileId = profileId;
     }
 
-    // Constructor
+    /**
+     * Default constructor for profile
+     * @param name
+     * @param age
+     * @param email
+     */
     public Profile(String name, int age, String email) {
         this(name, age);
         this.email = email;
     }
 
-    // Simple getter of the profile id of the profile
+    /**
+     * Gets the profileId of current instance
+     * @return int profileId
+     */
     public int getProfileId() {
         return profileId;
     }
 
-    // Simple getter of the name
+    /**
+     * Gets the name of current instance
+     * @return String name
+     */
     public String getName() {
         return name;
     }

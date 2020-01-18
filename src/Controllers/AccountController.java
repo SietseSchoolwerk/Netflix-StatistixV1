@@ -23,14 +23,18 @@ public class AccountController implements EventHandler<ActionEvent> {
     private Stage stage;
     private Account account;
 
-    // Default constructor for the AccountController
+    /**
+     * Constructor for the AccountController with account
+     * @param stage
+     * @param account
+     */
     public AccountController(Stage stage, Account account) {
         this(stage);
         this.account = account;
     }
 
     /**
-     * Show a warning dialog
+     * Default constructor for the AccountController
      * @param stage
      */
     public AccountController(Stage stage) {
@@ -71,7 +75,7 @@ public class AccountController implements EventHandler<ActionEvent> {
 
 
     /**
-     * Edit a text field, if the input is in correct fomat.
+     * Edit account if the input is correct
      */
     public void handleEdit() {
         if (!this.account.setPassword(txtPasswordAccount.getText())) {
@@ -120,7 +124,8 @@ public class AccountController implements EventHandler<ActionEvent> {
     }
 
     /**
-     * Handle edit account and call the matching DAO class to edit an account in the database
+     * Handle add account and call the matching DAO class to edit an account in the database
+     * It also checks if the input given is correct and if the email is already in use
      * @param account
      */
     public void handleAdd(Account account) {
@@ -187,7 +192,7 @@ public class AccountController implements EventHandler<ActionEvent> {
     }
 
     /**
-     *  Set the text in the account textfield
+     *  Set the text in the subscriber textfield
      * @param txtSubscriberAccount
      */
     public void setTxtSubscriberAccount(TextField txtSubscriberAccount) {

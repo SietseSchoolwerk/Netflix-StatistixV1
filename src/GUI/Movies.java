@@ -1,9 +1,6 @@
 package GUI;
 
-import Database.AccountDAO;
 import Database.FilmDAO;
-import Database.ProgramDAO;
-import Domain.Film;
 import Domain.Program;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

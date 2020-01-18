@@ -2,7 +2,6 @@ package Database;
 
 import Domain.*;
 import Domain.Program;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +13,9 @@ public class ProgramDAO {
     private Connection connection;
     private DatabaseConnection databaseConnection = new DatabaseConnection();
 
-    // Default constructor for the ProgramDAO class
+    /**
+     * Default constructor for the ProgramDAO
+     */
     public ProgramDAO() { this.connection = databaseConnection.getConn(); }
 
     /**
@@ -57,7 +58,7 @@ public class ProgramDAO {
     }
 
     /**
-     * Get an ArrayList of ProgramIds with all of the programs in the database
+     * Get an ArrayList all the programs from programma table
      * @return the ArrayList with Program objects
      */
     public ArrayList<Program> getAllPrograms(){
@@ -84,32 +85,5 @@ public class ProgramDAO {
             return null;
         }
 
-    }
-
-    /**
-     * Check if a program is a serie
-     * @param programId
-     * @return true if program is a series, false if not
-     */
-    public boolean isSerie(int programId) {
-        String sql = "SELECT count(*) as result FROM Episode WHERE ProgramId=?;";
-
-        try {
-            ArrayList<Profile> result = new ArrayList<>();
-            PreparedStatement statement = this.connection.prepareStatement(sql);
-            statement.setInt(1, programId);
-
-            ResultSet r = statement.executeQuery();
-            while(r.next()) {
-                if (r.getInt("result") == 0) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 }

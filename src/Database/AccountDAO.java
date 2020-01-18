@@ -3,7 +3,6 @@ package Database;
 import Domain.Account;
 import Domain.Film;
 import Domain.Program;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +14,9 @@ public class AccountDAO {
     private Connection connection;
     private DatabaseConnection databaseConnection = new DatabaseConnection();
 
-    // Default constructor for the AccountDAO class
+    /**
+     * Default constructor for the AccountDAO
+     */
     public AccountDAO() {
         this.connection = databaseConnection.getConn();
     }
@@ -180,7 +181,7 @@ public class AccountDAO {
     }
 
     /**
-     * Takes an object and edits the table in the database to the new attributes.
+     * Takes an object and edits the row in the database to the new attributes.
      * @param newAccount
      * @return true if query executed without errors. False if there were exceptions.
      */

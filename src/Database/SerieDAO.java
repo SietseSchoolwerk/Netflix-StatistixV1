@@ -1,8 +1,6 @@
-
 package Database;
 
 import Domain.Serie;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +12,9 @@ public class SerieDAO {
     private Connection connection;
     private DatabaseConnection databaseConnection = new DatabaseConnection();
 
-    // Default constructor for the SerieDAO class
+    /**
+     * Default constructor for the SerieDAO
+     */
     public SerieDAO() {
         this.connection = databaseConnection.getConn();
     }

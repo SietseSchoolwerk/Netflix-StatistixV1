@@ -1,6 +1,5 @@
 package GUI;
 
-import Database.AccountDAO;
 import Database.EpisodeDAO;
 import Database.SerieDAO;
 import Domain.Program;

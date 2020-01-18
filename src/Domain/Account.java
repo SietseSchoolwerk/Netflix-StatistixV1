@@ -1,6 +1,5 @@
 package Domain;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,8 +9,6 @@ public class Account {
     private String subscriber;
     private String address;
     private String city;
-    private ArrayList<Profile> profilesList;
-
 
     /**
      * Default constructor for Account.

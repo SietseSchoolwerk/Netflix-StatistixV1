@@ -1,8 +1,8 @@
 package Database;
+
 import Domain.Profile;
 import Domain.Program;
 import Domain.Watched;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +14,9 @@ public class ProfileDAO {
     private Connection connection;
     private DatabaseConnection databaseConnection = new DatabaseConnection();
 
-   //Default constructor for the ProfileDAO class
+    /**
+     * Default constructor for the ProfileDAO
+     */
     public ProfileDAO() {
         this.connection = databaseConnection.getConn();
     }
@@ -152,12 +154,11 @@ public class ProfileDAO {
     }
 
     /**
-     *  Edit a profile
+     * Edit a profile
      * @param profile
      * @return true if query executed without errors. False if there were exceptions.
      */
 
-    // Change the StringBuilder part to something seen in AccountDAO.editAccount
     public boolean editProfile(Profile profile) {
 
         String NewName = profile.getName();
@@ -271,7 +272,7 @@ public class ProfileDAO {
 }
 
     /**
-     *  Get watched objects for a given profileID
+     * Get watched objects for a given profileID
      * @param profileId
      * @return the ArrayList with Watched objects
      */

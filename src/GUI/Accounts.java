@@ -2,14 +2,9 @@ package GUI;
 
 import Controllers.AccountController;
 import Database.AccountDAO;
-import Database.DatabaseConnection;
 import Domain.Account;
-import Domain.Film;
-import Domain.Profile;
 import Domain.Program;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-
 import java.util.ArrayList;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,8 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class Accounts {

@@ -1,7 +1,6 @@
 package Domain;
 
 public class Program {
-    // Read only properties since this application includes no edit of the class
     private int programId;
     private String title;
     private String genre;
@@ -9,7 +8,15 @@ public class Program {
     private String lengthOfTime;
     private int age;
 
-    //Default constructor for the program class.
+    /**
+     * Default constructor for the program
+     * @param programId
+     * @param title
+     * @param genre
+     * @param language
+     * @param age
+     * @param lengthOfTime
+     */
     public Program(int programId, String title, String genre, String language,int age, String lengthOfTime) {
         this.programId = programId;
         this.title = title;

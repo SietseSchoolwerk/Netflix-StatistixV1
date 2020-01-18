@@ -2,7 +2,6 @@ package Database;
 
 import Domain.Film;
 import Domain.Program;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,23 +13,15 @@ public class FilmDAO extends ProgramDAO {
     private Connection connection;
     private DatabaseConnection databaseConnection = new DatabaseConnection();
 
-    // Default constructor for the FilmDAO class
+    /**
+     * Default constructor for the FilmDAO
+     */
     public FilmDAO() {
         this.connection = databaseConnection.getConn();
     }
 
     /**
-     * Get a Film object for a given ProgramId
-     * @return Return the title of the current instance.
-     */
-    public Film getFilm(int programId) {
-        ProgramDAO dao = new ProgramDAO();
-        Program prog = dao.getProgram(programId);
-        return new Film(programId, prog.getTitle(), prog.getGenre(), prog.getLanguage(), prog.getLengthOfTime(), prog.getAge());
-    }
-
-    /**
-     * Get an ArayList of all Program objects in the database that are movies.
+     * Get an ArrayList of all Program objects in the database that are movies.
      * @return ArrayList with movies
      */
     public ArrayList<Program> getAllMovies() {

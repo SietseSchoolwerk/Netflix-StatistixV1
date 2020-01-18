@@ -6,8 +6,6 @@ import java.sql.DriverManager;
 
 public class DatabaseConnection {
 
-    private Connection connection;
-    private String databaseName = "Netflix";
     private final String connectionUrl = "jdbc:sqlserver://localhost\\SQLEXPRESS;databaseName=Netflix;integratedSecurity=true;port=1433";
 
     /**
