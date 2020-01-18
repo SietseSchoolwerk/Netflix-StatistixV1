@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class ProfileTest {
 
     @Test
-    void testSetInvalidNameShouldReturnFalse() {
+    void testCheckNameWithEmptyStringShouldReturnFalse() {
 
         //Arrange
         Profile profile = new Profile(
@@ -16,7 +16,7 @@ class ProfileTest {
         String invalidName = "";
 
         //Act
-        boolean result = profile.setName(invalidName);
+        boolean result = profile.checkName(invalidName);
 
         //Assert
         Assertions.assertFalse(result);
@@ -24,7 +24,42 @@ class ProfileTest {
     }
 
     @Test
-    void testSetValidNameShouldReturnTrue() {
+    void testCheckNameWithNumbersShouldReturnFalse() {
+
+        //Arrange
+        Profile profile = new Profile(
+                "ValidName",
+                28
+        );
+        String invalidName = "123";
+
+        //Act
+        boolean result = profile.checkName(invalidName);
+
+        //Assert
+        Assertions.assertFalse(result);
+
+    }
+    @Test
+    void testCheckNameWithNumbersAndLettersShouldReturnFalse() {
+
+        //Arrange
+        Profile profile = new Profile(
+                "ValidName",
+                28
+        );
+        String invalidName = "123sdf";
+
+        //Act
+        boolean result = profile.checkName(invalidName);
+
+        //Assert
+        Assertions.assertFalse(result);
+
+    }
+
+    @Test
+    void testCheckNameWithOnlyLettersShouldReturnTrue() {
 
         //Arrange
         Profile profile = new Profile(
@@ -34,7 +69,7 @@ class ProfileTest {
         String validName = "NewValidName";
 
         //Act
-        boolean result = profile.setName(validName);
+        boolean result = profile.checkName(validName);
 
         //Assert
         Assertions.assertTrue(result);
@@ -42,7 +77,7 @@ class ProfileTest {
     }
 
     @Test
-    void testSetInvalidAgeShouldReturnFalse() {
+    void testCheckAgeWithNegativeNumberShouldReturnFalse() {
 
         //Arrange
         Profile profile = new Profile(
@@ -50,73 +85,174 @@ class ProfileTest {
                 28
         );
 
-        int inValidAge = -200;
+        int inValidAge = -1;
 
         //Act
-        boolean result = profile.setAge(inValidAge);
+        boolean result = profile.checkAge(inValidAge);
 
         //Assert
         Assertions.assertFalse(result);
 
-
     }
 
     @Test
-    void testSetValidAgeShouldReturnTrue() {
+    void testCheckAgeWithZeroShouldReturnFalse() {
 
         //Arrange
         Profile profile = new Profile(
                 "ValidName",
                 28
         );
-        int validAge = 47;
+
+        int inValidAge = 0;
 
         //Act
-        boolean result = profile.setAge(validAge);
+        boolean result = profile.checkAge(inValidAge);
+
+        //Assert
+        Assertions.assertFalse(result);
+
+    }
+
+    @Test
+    void testCheckAgeWithNumberAboveZeroShouldReturnTrue() {
+
+        //Arrange
+        Profile profile = new Profile(
+                "ValidName",
+                28
+        );
+        int validAge = 1;
+
+        //Act
+        boolean result = profile.checkAge(validAge);
 
         //Assert
         Assertions.assertTrue(result);
     }
 
     @Test
-    void testSetBekekenWithInvalidDataShouldReturnFalse() {
+    void testSetBekekenWithNegativeNumberShouldReturnFalse() {
 
         //Arrange
-        Profile profile = new Profile(
-                "ValidName",
-                28
+        Watched watched = new Watched(
+                0,
+                "Test",
+                "Test",
+                "Test",
+                1 ,
+                12,
+                0,
+                null,
+                null
         );
-        int inValidAge = -90;
-        String inValidName = "";
+        int watchPercentage = -1;
 
         //Act
-        boolean result1 = profile.setAge(inValidAge);
-        boolean result2 = profile.setName(inValidName);
+        boolean result1 = watched.checkWatchedPercentage(watchPercentage);
 
         //Assert
         Assertions.assertFalse(result1);
-        Assertions.assertFalse(result2);
 
     }
 
     @Test
-    void testSetBekekenWithValidDataShouldReturnTrue() {
+    void testSetBekekenWithNumberZeroShouldReturnFalse() {
 
         //Arrange
-        Profile profile = new Profile(
-                "ValidName",
-                28
+        Watched watched = new Watched(
+                0,
+                "Test",
+                "Test",
+                "Test",
+                1 ,
+                12,
+                0,
+                null,
+                null
         );
-        int validAge = 47;
-        String validString = "NewValidName";
+        int watchPercentage = 0;
 
         //Act
-        boolean result1 = profile.setAge(validAge);
-        boolean result2 = profile.setName(validString);
+        boolean result1 = watched.checkWatchedPercentage(watchPercentage);
+
+        //Assert
+        Assertions.assertFalse(result1);
+
+    }
+
+    @Test
+    void testSetBekekenWithNumberAboveZeroAndUnderHunderdOneShouldReturnTrue() {
+
+        //Arrange
+        Watched watched = new Watched(
+                0,
+                "Test",
+                "Test",
+                "Test",
+                1 ,
+                12,
+                0,
+                null,
+                null
+        );
+        int watchPercentage = 1;
+
+        //Act
+        boolean result1 = watched.checkWatchedPercentage(watchPercentage);
 
         //Assert
         Assertions.assertTrue(result1);
-        Assertions.assertTrue(result2);
+
+    }
+
+    @Test
+    void testSetBekekenWithNumberAboveHundredShouldReturnFalse() {
+
+        //Arrange
+        Watched watched = new Watched(
+                0,
+                "Test",
+                "Test",
+                "Test",
+                1 ,
+                12,
+                0,
+                null,
+                null
+        );
+        int watchPercentage = 101;
+
+        //Act
+        boolean result1 = watched.checkWatchedPercentage(watchPercentage);
+
+        //Assert
+        Assertions.assertFalse(result1);
+
+    }
+
+    @Test
+    void testSetBekekenWithNumberHundredShouldReturnTrue() {
+
+        //Arrange
+        Watched watched = new Watched(
+                0,
+                "Test",
+                "Test",
+                "Test",
+                1 ,
+                12,
+                0,
+                null,
+                null
+        );
+        int watchPercentage = 100;
+
+        //Act
+        boolean result1 = watched.checkWatchedPercentage(watchPercentage);
+
+        //Assert
+        Assertions.assertTrue(result1);
 
     }
 }
