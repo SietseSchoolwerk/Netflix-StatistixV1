@@ -160,39 +160,17 @@ public class ProfileDAO {
     // Change the StringBuilder part to something seen in AccountDAO.editAccount
     public boolean editProfile(Profile profile) {
 
-
-
         String NewName = profile.getName();
         int NewAge = profile.getAge();
 
-
-        StringBuilder setStatementStringBuilder = new StringBuilder();
-
-        // Beware. This code has the same lame SQLi as in the AccountDAO.
-        setStatementStringBuilder.append(String.format("UPDATE Profile SET "));
-
-        setStatementStringBuilder.append(
-                String.format("Name='%s',", NewName)
-        );
-
-
-        setStatementStringBuilder.append(
-                String.format("Age='%s',", NewAge)
-        );
-
-        String setStatementString = setStatementStringBuilder.toString();
-        String setStatementStringSliced =
-                setStatementString.substring(0, setStatementString.length() - 1);
-
-        setStatementStringSliced += String.format(
-                " WHERE ProfileId='%s'", profile.getProfileId());
-
-
         try {
-            PreparedStatement pdo = connection.prepareStatement(
-                    setStatementStringSliced
+            PreparedStatement pdo = this.connection.prepareStatement(
+                    "  UPDATE Profile" +
+                            "  SET Name=?" +
+                            "  ,Age= ?"
             );
-            System.out.println(setStatementStringBuilder.toString());
+            pdo.setString(1, NewName);
+            pdo.setInt(2, NewAge);
             pdo.execute();
             return true;
         } catch (Exception e) {
